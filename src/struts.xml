@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	
+	<package name="application" namespace="/" extends="convention-default">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+			<result-type name="string" class="com.ayopa.server.results.StringResult"/>
+		</result-types>
+	<!-- 
+		<interceptors>
+			<interceptor name="current-user"
+				class="com.happyjacksoftware.hl7.viewer.interceptors.CurrentUserInterceptor"></interceptor>		
+			<interceptor name="required-user"
+				class="com.happyjacksoftware.hl7.viewer.interceptors.RequiredUserInterceptor"></interceptor>
+			<interceptor-stack name="defaultSecureStack">
+				<interceptor-ref name="current-user"></interceptor-ref>
+				<interceptor-ref name="required-user"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="defaultSecureStack"></default-interceptor-ref>
+		<global-results>
+			<result name="login">/Login.jsp</result>
+		</global-results>
+		-->
+	</package>
+</struts>
