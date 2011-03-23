@@ -1,0 +1,375 @@
+body{
+	font-family: Verdana, Geneva, Arial, helvetica, sans-serif;
+	  background-color:#FFFFFF;
+	  margin:0;
+	  padding:0;
+	  font-size:11pt;
+}
+
+a img{
+	border:none;
+}
+
+.main_content{
+	width:760px;
+	margin:20px auto;
+}
+
+.ayopa_menu{
+	width:760px;
+	height:42px;
+	list-style: none;
+	margin:0;
+	padding:0 0 0 2px;
+}
+
+.ayopa_menu li{
+	background-image:url(http://www.ayopadev.com/ayopa/images/menu_inactive_middle.png);
+	height:42px;
+	float:left;
+}
+
+.ayopa_menu .active{
+background-image:url(http://www.ayopadev.com/ayopa/images/menu_active_middle.png);
+height:42px;
+float:left;}
+
+.ayopa_menu .ayopa_menu_item_left{
+	float:left;
+	width:13px;
+	height:42px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/menu_inactive_left.png);
+}
+
+.ayopa_menu .ayopa_menu_item_right{
+	float:left;
+	width:20px;
+	height:42px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/menu_inactive_right.png);
+}
+
+.ayopa_menu .active .ayopa_menu_item_left{
+	float:left;
+	width:13px;
+	height:42px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/menu_active_left.png);
+}
+
+.ayopa_menu .active .ayopa_menu_item_right{
+	float:left;
+	width:24px;
+	height:42px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/menu_active_right.png);
+}
+
+
+.ayopa_myAuctions .ayopa_menu_item_middle{
+	background:no-repeat bottom;
+	background-image:url(http://www.ayopadev.com/ayopa/images/menu_myAuctions.png);
+	width:126px;
+	height:35px;
+	padding-left:1px;
+	padding-right:12px;
+	float:left;
+}
+
+.ayopa_ayopaAuctions .ayopa_menu_item_middle{
+	background:no-repeat bottom;
+	background-image:url(http://www.ayopadev.com/ayopa/images/menu_ayopaAuctions.png);
+	width:166px;
+	height:35px;
+	padding-left:1px;
+	padding-right:12px;
+	float:left;
+}
+
+.ayopa_rebate .ayopa_menu_item_middle{
+	background:no-repeat bottom;
+	background-image:url(http://www.ayopadev.com/ayopa/images/menu_rebateStatus.png);
+	width:126px;
+	height:35px;
+	padding-left:1px;
+	padding-right:12px;
+	float:left;
+}
+
+.ayopa_info .ayopa_menu_item_middle{
+	background:no-repeat bottom;
+	background-image:url(http://www.ayopadev.com/ayopa/images/menu_info.png);
+	width:50px;
+	height:35px;
+	padding-left:1px;
+	padding-right:12px;
+	float:left;
+}
+
+
+.ayopa_content_top{
+	width:778px;
+	height:10px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/content_top.png);
+}
+
+.ayopa_content_middle{
+	width:748px;
+	padding-left:15px;
+	padding-right:15px;
+	min-height:300px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/content_middle.png);
+	padding-bottom:35px;
+}
+
+.ayopa_content_bottom{
+	width:778px;
+	height:23px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/content_bottom.png);
+}
+
+.ayopa_side_nav_container{
+	position:relative;
+}
+
+.ayopa_side_nav{
+	margin:0;
+	padding:0;
+	list-style:none;
+	width:175px;
+	position:absolute;
+}
+
+.ayopa_side_nav li{
+	height:27px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/side_menu_inactive_middle.png);
+}
+
+.ayopa_side_nav a{
+	line-height:27px;
+	font-size:12px;
+	color:#ffffff;
+	font-weight:normal;
+	text-decoration:none;
+	display:block;
+}
+
+.ayopa_side_nav .ayopa_side_nav_left{
+	width:16px;
+	height:27px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/side_menu_inactive_left.png);
+	float:left;
+}
+.ayopa_side_nav .ayopa_side_nav_right{
+	width:16px;
+	height:27px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/side_menu_inactive_right.png);
+	float:right;
+}
+
+
+.ayopa_side_nav .active .ayopa_side_nav_left{
+	background-image:url(http://www.ayopadev.com/ayopa/images/side_menu_active_left.png);
+}
+
+.ayopa_side_nav .active .ayopa_side_nav_right{
+	background-image:url(http://www.ayopadev.com/ayopa/images/side_menu_active_right.png);
+}
+
+.ayopa_side_nav .active{
+	background-image:url(http://www.ayopadev.com/ayopa/images/side_menu_active_middle.png);
+}
+
+.ayopa_auction_tile{
+	float:right;
+	margin-right:20px;
+	clear:both;
+}
+
+.ayopa_auction_tile_top{
+	width:517px;
+	height:23px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/tile_top.png);
+}
+
+.ayopa_auction_tile_middle{
+	width:467px;
+	min-height:53px;
+	padding:0 25px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/tile_middle.png);
+}
+
+.ayopa_auction_tile_bottom{
+	width:517px;
+	height:23px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/tile_bottom.png);
+}
+
+.highlighted .ayopa_auction_tile_top{
+	background-image:url(http://www.ayopadev.com/ayopa/images/tile_top_highlighted.png);
+}
+
+.highlighted .ayopa_auction_tile_middle{
+	background-image:url(http://www.ayopadev.com/ayopa/images/tile_middle_highlighted.png);
+}
+
+.highlighted .ayopa_auction_tile_bottom{
+	background-image:url(http://www.ayopadev.com/ayopa/images/tile_bottom_highlighted.png);
+}
+
+
+.ayopa_item_title{
+	font-weight:bold;
+	font-size:18px;
+	color:#195c7e;
+}
+
+.ayopa_item_photo{
+	margin-top:15px;
+	float:left;
+}
+.ayopa_item_photo img{
+	border:1px solid #195c7e;
+}
+
+.size_right{
+	clear:both;
+}
+
+.ayopa_sell_scale{
+	font-size:9px;
+	float:left;
+	margin-left:15px;
+	margin-top:5px;
+	font-weight:bold;
+}
+.ayopa_sell_scale div{
+	padding-top:5px;
+}
+
+.ayopa_graph{
+	font-size:9px;
+}
+
+.ayopa_start{
+	color:#888888;
+}
+.ayopa_current{
+	color:#229944;
+}
+.ayopa_next{
+	color:#999900;
+}
+.ayopa_lowest{
+	color:#992222;
+}
+
+.ayopa_graph{
+	margin-left:10px;
+	margin-top:5px;
+	float:left;
+}
+.ayopa_buyer_amout{
+	padding-left:5px;
+}
+.ayopa_buyer_amount div{
+	width:23px;
+	float:left;
+	text-align:center;	
+}
+
+.ayopa_graph_label{
+	font-size:10px;
+	text-align:center;
+	color:#999999;
+}
+
+.ayopa_tile_right_content{
+	float:right;
+	text-align:right;
+}
+
+.ayopa_tile_right_content div{
+	margin-bottom:5px;
+}
+
+.ayopa_current_price{
+	color:#195c7e;
+	font-weight:bold;
+	font-size:15px;
+	text-align:right;
+	padding-top:7px;
+}
+
+.ayopa_you_bought{
+	color:#195c7e;
+	font-weight:normal;
+	font-size:12px;
+	text-align:right;
+}
+
+.ayopa_time_left{
+	background-image:url(http://www.ayopadev.com/ayopa/images/time_left.png);
+	width:220px;
+	height: 36px;
+	clear:both;
+	float:right;
+	text-align:right;
+}
+
+.ayopa_time_left_labels{
+	padding-right:8px;
+}
+
+.ayopa_time_left_labels div{
+	font-size:11px;
+	float:right;
+	padding-top:3px;
+	width:29px;
+	text-align:center;
+}
+
+.ayopa_time_left_time{
+	padding-right:8px;
+	clear:both;	
+}
+
+.ayopa_time_left_time div{
+	
+	font-size:12px;
+	font-weight:bold;
+	float:right;
+	padding-top:0px;
+	width:29px;
+	text-align:center;
+}
+
+.ayopa_splash_screen{
+	width:520px;
+	height:391px;
+	background:url(http://www.ayopadev.com/ayopa/images/ayopa_splash_screen.jpg) no-repeat;
+	background-repeat: no-repeat;
+	color:#1A5C7E;
+}
+
+.ayopa_splash_header{
+	padding-left:85px;
+	padding-top:130px;
+	font-size:16px;
+	font-weight:bold;
+}
+
+.ayopa_splash_content{
+	padding-left:90px;
+	width:350px;
+}
+
+.ayopa_splash_content li{
+	padding-bottom:8px;
+}
+
+.ayopa_splash_content ul{
+	margin-bottom:0;
+	margin-top:8px;
+}
+
+.ayopa_splash_action{
+	padding-left:70px;
+}

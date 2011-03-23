@@ -1,0 +1,70 @@
+/*---------------------  BUY WITH AYOPA BUTTON  -------------------------*/
+
+.main_buy_with_ayopa a{text-decoration:none;}
+
+
+.buy_with_ayopa{
+	width:220px;
+	height:37px;
+}
+.buy_with_ayopa_data{
+	width:220px;
+	height:49px;
+	background-image:url(../images/buy_with_ayopa_data.png);
+	position:relative;
+
+}
+
+.buy_with_ayopa_buyer_count{
+	position:relative;
+	top:-1px;
+	padding-left:90px;
+}
+
+.buy_with_ayopa_current{
+float:left;
+width:30px;
+color:#366425;
+}
+
+.buy_with_ayopa_next{
+	float:left;
+	width:50px;
+	color:#cccccc;
+}
+
+.buy_with_ayopa_last{
+	float:left;
+	color:#cccccc;
+}
+
+.buy_with_ayopa_time_left{
+	position:absolute;
+	top:15px;
+}
+
+.buy_with_ayopa_time_left_header{
+	width:210px;
+}
+
+.buy_with_ayopa_time_left_header div{
+	font-size:11px;
+	float:right;
+	padding-top:3px;
+	width:29px;
+	text-align:center;
+	color:#000000;
+}
+.buy_with_ayopa_time_left_numbers{
+	clear:both;
+}
+
+.buy_with_ayopa_time_left_numbers div{
+	font-size:12px;
+	font-weight:bold;
+	float:right;
+	padding-top:0px;
+	width:29px;
+	text-align:center;	
+	color:#000000;
+}
