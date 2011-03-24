@@ -14,11 +14,13 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.ayopa.server.utils.HTTPRequestPoster;
 import com.ayopa.server.utils.JsonUtils;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import com.restfb.types.User;
 
 
 @ParentPackage (value="application")
@@ -56,71 +58,29 @@ public class GetUserByFbId extends ActionSupport {
 	
 	@Override
 	public String execute() throws Exception {
-		FacebookClient facebookClient = new DefaultFacebookClient();
+		String appID = "120882414650116";
+		String appSecret = "17ce975710ce3ac5670fa17d5e70fef3";
+		
+		String accessToken = "";
+		
+		accessToken = HTTPRequestPoster.sendGetRequest("https://graph.facebook.com/oauth/access_token"
+		     , "client_id=" + appID + "&client_secret=" + appSecret + "&grant_type=client_credentials");
+		
+		accessToken = accessToken.split("&")[0].replaceFirst("access_token=", "");
+		
+		FacebookClient facebookClient = new DefaultFacebookClient(accessToken);
 		
 		@SuppressWarnings("rawtypes")
-		List user = facebookClient.executeQuery("SELECT id FROM profile where id = me()", List.class);
-		System.out.println("UserID:" + user.size());
+		User user = facebookClient.fetchObject("me", User.class);
 		
-		jsonString = "{\"User\": \"" + fbID + "\"}";
+		System.out.println("AccessToken:"+ accessToken);
+		
+		jsonString = "{\"User\": \"" + user.getId() + "\"}";
 		if ( jsoncallback != null ) jsonReturn = jsoncallback + "(" + jsonString + ");";
 		else jsonReturn = jsonString;
 
 		return Action.SUCCESS;
 	}
-	
-
-	
-	private String statusMsg;
-	String appid = "120882414650116";
-	String appsecret = "17ce975710ce3ac5670fa17d5e70fef3";
-	String redirectURL = "http://localhost:8080/project_fb/facebookjsp.jsp";
-	String authorizeURLStr = "https://graph.facebook.com/oauth/authorize?client_id="
-	+ appid + "&redirect_uri=" + redirectURL;
-	String accessTokenURLStr;
-	String accessToken;
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		try {
-		if(request.getParameter("accessToken")!=null){
-			
-			return;
-		}
-		System.out.println("in request");
-		response.sendRedirect(authorizeURLStr);
-		statusMsg=request.getParameter("fbstatus");
-		System.out.println("after sending request");
-		
-		accessTokenURLStr = "https://graph.facebook.com/oauth/access_token?client_id="
-		      + appid + "&redirect_uri=" + redirectURL + "&client_secret=" + appsecret
-		      + "&code=" + statusMsg +"&type=web_server";
-		
-		accessToken=readUrl(accessTokenURLStr).split("&")[0].replaceFirst("access_token=", "");
-		
-		
-		
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	  
-	private String readUrl(String urlString) throws IOException {
-	    URL url = new URL(urlString);	    
-	    BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-	 
-	    String response = "";
-	    String inputLine;
-	 
-	    while ((inputLine = in.readLine()) != null)
-	        response += inputLine;
-	 
-	    in.close();
-	    return response;
-	}
-
-	 
 	     
 	
 }

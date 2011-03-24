@@ -18,11 +18,17 @@ public class SetAuctionParticipation extends ActionSupport {
 
 	private Long auction_id;
 	private Long fb_id;
+	private Integer quantity;
 	private String success;
 	
 
 	public String getSuccess() {
 		return success;
+	}
+
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 

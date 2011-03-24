@@ -1,6 +1,7 @@
 package com.ayopa.server.actions;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
@@ -41,6 +42,18 @@ public class CreateAuction extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
+		
+		JSONObject jsonAuction = (JSONObject) JSONSerializer.toJSON( auctionDef ); 
+		
+		Iterator<String> nameItr = jsonAuction.keys();
+		HashMap<String, Object> outMap = new HashMap<String, Object>();
+		while(nameItr.hasNext()) {
+			String name = nameItr.next();
+		    outMap.put(name, jsonAuction.getString(name));
+		    
+		}
+		
+		System.out.println(outMap);
 		auction = new HashMap<String, Object> ();
 		auction.put("auction_id", 123456);
 		

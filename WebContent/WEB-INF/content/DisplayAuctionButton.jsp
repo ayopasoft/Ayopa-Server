@@ -22,13 +22,16 @@
 							<div class="buy_with_ayopa_data">
 								<div class="buy_with_ayopa_buyer_count">
 									<div class="buy_with_ayopa_current">
-										<s:text name="format.currency">
-											<s:param name="value" value="currentPrice"/>
-										</s:text>
+										<s:property value="current_quant"/>
 									</div>
 
 									<div class="buy_with_ayopa_next">40</div>
 									<div class="buy_with_ayopa_last">60</div>
+								</div>
+								<div>
+									<s:text name="format.currency">
+											<s:param name="value" value="currentPrice"/>
+										</s:text>
 								</div>
 								<div class="buy_with_ayopa_time_left">
 									<div class="buy_with_ayopa_time_left_header">

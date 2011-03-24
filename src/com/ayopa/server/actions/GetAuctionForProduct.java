@@ -54,6 +54,7 @@ public class GetAuctionForProduct extends ActionSupport {
 		auction.put("auction_maxunits", "100");
 		auction.put("auction_startprice", "900");
 		auction.put("auction_image", "http://www.ayopadev.com/mm5/graphics/00000001/313PpMMkZWL._SL500_AA300_th.jpg");
+		auction.put("product_link", "http://www.ayopadev.com/product/HJS-TV1.html");
 		auction.put("auction_category", "Electronics");
 		auction.put("pricing_conflict", 700);
 		
@@ -68,18 +69,17 @@ public class GetAuctionForProduct extends ActionSupport {
 		list.add(schedule_row);
 		
 		
-		schedule_row.clear();
 		
+		schedule_row = new HashMap<String, Object>();
 		schedule_row.put("discount", 100);
 		schedule_row.put("min", 71);
 		schedule_row.put("max", 90);
 		schedule_row.put("add", "");
 		
+		
 		list.add(schedule_row);
 		
-		
-		schedule_row.clear();
-		
+		schedule_row = new HashMap<String, Object>();
 		schedule_row.put("discount", 100);
 		schedule_row.put("min", 91);
 		schedule_row.put("max", 100);
