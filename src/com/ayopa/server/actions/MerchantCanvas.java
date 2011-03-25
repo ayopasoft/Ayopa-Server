@@ -7,7 +7,8 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
-import com.ayopa.server.utils.Auction;
+import com.ayopa.server.model.Auction;
+import com.ayopa.server.model.AuctionDTO;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,49 +20,51 @@ import com.opensymphony.xwork2.ActionSupport;
 public class MerchantCanvas extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
-	private List<Auction> auctions;
+	private List<AuctionDTO> auctions;
 	//define getters for data elements
 	
-	private List<Auction> highlightedAuctions;
+	private List<AuctionDTO> highlightedAuctions;
 	
 	
-	public List<Auction> getAuctions() {
+	public List<AuctionDTO> getAuctions() {
 		return auctions;
 	}
 	
 	
-	public List<Auction> getHighlightedAuctions() {
+	public List<AuctionDTO> getHighlightedAuctions() {
 		return highlightedAuctions;
 	}
 
 
-	private List<Auction> getHighAuctions() {
+	private List<AuctionDTO> getHighAuctions() {
 		//return highlighted auctions
-		List<Auction> highlightedAuctions = new ArrayList<Auction>();
+		List<AuctionDTO> highlightedAuctions = new ArrayList<AuctionDTO>();
 		return highlightedAuctions;
 	}
 	
 	
-	private List<Auction> getMerchantAuctions() {
+	private List<AuctionDTO> getMerchantAuctions() {
 		//return non-highlighted auctions
-		List<Auction> merchantAuctions = new ArrayList<Auction>();
+		List<AuctionDTO> merchantAuctions = new ArrayList<AuctionDTO>();
 		return merchantAuctions;
 	}
 
 	@Override
 	public String execute() throws Exception {
 	
+		Auction auction = new Auction();
+		auction = auction.getAuction("204cff85-0796-4535-8764-9a7c356a2b12");
 		
-		Auction singleAuction = new Auction();
-		Auction singleAuction2 = new Auction();
+		AuctionDTO singleAuction = new AuctionDTO();
+		AuctionDTO singleAuction2 = new AuctionDTO();
 		
-		auctions = new ArrayList<Auction>();
-		highlightedAuctions = new ArrayList<Auction>();
+		auctions = new ArrayList<AuctionDTO>();
+		highlightedAuctions = new ArrayList<AuctionDTO>();
 		
-		singleAuction.setTitle("42\" LCD HDTV");
-		singleAuction.setLink("http://www.ayopadev.com/product/HJS-TV1.html");
-		singleAuction.setImage("http://www.ayopadev.com/mm5/graphics/00000001/313PpMMkZWL._SL500_AA300_th.jpg");
-		singleAuction.setStart_price(900.00);
+		singleAuction.setTitle(auction.getProduct_title());
+		singleAuction.setLink(auction.getProduct_url());
+		singleAuction.setImage(auction.getProduct_image());
+		singleAuction.setStart_price(auction.getAuction_startprice());
 		singleAuction.setCurrent_price(800.00);
 		singleAuction.setNext_price(700.00);
 		singleAuction.setLowest_price(650.00);

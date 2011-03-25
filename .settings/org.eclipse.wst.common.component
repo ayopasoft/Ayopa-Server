@@ -3,6 +3,8 @@
     <wb-module deploy-name="AyopaServer">
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config"/>
         <property name="context-root" value="AyopaServer"/>
         <property name="java-output-path" value="/AyopaServer/build/classes"/>
     </wb-module>

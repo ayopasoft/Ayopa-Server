@@ -7,7 +7,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
-import com.ayopa.server.utils.Auction;
+import com.ayopa.server.model.AuctionDTO;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,20 +19,20 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AyopaAuctions extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
-	private List<Auction> auctions;
+	private List<AuctionDTO> auctions;
 	//define getters for data elements
 	
 	
 	
-	public List<Auction> getAuctions() {
+	public List<AuctionDTO> getAuctions() {
 		return auctions;
 	}
 	
-	public List<Auction> getActiveAuctions() {
+	public List<AuctionDTO> getActiveAuctions() {
 		//return all active auctions for Ayopa
 		//what about categories?
 		
-		List<Auction> activeAuctions = new ArrayList<Auction>();
+		List<AuctionDTO> activeAuctions = new ArrayList<AuctionDTO>();
 		return activeAuctions;
 	}
 
@@ -41,9 +41,9 @@ public class AyopaAuctions extends ActionSupport {
 		//return all active Ayopa auctions
 		//filter by category
 		
-		Auction singleAuction = new Auction();
+		AuctionDTO singleAuction = new AuctionDTO();
 		
-		auctions = new ArrayList<Auction>();
+		auctions = new ArrayList<AuctionDTO>();
 		singleAuction.setTitle("42\" LCD HDTV");
 		singleAuction.setLink("http://www.ayopadev.com/product/HJS-TV1.html");
 		singleAuction.setImage("http://www.ayopadev.com/mm5/graphics/00000001/313PpMMkZWL._SL500_AA300_th.jpg");

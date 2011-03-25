@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.ayopa.server.model.Auction;
 import com.ayopa.server.utils.JsonUtils;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -26,7 +27,6 @@ public class CreateAuction extends ActionSupport {
 	private String jsoncallback;
 	private String jsonReturn;
 
-	private Map<String, Object> auction;
 	
 	public void setJsoncallback(String jsoncallback) {
 		this.jsoncallback = JsonUtils.sanitizeJsonpParam(jsoncallback);
@@ -43,24 +43,12 @@ public class CreateAuction extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		
-		JSONObject jsonAuction = (JSONObject) JSONSerializer.toJSON( auctionDef ); 
+		Auction auction = new Auction();
 		
-		Iterator<String> nameItr = jsonAuction.keys();
-		HashMap<String, Object> outMap = new HashMap<String, Object>();
-		while(nameItr.hasNext()) {
-			String name = nameItr.next();
-		    outMap.put(name, jsonAuction.getString(name));
-		    
-		}
+		String jsonString = auction.putAuction(auctionDef);
 		
-		System.out.println(outMap);
-		auction = new HashMap<String, Object> ();
-		auction.put("auction_id", 123456);
-		
-		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( auction ); 
-		
-		if ( jsoncallback != null ) jsonReturn = jsoncallback + "(" + jsonObject.toString() + ");";
-		else jsonReturn = jsonObject.toString();
+		if ( jsoncallback != null ) jsonReturn = jsoncallback + "(" + jsonString + ");";
+		else jsonReturn = jsonString;
 		
 		return Action.SUCCESS;
 	}

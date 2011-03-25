@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.ayopa.server.model.Auction;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -41,6 +42,15 @@ public class GetAuctionForProduct extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
+		
+		Auction myAuction = new Auction();
+		merchantID = "1";
+		productID = "4";
+		
+		String jsonString = myAuction.getAuctionForProduct(merchantID, productID);
+		
+		System.out.println(jsonString);
+		
 		auction = new HashMap<String, Object> ();
 		auction_schedule = new HashMap<String, List<Map<String,Object>>>();
 		schedule_row = new HashMap<String, Object>();
