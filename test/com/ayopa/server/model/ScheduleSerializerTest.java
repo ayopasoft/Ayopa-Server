@@ -1,16 +1,11 @@
 package com.ayopa.server.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.junit.Test;
-
-import com.restfb.json.JsonObject;
 
 public class ScheduleSerializerTest {
 
@@ -19,8 +14,7 @@ public class ScheduleSerializerTest {
 		
 		String strReturn = "";
 		List<ScheduleItem> list = new ArrayList<ScheduleItem>();
-		ScheduleSerializer serial = new ScheduleSerializer();
-		strReturn = serial.toJson(list);
+		strReturn = ScheduleSerializer.toJson(list);
 		
 		//empty list
 		assertEquals("Empty list not serialized properly", "[]", strReturn);
@@ -33,7 +27,7 @@ public class ScheduleSerializerTest {
 		list.add(item);
 		
 		
-		strReturn = serial.toJson(list);
+		strReturn = ScheduleSerializer.toJson(list);
 //		JSONArray jsonArray = (JSONArray) new JSONArray( strReturn );  
 //		JsonObject obj = new JsonObject(strReturn);
 		
@@ -54,7 +48,7 @@ public class ScheduleSerializerTest {
 		item3.setAdd(4);
 		list.add(item3);
 		
-		strReturn = serial.toJson(list);
+		strReturn = ScheduleSerializer.toJson(list);
 		
 		assertEquals("Multiple element list not serialized properly", "[{\"min\":20,\"max\":25,\"dis\":5,\"add\":5},{\"min\":30,\"max\":35,\"dis\":6,\"add\":3},{\"min\":40,\"max\":45,\"dis\":7.9,\"add\":4}]", strReturn);
 		
@@ -66,16 +60,16 @@ public class ScheduleSerializerTest {
 		
 		String strInput = "[]";
 		List<ScheduleItem> list = new ArrayList<ScheduleItem>();
-		ScheduleSerializer serial = new ScheduleSerializer();
 		
-		list = serial.toSchedule(strInput);
+		
+		list = ScheduleSerializer.toSchedule(strInput);
 
 		assertEquals("Empty list not serialized properly", 0, list.size());
 		
 		strInput = "[{\"min\":20,\"max\":25,\"dis\":5,\"add\":5}]";
 		
 		list.clear();
-		list = serial.toSchedule(strInput);
+		list = ScheduleSerializer.toSchedule(strInput);
 		
 		assertEquals("1 Element list not serialized properly", 1, list.size());
 		assertEquals("1 Element getAdd test failed", 5, list.get(0).getAdd());
@@ -86,7 +80,7 @@ public class ScheduleSerializerTest {
 		strInput = "[{\"min\":20,\"max\":25,\"dis\":5,\"add\":5},{\"min\":30,\"max\":35,\"dis\":6,\"add\":3},{\"min\":40,\"max\":45,\"dis\":7.9,\"add\":4}]";
 		
 		list.clear();
-		list = serial.toSchedule(strInput);
+		list = ScheduleSerializer.toSchedule(strInput);
 		
 		assertEquals("Multiple element list not serialized properly", 3, list.size());
 		

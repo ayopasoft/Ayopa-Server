@@ -19,11 +19,11 @@ public class AuctionPersistence {
 	private static Log log = LogFactory.getLog(AuctionPersistence.class);
 	
 	public String putAuction (Auction auction) throws IOException {
-		if (auction.getAuction_id() == null)
+		if (auction.getAuction_id() == null || auction.getAuction_id().length() == 0)
 			auction.setAuction_id(UUID.randomUUID().toString());
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
-		ScheduleSerializer sched = new ScheduleSerializer();
+		
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put(AwsFacade.Key.AUCTION_ID,auction.getAuction_id());
@@ -37,7 +37,7 @@ public class AuctionPersistence {
 		map.put(AwsFacade.Key.AUCTION_END, df.format(auction.getAuction_end()));
 		map.put(AwsFacade.Key.AUCTION_MAXUNITS, Integer.toString(auction.getAuction_maxunits()));
 		map.put(AwsFacade.Key.AUCTION_HIGHLIGHTED, Boolean.toString(auction.getAuction_highlighted()));
-		map.put(AwsFacade.Key.AUCTION_SCHEDULE, sched.toJson(auction.getAuction_schedule()));
+		map.put(AwsFacade.Key.AUCTION_SCHEDULE, ScheduleSerializer.toJson(auction.getAuction_schedule()));
 		map.put(AwsFacade.Key.AUCTION_STARTPRICE, Double.toString(auction.getAuction_startprice()));
 		map.put(AwsFacade.Key.AUCTION_PRICECONFLICT, Double.toString(auction.getAuction_priceconflict()));
 		map.put(AwsFacade.Key.MERCHANT_ID, auction.getMerchant_id());
@@ -65,7 +65,6 @@ public class AuctionPersistence {
 		Auction auction = new Auction ();
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
-		ScheduleSerializer sched = new ScheduleSerializer();
 		
 		auction.setAuction_id (map.get(AwsFacade.Key.AUCTION_ID));
 		auction.setProduct_id(map.get(AwsFacade.Key.PRODUCT_ID));
@@ -85,7 +84,7 @@ public class AuctionPersistence {
 		auction.setAuction_maxunits(Integer.parseInt(map.get(AwsFacade.Key.AUCTION_MAXUNITS)));
 		auction.setAuction_startprice(Double.parseDouble(map.get(AwsFacade.Key.AUCTION_STARTPRICE)));
 		auction.setAuction_priceconflict(Double.parseDouble(map.get(AwsFacade.Key.AUCTION_PRICECONFLICT)));
-		auction.setAuction_schedule(sched.toSchedule(map.get(AwsFacade.Key.AUCTION_SCHEDULE)));
+		auction.setAuction_schedule(ScheduleSerializer.toSchedule(map.get(AwsFacade.Key.AUCTION_SCHEDULE)));
 		auction.setMerchant_id(map.get(AwsFacade.Key.MERCHANT_ID));
 		auction.setMerchant_name(map.get(AwsFacade.Key.MERCHANT_NAME));
 		auction.setMerchant_website(map.get(AwsFacade.Key.MERCHANT_WEBSITE));

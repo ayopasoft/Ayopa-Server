@@ -12,15 +12,43 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONSerializer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+
 import com.ayopa.server.model.persistence.AuctionPersistence;
 import com.ayopa.server.utils.AwsFacade;
 
 public class Auction {
+	
+	public static class Key {
+		
+		public static final String AUCTION_ID = "auction_id";
+		public static final String PRODUCT_ID = "product_id";
+		public static final String PRODUCT_NAME = "product_name";
+		public static final String PRODUCT_DESCR = "product_descr";
+		public static final String PRODUCT_CAT = "product_category";
+		public static final String PRODUCT_IMAGE_URL = "product_image";
+		public static final String PRODUCT_URL = "product_link";
+		public static final String AUCTION_START = "auction_start";
+		public static final String AUCTION_END = "auction_end";
+		public static final String AUCTION_HIGHLIGHTED = "auction_highlighted";
+		public static final String AUCTION_MAXUNITS = "auction_maxunits";
+		public static final String AUCTION_STARTPRICE = "auction_startprice";
+		public static final String AUCTION_PRICECONFLICT = "pricing_conflict";
+		public static final String AUCTION_SCHEDULE = "auction_schedule";
+		public static final String MERCHANT_ID = "merchant_id";
+		public static final String MERCHANT_NAME = "merchant_name";
+		public static final String MERCHANT_WEBSITE = "merchant_website";
+		public static final String SCHEDULE_ROW = "schedule_row";
+		public static final String DISCOUNT = "dis";
+		public static final String MINIMUM = "min";
+		public static final String MAXIMUM = "max";
+		public static final String ADDITIONAL = "add";
+	}
 	
 	private static Log log = LogFactory.getLog(AuctionPersistence.class);
 	
@@ -160,7 +188,7 @@ public class Auction {
 		return auction;
 	}
 	
-	public String getAuctionForProduct (String merchant_id, String product_id) throws IOException{
+	public Auction getAuctionForProduct (String merchant_id, String product_id) throws IOException{
 		Auction auction = new Auction();
 		AuctionPersistence ap = new AuctionPersistence();
 		
@@ -171,8 +199,11 @@ public class Auction {
 		String now = df.format(Calendar.getInstance().getTime());
 	
 	
-		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" + AwsFacade.Key.MERCHANT_ID + "` = '" 
-			+ merchant_id + "' and `" + AwsFacade.Key.PRODUCT_ID + "` = '" + product_id + "' and `" + AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" + AwsFacade.Key.AUCTION_END + "` >= '" + now + "'";
+		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
+		+ AwsFacade.Key.MERCHANT_ID + "` = '" + merchant_id + "' and `" 
+		+ AwsFacade.Key.PRODUCT_ID + "` = '" + product_id + "' and `" 
+		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
+		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "'";
 		
 		log.info(query);
 		
@@ -180,7 +211,7 @@ public class Auction {
 		
 		
 		if (results.size() == 0) {
-			return "0";
+			//return auction;
 		}
 		else {
 			if (results.size() > 1){
@@ -191,7 +222,7 @@ public class Auction {
 			
 		}
 		
-			return auction.auction_id;
+			return auction;
 			
 	}
 	
@@ -200,72 +231,121 @@ public class Auction {
 		Auction auction = new Auction();
 		AuctionPersistence awsAuction = new AuctionPersistence();
 		
-		
-		//JSONObject jsonAuction = (JSONObject) JSONSerializer.toJSON( auctionDef ); 
-		
-		//jsonAuction.get("auction_id");
-		
-		/*Iterator<String> nameItr = jsonAuction.keys();
-		HashMap<String, Object> outMap = new HashMap<String, Object>();
-		while(nameItr.hasNext()) {
-			String name = nameItr.next();
-		    outMap.put(name, jsonAuction.getString(name));
-		    
-		}*/
-		
-		//populate auction object
-		//putAuction
-		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
-		
-		auction.setProduct_id("4");
-		auction.setProduct_title("42\" LCD HDTV");
-		auction.setProduct_description("description");
-		auction.setProduct_category("Electronics");
-		auction.setProduct_image("http://www.ayopadev.com/mm5/graphics/00000001/313PpMMkZWL._SL500_AA300_th.jpg");
-		auction.setProduct_url("http://www.ayopadev.com/product/HJS-TV1.html");
-		try {
-			auction.setAuction_start(df.parse("2011-03-24"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			log.error("Got bad date format from json String: " , e);
-		}
-		try {
-			auction.setAuction_end(df.parse("2011-03-29"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			log.error("Got bad date format from json String: " , e);
-		}
-		auction.setAuction_highlighted(Boolean.TRUE);
-		auction.setAuction_maxunits(100);
-		auction.setAuction_startprice(900.00);
-		auction.setAuction_priceconflict(690.00);
-		
-		List<ScheduleItem> schedule = new ArrayList<ScheduleItem>();
-		ScheduleItem item = new ScheduleItem();
-		
-		item.setDis(5.00);
-		item.setMin(5);
-		item.setMax(20);
-		item.setAdd(2);
-		
-		schedule.add(item);
-		
-		auction.setAuction_schedule(schedule);
-		auction.setMerchant_id("1");
-		auction.setMerchant_name("Happy Jack Software");
-		auction.setMerchant_website("http://www.ayopadev.com/mm5");
+		auction = auction.jsonToAuction(auctionDef);
 		
 		String auctionReturn = awsAuction.putAuction(auction);
-
 		
 		Map<String,String> mapReturn = new HashMap<String, String> ();
 		mapReturn.put("auction_id", auctionReturn);
 		
 		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( mapReturn );
 		
+		return jsonObject.toString();
+	}
+	
+	public String auctionToJson(Auction auction){
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		Map<String,Object> auctionMap = new HashMap<String, Object> ();
+		Map<String, List<Map<String,Object>>> auction_schedule = new HashMap<String, List<Map<String,Object>>>();
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		Map<String, Map<String,Object>> auction_container = new HashMap<String, Map<String,Object>>();
+		
+	
+		
+			auctionMap.put(Auction.Key.AUCTION_ID, auction.auction_id);
+			auctionMap.put(Auction.Key.PRODUCT_ID, auction.product_id);
+			auctionMap.put(Auction.Key.PRODUCT_NAME, auction.product_title);
+			auctionMap.put(Auction.Key.PRODUCT_DESCR, auction.product_description);
+			try {
+				auctionMap.put(Auction.Key.AUCTION_START, df.format(auction.auction_start));
+				auctionMap.put(Auction.Key.AUCTION_END, df.format(auction.auction_end));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				log.error("Auction start or auction end dates error: " + e);
+			}
+			auctionMap.put(Auction.Key.AUCTION_MAXUNITS, auction.auction_maxunits);
+			auctionMap.put(Auction.Key.AUCTION_STARTPRICE, auction.auction_startprice);
+			auctionMap.put(Auction.Key.AUCTION_HIGHLIGHTED, auction.auction_highlighted);
+			auctionMap.put(Auction.Key.PRODUCT_IMAGE_URL, auction.product_image);
+			auctionMap.put(Auction.Key.PRODUCT_URL, auction.product_url);
+			auctionMap.put(Auction.Key.PRODUCT_CAT, auction.product_category);
+			auctionMap.put(Auction.Key.AUCTION_PRICECONFLICT, auction.auction_priceconflict);
+			auctionMap.put(Auction.Key.MERCHANT_ID, auction.merchant_id);
+			auctionMap.put(Auction.Key.MERCHANT_NAME, auction.merchant_name);
+			auctionMap.put(Auction.Key.MERCHANT_WEBSITE, auction.merchant_website);	 
+			
+			try {
+				for (int i=0; i < auction.auction_schedule.size(); i++) {
+					Map<String,Object> schedule_row = new HashMap<String, Object>();
+					schedule_row.put(Auction.Key.DISCOUNT, auction.auction_schedule.get(i).getDis());
+					schedule_row.put(Auction.Key.MINIMUM, auction.auction_schedule.get(i).getMin());
+					schedule_row.put(Auction.Key.MAXIMUM, auction.auction_schedule.get(i).getMax());
+					schedule_row.put(Auction.Key.ADDITIONAL, auction.auction_schedule.get(i).getAdd());
+					list.add(schedule_row);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				log.error("Auction schedule empty: " + e);
+			}
+			
+			
+			auction_schedule.put(Auction.Key.SCHEDULE_ROW, list);
+			
+			auctionMap.put(Auction.Key.AUCTION_SCHEDULE, auction_schedule);
+		
+		
+		
+		auction_container.put("auction", auctionMap);
+		
+		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( auction_container );
 		
 		return jsonObject.toString();
+	}
+	
+	public Auction jsonToAuction(String json)
+	{
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( json ); 
+		Auction auction = new Auction();
+		
+		if (json.length() != 0 && json != null){
+			
+			
+			JSONObject jsonAuction = (JSONObject) jsonObject.get("auction");
+			
+			auction.setAuction_id(jsonAuction.getString(Auction.Key.AUCTION_ID));
+			auction.setProduct_id(jsonAuction.getString(Auction.Key.PRODUCT_ID));
+			auction.setProduct_title(jsonAuction.getString(Auction.Key.PRODUCT_NAME));
+			auction.setProduct_description(jsonAuction.getString(Auction.Key.PRODUCT_DESCR));
+			auction.setProduct_image(jsonAuction.getString(Auction.Key.PRODUCT_IMAGE_URL));
+			auction.setProduct_category(jsonAuction.getString(Auction.Key.PRODUCT_CAT));
+			auction.setProduct_url(jsonAuction.getString(Auction.Key.PRODUCT_URL));
+			auction.setAuction_highlighted(jsonAuction.getBoolean(Auction.Key.AUCTION_HIGHLIGHTED));
+			
+			try {
+				auction.setAuction_start(df.parse(jsonAuction.getString(Auction.Key.AUCTION_START)));
+				auction.setAuction_end(df.parse(jsonAuction.getString(Auction.Key.AUCTION_END)));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				log.error("Auction start or Auction end is invalid: " + e);
+			}
+			
+			auction.setAuction_maxunits(jsonAuction.getInt(Auction.Key.AUCTION_MAXUNITS));
+			auction.setAuction_startprice(jsonAuction.getDouble(Auction.Key.AUCTION_STARTPRICE));
+			auction.setAuction_priceconflict(jsonAuction.getDouble(Auction.Key.AUCTION_PRICECONFLICT));
+			auction.setMerchant_id(jsonAuction.getString(Auction.Key.MERCHANT_ID));
+			auction.setMerchant_name(jsonAuction.getString(Auction.Key.MERCHANT_NAME));
+			auction.setMerchant_website(jsonAuction.getString(Auction.Key.MERCHANT_WEBSITE));
+			
+			JSONObject jsonAuctionSched = (JSONObject) JSONSerializer.toJSON( jsonAuction.get(Auction.Key.AUCTION_SCHEDULE));
+			JSONArray jsonSched = (JSONArray) JSONSerializer.toJSON( jsonAuctionSched.get(Auction.Key.SCHEDULE_ROW) ); 
+			
+			auction.setAuction_schedule(ScheduleSerializer.toSchedule(jsonSched.toString()));
+			
+			
+		}
+		return auction;
 	}
 	
 }
