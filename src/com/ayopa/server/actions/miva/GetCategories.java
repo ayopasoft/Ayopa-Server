@@ -1,10 +1,14 @@
 package com.ayopa.server.actions.miva;
 
 
+import java.util.List;
+
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.ayopa.server.model.Category;
+import com.ayopa.server.utils.AwsFacade;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -29,16 +33,14 @@ public class GetCategories extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		
-		category = "<category value=\"Baby & Toddlers\">";
-		category += "<category value=\"Clothing & Accessories\">";
-		category += "<category value=\"Electronics\">";
-		category += "<category value=\"Furniture\">";
-		category += "<category value=\"Hardware\">";
-		category += "<category value=\"Home & Garden\">";
-		category += "<category value=\"Office Supplies\">";
-		category += "<category value=\"Sporting Goods & Outdoor\">";
-		category += "<category value=\"Software\">";
-		category += "<category value=\"Toys & Games\">";
+		List<java.util.Map<String, String>> list  = Category.getCategories();
+		
+		category = "";
+		
+		for(int i=0; i < list.size(); i++){
+			
+			category += "<category value=\"" + list.get(i).get(AwsFacade.Key.CATEGORY_NAME) + "\">";
+		}
 		
 		return Action.SUCCESS;
 	}

@@ -38,11 +38,14 @@ public class GetAuctionForProduct extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		
-		Auction myAuction = new Auction();
-		merchantID = "1";
-		productID = "4";
+		Auction auction = new Auction();
+				
+		auction = auction.getAuctionForProduct(merchantID, productID);
 		
-		jsonString = myAuction.auctionToJson(myAuction.getAuctionForProduct(merchantID, productID));
+		if (auction.getAuction_id() == null)
+			jsonString = "0";
+		else
+			jsonString = auction.auctionToJson(auction);
 		
 		return Action.SUCCESS;
 	}

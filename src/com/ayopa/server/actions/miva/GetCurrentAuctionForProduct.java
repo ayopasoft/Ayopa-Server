@@ -5,6 +5,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.ayopa.server.model.Auction;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -40,12 +41,21 @@ public class GetCurrentAuctionForProduct extends ActionSupport {
 		//detects if auction expired, ended, etc before returning auction_id
 		//Basically, don't return id if auction is not active
 		
+		Auction auction = new Auction();
+		
 		if (merchantID == null || merchantID.trim().length() == 0)
 			auctionID = "0";
 		else if (productID == null || productID.trim().length() == 0)
 			auctionID = "0";
 		else
-			auctionID = "12345";
+			{
+			
+			auction = auction.getAuctionForProduct(merchantID, productID);
+			auctionID = auction.getAuction_id();
+			if (auctionID == null)
+				auctionID = "0";
+			}
+		
 		return Action.SUCCESS;
 	}
 

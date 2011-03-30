@@ -59,6 +59,8 @@ public class AwsFacade {
 
 	public static class Table {
 		public static final String AUCTION = "ayopa-auctions";
+		public static final String MERCHANT = "ayopa-merchants";
+		public static final String CATEGORY = "ayopa-categories";
 	}
 	
 	public static class Key {
@@ -77,9 +79,27 @@ public class AwsFacade {
 		public static final String AUCTION_STARTPRICE = "auction-startprice";
 		public static final String AUCTION_PRICECONFLICT = "auction-priceconflict";
 		public static final String AUCTION_SCHEDULE = "auction-schedule";
+		public static final String AUCTION_DELETED = "auction-deleted";
+		public static final String AUCTION_ENDED = "auction-ended";
+		
 		public static final String MERCHANT_ID = "merchant-id";
 		public static final String MERCHANT_NAME = "merchant-name";
 		public static final String MERCHANT_WEBSITE = "merchant-website";
+		public static final String MERCHANT_USERNAME = "merchant-username";
+		public static final String MERCHANT_PASSWORD = "merchant-password";
+		public static final String MERCHANT_ADDRESS1 = "merchant-address1";
+		public static final String MERCHANT_ADDRESS2 = "merchant-address2";
+		public static final String MERCHANT_CITY = "merchant-city";
+		public static final String MERCHANT_STATE = "merchant-state";
+		public static final String MERCHANT_COUNTRY = "merchant-country";
+		public static final String MERCHANT_POSTALCODE = "merchant-postalcode";
+		public static final String MERCHANT_CONTACT = "merchant-contact";
+		public static final String MERCHANT_EMAIL = "merchant-email";
+		public static final String MERCHANT_FB_PAGE = "merchant-fb-page";
+		public static final String MERCHANT_AYOPA_FB = "merchant-ayopa-fb";
+		
+		public static final String CATEGORY_NAME = "category-name";
+		
 	}
 	
 	public static class Bucket {
@@ -105,7 +125,9 @@ public class AwsFacade {
 		sqs = new AmazonSQSClient(credentials);
 	
 		if (CREATE_RESOURCES) {
-			createDomain(Table.AUCTION);			
+			createDomain(Table.AUCTION);
+			createDomain(Table.MERCHANT);
+			createDomain(Table.CATEGORY);
 		}
 	}
 	

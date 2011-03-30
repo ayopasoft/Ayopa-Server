@@ -23,6 +23,7 @@ import com.ayopa.server.model.persistence.AuctionPersistence;
 import com.ayopa.server.utils.AwsFacade;
 
 public class Auction {
+	private static Log log = LogFactory.getLog(AuctionPersistence.class);
 	
 	public static class Key {
 		
@@ -48,9 +49,10 @@ public class Auction {
 		public static final String MINIMUM = "min";
 		public static final String MAXIMUM = "max";
 		public static final String ADDITIONAL = "add";
+		public static final String AUCTION_ENDED = "auction_ended";
+		public static final String AUCTION_DELETED = "auction_deleted";
 	}
 	
-	private static Log log = LogFactory.getLog(AuctionPersistence.class);
 	
 	private String auction_id;
 	private String product_id;
@@ -69,8 +71,22 @@ public class Auction {
 	private String merchant_id;
 	private String merchant_name;
 	private String merchant_website;
+	private String auction_ended;
+	private String auction_deleted;
 	
 	
+	public String getAuction_ended() {
+		return auction_ended;
+	}
+	public void setAuction_ended(String auction_ended) {
+		this.auction_ended = auction_ended;
+	}
+	public String getAuction_deleted() {
+		return auction_deleted;
+	}
+	public void setAuction_deleted(String auction_deleted) {
+		this.auction_deleted = auction_deleted;
+	}
 	public String getAuction_id() {
 		return auction_id;
 	}
@@ -203,7 +219,10 @@ public class Auction {
 		+ AwsFacade.Key.MERCHANT_ID + "` = '" + merchant_id + "' and `" 
 		+ AwsFacade.Key.PRODUCT_ID + "` = '" + product_id + "' and `" 
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
-		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "'";
+		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
+		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
+		+ AwsFacade.Key.AUCTION_START + "` desc";
 		
 		log.info(query);
 		
@@ -272,7 +291,9 @@ public class Auction {
 			auctionMap.put(Auction.Key.AUCTION_PRICECONFLICT, auction.auction_priceconflict);
 			auctionMap.put(Auction.Key.MERCHANT_ID, auction.merchant_id);
 			auctionMap.put(Auction.Key.MERCHANT_NAME, auction.merchant_name);
-			auctionMap.put(Auction.Key.MERCHANT_WEBSITE, auction.merchant_website);	 
+			auctionMap.put(Auction.Key.MERCHANT_WEBSITE, auction.merchant_website);	
+			auctionMap.put(Auction.Key.AUCTION_DELETED, auction.auction_deleted);
+			auctionMap.put(Auction.Key.AUCTION_ENDED, auction.auction_ended);
 			
 			try {
 				for (int i=0; i < auction.auction_schedule.size(); i++) {
@@ -337,6 +358,8 @@ public class Auction {
 			auction.setMerchant_id(jsonAuction.getString(Auction.Key.MERCHANT_ID));
 			auction.setMerchant_name(jsonAuction.getString(Auction.Key.MERCHANT_NAME));
 			auction.setMerchant_website(jsonAuction.getString(Auction.Key.MERCHANT_WEBSITE));
+			auction.setAuction_ended(jsonAuction.getString(Auction.Key.AUCTION_ENDED));
+			auction.setAuction_deleted(jsonAuction.getString(Auction.Key.AUCTION_DELETED));
 			
 			JSONObject jsonAuctionSched = (JSONObject) JSONSerializer.toJSON( jsonAuction.get(Auction.Key.AUCTION_SCHEDULE));
 			JSONArray jsonSched = (JSONArray) JSONSerializer.toJSON( jsonAuctionSched.get(Auction.Key.SCHEDULE_ROW) ); 

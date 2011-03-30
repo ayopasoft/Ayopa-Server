@@ -4,6 +4,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.ayopa.server.model.Merchant;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -42,12 +43,21 @@ public class CheckLogin extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
+		
+		Merchant merchant = new Merchant();
+		
 		if (username == null || username.trim().length() == 0)
 			merchantID = "0";
 		else if (password == null || password.trim().length() == 0)
 			merchantID = "0";
-		else
-			merchantID = "100";
+		else {
+			
+			merchant = merchant.authenticate_login(username, password);
+			merchantID = merchant.getMerchant_id();
+			if (merchantID == null)
+				merchantID = "0";
+		}
+		
 		return Action.SUCCESS;
 	}
 }

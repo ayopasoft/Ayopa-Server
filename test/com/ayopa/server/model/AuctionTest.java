@@ -63,17 +63,17 @@ public class AuctionTest {
 		
 		result = auction.auctionToJson(auction);
 		
-		assertEquals("Full Auction definition to JSON failed","{\"auction\":{\"merchant_website\":\"Merchant Website\",\"auction_highlighted\":true,\"product_id\":\"4\",\"merchant_name\":\"Happy Jack Software\",\"product_name\":\"Product Title\",\"auction_maxunits\":100,\"auction_end\":\"2011-03-29\",\"auction_id\":\"12345\",\"auction_startprice\":25,\"product_category\":\"Electronics\",\"auction_start\":\"2011-03-28\",\"auction_schedule\":{\"schedule_row\":[{\"min\":20,\"max\":25,\"dis\":5,\"add\":5},{\"min\":30,\"max\":35,\"dis\":6,\"add\":3},{\"min\":40,\"max\":45,\"dis\":7.9,\"add\":4}]},\"product_image\":\"Product Image\",\"product_descr\":\"Product Description\",\"pricing_conflict\":5,\"merchant_id\":\"1\",\"product_link\":\"Product URL\"}}",result);
+		assertEquals("Full Auction definition to JSON failed","{\"auction\":{\"merchant_website\":\"Merchant Website\",\"auction_highlighted\":true,\"product_id\":\"4\",\"merchant_name\":\"Happy Jack Software\",\"product_name\":\"Product Title\",\"auction_maxunits\":100,\"auction_end\":\"2011-03-29\",\"auction_deleted\":null,\"auction_id\":\"12345\",\"auction_startprice\":25,\"product_category\":\"Electronics\",\"auction_start\":\"2011-03-28\",\"auction_schedule\":{\"schedule_row\":[{\"min\":20,\"max\":25,\"dis\":5,\"add\":5},{\"min\":30,\"max\":35,\"dis\":6,\"add\":3},{\"min\":40,\"max\":45,\"dis\":7.9,\"add\":4}]},\"product_image\":\"Product Image\",\"product_descr\":\"Product Description\",\"pricing_conflict\":5,\"auction_ended\":null,\"merchant_id\":\"1\",\"product_link\":\"Product URL\"}}",result);
 	}
 
 	@Test
 	public void testJsonToAuction(){
 		Auction auction = new Auction();
-		String jsonString = "{\"auction\":{\"merchant_website\":\"Merchant Website\",\"auction_highlighted\":true,\"product_id\":\"4\",\"merchant_name\":\"Happy Jack Software\",\"product_name\":\"Product Title\",\"auction_maxunits\":100,\"auction_end\":\"2011-03-29\",\"auction_id\":\"12345\",\"auction_startprice\":25,\"product_category\":\"Electronics\",\"auction_start\":\"2011-03-28\",\"auction_schedule\":{\"schedule_row\":[{\"min\":20,\"max\":25,\"dis\":5,\"add\":0},{\"min\":30,\"max\":35,\"dis\":6,\"add\":3},{\"min\":40,\"max\":45,\"dis\":7.9,\"add\":4}]},\"product_image\":\"Product Image\",\"product_descr\":\"Product Description\",\"pricing_conflict\":5,\"merchant_id\":\"1\",\"product_link\":\"Product URL\"}}";
+		String jsonString = "{\"auction\":{\"merchant_website\":\"Merchant Website\",\"auction_highlighted\":true,\"product_id\":\"4\",\"merchant_name\":\"Happy Jack Software\",\"product_name\":\"Product Title\",\"auction_maxunits\":100,\"auction_end\":\"2011-03-29\",\"auction_deleted\":null,\"auction_id\":\"12345\",\"auction_startprice\":25,\"product_category\":\"Electronics\",\"auction_start\":\"2011-03-28\",\"auction_schedule\":{\"schedule_row\":[{\"min\":20,\"max\":25,\"dis\":5,\"add\":5},{\"min\":30,\"max\":35,\"dis\":6,\"add\":3},{\"min\":40,\"max\":45,\"dis\":7.9,\"add\":4}]},\"product_image\":\"Product Image\",\"product_descr\":\"Product Description\",\"pricing_conflict\":5,\"auction_ended\":null,\"merchant_id\":\"1\",\"product_link\":\"Product URL\"}}";
 		auction = auction.jsonToAuction(jsonString);
 		
 		assertEquals("Json to Auction failed for full definition: auction_id","12345", auction.getAuction_id());
-		assertEquals("Json to Auction failed for full definition: schedule", "[{\"min\":20,\"max\":25,\"dis\":5,\"add\":0},{\"min\":30,\"max\":35,\"dis\":6,\"add\":3},{\"min\":40,\"max\":45,\"dis\":7.9,\"add\":4}]" , ScheduleSerializer.toJson(auction.getAuction_schedule()));
+		assertEquals("Json to Auction failed for full definition: schedule", "[{\"min\":20,\"max\":25,\"dis\":5,\"add\":5},{\"min\":30,\"max\":35,\"dis\":6,\"add\":3},{\"min\":40,\"max\":45,\"dis\":7.9,\"add\":4}]" , ScheduleSerializer.toJson(auction.getAuction_schedule()));
 	}
 	
 }

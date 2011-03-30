@@ -40,9 +40,12 @@ public class AuctionPersistence {
 		map.put(AwsFacade.Key.AUCTION_SCHEDULE, ScheduleSerializer.toJson(auction.getAuction_schedule()));
 		map.put(AwsFacade.Key.AUCTION_STARTPRICE, Double.toString(auction.getAuction_startprice()));
 		map.put(AwsFacade.Key.AUCTION_PRICECONFLICT, Double.toString(auction.getAuction_priceconflict()));
+		map.put(AwsFacade.Key.AUCTION_ENDED, auction.getMerchant_website());
 		map.put(AwsFacade.Key.MERCHANT_ID, auction.getMerchant_id());
 		map.put(AwsFacade.Key.MERCHANT_NAME, auction.getMerchant_name());
 		map.put(AwsFacade.Key.MERCHANT_WEBSITE, auction.getMerchant_website());
+		map.put(AwsFacade.Key.AUCTION_ENDED, auction.getAuction_ended());
+		map.put(AwsFacade.Key.AUCTION_DELETED, auction.getAuction_deleted());
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		aws.putRow(AwsFacade.Table.AUCTION, auction.getAuction_id(), map);
@@ -88,6 +91,12 @@ public class AuctionPersistence {
 		auction.setMerchant_id(map.get(AwsFacade.Key.MERCHANT_ID));
 		auction.setMerchant_name(map.get(AwsFacade.Key.MERCHANT_NAME));
 		auction.setMerchant_website(map.get(AwsFacade.Key.MERCHANT_WEBSITE));
+		auction.setAuction_deleted(map.get(AwsFacade.Key.AUCTION_DELETED));
+		auction.setAuction_ended(map.get(AwsFacade.Key.AUCTION_END));
+		
+		
 		return auction;
 	}
+	
+	
 }
