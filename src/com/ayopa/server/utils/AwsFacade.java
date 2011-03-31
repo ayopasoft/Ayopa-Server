@@ -61,6 +61,8 @@ public class AwsFacade {
 		public static final String AUCTION = "ayopa-auctions";
 		public static final String MERCHANT = "ayopa-merchants";
 		public static final String CATEGORY = "ayopa-categories";
+		public static final String BUYER = "ayopa-buyers";
+		public static final String PURCHASE = "ayopa-purchases";
 	}
 	
 	public static class Key {
@@ -100,6 +102,17 @@ public class AwsFacade {
 		
 		public static final String CATEGORY_NAME = "category-name";
 		
+		public static final String PURCHASE_ID = "purchase-id";
+		public static final String PURCHASE_AUCTION_ID = "purchase-auction-id";
+		public static final String PURCHASE_BUYER_ID = "purchase-buyer-id";
+		public static final String PURCHASE_QUANTITY = "purchase-quantity";
+		public static final String PURCHASE_PRICE = "purchase-price";
+		
+		public static final String BUYER_ID = "buyer-id";
+		public static final String BUYER_ACCESS_TOKEN = "buyer-access-token";
+		public static final String BUYER_NAME = "buyer-name";
+		public static final String BUYER_EMAIL = "buyer-email";
+		
 	}
 	
 	public static class Bucket {
@@ -128,6 +141,8 @@ public class AwsFacade {
 			createDomain(Table.AUCTION);
 			createDomain(Table.MERCHANT);
 			createDomain(Table.CATEGORY);
+			createDomain(Table.BUYER);
+			createDomain(Table.PURCHASE);
 		}
 	}
 	
