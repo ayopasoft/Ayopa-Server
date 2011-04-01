@@ -19,8 +19,8 @@ public class PurchasePersistence {
 		map.put(AwsFacade.Key.PURCHASE_ID,purchase.getPurchase_id());
 		map.put(AwsFacade.Key.PURCHASE_AUCTION_ID, purchase.getPurchase_auction_id());
 		map.put(AwsFacade.Key.PURCHASE_BUYER_ID, purchase.getPurchase_buyer_id());
-		map.put(AwsFacade.Key.PURCHASE_QUANTITY, purchase.getPurchase_quantity());
-		map.put(AwsFacade.Key.PURCHASE_PRICE, purchase.getPurchase_price());
+		map.put(AwsFacade.Key.PURCHASE_QUANTITY, Integer.toString(purchase.getPurchase_quantity()));
+		map.put(AwsFacade.Key.PURCHASE_PRICE, Double.toString(purchase.getPurchase_price()));
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		aws.putRow(AwsFacade.Table.PURCHASE, purchase.getPurchase_id(), map);
@@ -45,8 +45,8 @@ public class PurchasePersistence {
 		purchase.setPurchase_id(map.get(AwsFacade.Key.PURCHASE_ID));
 		purchase.setPurchase_auction_id(map.get(AwsFacade.Key.PURCHASE_AUCTION_ID));
 		purchase.setPurchase_buyer_id(map.get(AwsFacade.Key.PURCHASE_BUYER_ID));
-		purchase.setPurchase_quantity(map.get(AwsFacade.Key.PURCHASE_QUANTITY));
-		purchase.setPurchase_price(map.get(AwsFacade.Key.PURCHASE_PRICE));
+		purchase.setPurchase_quantity(Integer.parseInt(map.get(AwsFacade.Key.PURCHASE_QUANTITY)));
+		purchase.setPurchase_price(Double.parseDouble(map.get(AwsFacade.Key.PURCHASE_PRICE)));
 		
 		return purchase;
 	}

@@ -12,9 +12,6 @@
 
 <s:actionerror />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
-<html>
 
 	<body bgcolor="#ffffff">
 		<div class="main_buy_with_ayopa">
@@ -25,12 +22,12 @@
 										<s:property value="current_quant"/>
 									</div>
 
-									<div class="buy_with_ayopa_next">40</div>
-									<div class="buy_with_ayopa_last">60</div>
+									<div class="buy_with_ayopa_next"><s:property value="next_quant"/></div>
+									<div class="buy_with_ayopa_last"><s:property value="highest_quant"/></div>
 								</div>
 								<div>
-									<s:text name="format.currency">
-											<s:param name="value" value="currentPrice"/>
+									<s:text name="format.graphcurr">
+											<s:param name="value" value="current_price"/>
 										</s:text>
 								</div>
 								<div class="buy_with_ayopa_time_left">
@@ -42,11 +39,11 @@
 										<div>Day</div>
 									</div>
 									<div class="buy_with_ayopa_time_left_numbers">
-										<div>38</div>  <!--Seconds-->
-										<div>45</div>  <!--Minutes-->
+										<div><s:property value="time_seconds"/></div>  <!--Seconds-->
+										<div><s:property value="time_minutes"/></div>  <!--Minutes-->
 
-										<div>14</div>  <!--Hours-->
-										<div>2</div>	<!--Days-->
+										<div><s:property value="time_hours"/></div>  <!--Hours-->
+										<div><s:property value="time_days"/></div>	<!--Days-->
 									</div>
 								</div>
 							</div>	

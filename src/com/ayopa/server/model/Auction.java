@@ -269,8 +269,6 @@ public class Auction {
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		Map<String, Map<String,Object>> auction_container = new HashMap<String, Map<String,Object>>();
 		
-	
-		
 			auctionMap.put(Auction.Key.AUCTION_ID, auction.auction_id);
 			auctionMap.put(Auction.Key.PRODUCT_ID, auction.product_id);
 			auctionMap.put(Auction.Key.PRODUCT_NAME, auction.product_title);
@@ -313,7 +311,6 @@ public class Auction {
 			auction_schedule.put(Auction.Key.SCHEDULE_ROW, list);
 			
 			auctionMap.put(Auction.Key.AUCTION_SCHEDULE, auction_schedule);
-		
 		
 		
 		auction_container.put("auction", auctionMap);

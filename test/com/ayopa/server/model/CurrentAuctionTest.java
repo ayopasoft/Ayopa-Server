@@ -2,11 +2,14 @@ package com.ayopa.server.model;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,6 +17,44 @@ import org.junit.Test;
 
 public class CurrentAuctionTest {
 	private static Log log = LogFactory.getLog(CurrentAuctionTest.class);
+	
+	@Test
+	public void testGetCurrentQuantity() throws IOException {
+		CurrentAuction currAuction = new CurrentAuction();
+		int quantity = currAuction.getCurrentQuantity("518a13e1-8439-4aec-8ea9-d9e4b4f4ab4a");
+		
+		assertEquals("GetCurrentQuantity returned incorrect value",21,quantity,0);
+		
+	}
+	
+	
+	@Test
+	public void testGetAuctionTimeRemaining()
+	{
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		
+		Auction auction = new Auction();
+		try {
+			auction.setAuction_start(df.parse("2011-03-28"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			log.error(e);
+		}
+		try {
+			auction.setAuction_end(df.parse("2011-04-04"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			log.error(e);
+		}
+		
+		Map<String, Long> map = new HashMap<String, Long>();
+		
+		map = CurrentAuction.getAuctionTimeRemaining(auction);
+		
+		assertEquals("Time remaining days wrong",2,map.get("days"),0);
+		
+	}
+	
 	@Test
 	public void testGetCurrentAuctionInfo() {
 		

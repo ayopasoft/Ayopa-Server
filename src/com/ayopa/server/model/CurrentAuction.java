@@ -1,6 +1,8 @@
 package com.ayopa.server.model;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -193,5 +195,38 @@ public class CurrentAuction {
 		
 		return currAuction;
 	}
+	
+	public static Map<String,Long> getAuctionTimeRemaining(Auction auction){
+		
+		//check if auction ended manually?
+		
+		Map<String,Long> map = new HashMap<String,Long>();
+		
+		Calendar calendar1 = Calendar.getInstance();
+		Calendar calendar2 = Calendar.getInstance();
+		calendar1.setTime(Calendar.getInstance().getTime());
+	    calendar2.setTime(auction.getAuction_end());
+	    
+	    long milliseconds1 = calendar1.getTimeInMillis();
+	    long milliseconds2 = calendar2.getTimeInMillis();
+	    long diff = milliseconds2 - milliseconds1;
+	    long diffInSeconds = diff / 1000;
+	    
+	    long sec = (diffInSeconds >= 60 ? diffInSeconds % 60 : diffInSeconds);
+	    long min = (diffInSeconds = (diffInSeconds / 60)) >= 60 ? diffInSeconds % 60 : diffInSeconds;
+	    long hrs = (diffInSeconds = (diffInSeconds / 60)) >= 24 ? diffInSeconds % 24 : diffInSeconds;
+	    long days = (diffInSeconds = (diffInSeconds / 24)) >= 30 ? diffInSeconds % 30 : diffInSeconds;
+
+	    	    
+	    map.put("seconds", sec);
+	    map.put("minutes", min);
+	    map.put("hours", hrs);
+	    map.put("days", days);
+	    
+	    return map;
+	
+	}
+	
+	
 	
 }
