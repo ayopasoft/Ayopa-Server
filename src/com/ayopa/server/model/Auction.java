@@ -204,6 +204,39 @@ public class Auction {
 		return auction;
 	}
 	
+	public List<Auction> getCurrentAuctions () throws IOException{
+		List<Auction> auctions = new ArrayList<Auction>();
+		AwsFacade aws = AwsFacade.getInstance();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		
+		String now = df.format(Calendar.getInstance().getTime());
+		
+		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
+		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
+		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
+		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
+		+ AwsFacade.Key.AUCTION_START + "` desc";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		if (results.size() == 0) {
+			//return auction;
+		}
+		else {
+			for (int i = 0; i < results.size(); i++){
+				Auction auction = new Auction();
+				auction = auction.getAuction(results.get(i).get(AwsFacade.Key.AUCTION_ID));
+				auctions.add(auction);
+			}
+			
+			
+		}
+			return auctions;
+	}
+	
 	public Auction getAuctionForProduct (String merchant_id, String product_id) throws IOException{
 		Auction auction = new Auction();
 		AuctionPersistence ap = new AuctionPersistence();
@@ -242,6 +275,42 @@ public class Auction {
 		}
 		
 			return auction;
+			
+	}
+	
+	public List<Auction> getAuctionsForBuyer (String buyer_id) throws IOException{
+		List<Auction> auctions = new ArrayList<Auction>();
+		
+		
+		AwsFacade aws = AwsFacade.getInstance();
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		
+		String now = df.format(Calendar.getInstance().getTime());
+	
+		String query = "select * from `" + AwsFacade.Table.PURCHASE + "` where `" 
+		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` = '" + buyer_id + "' and `" 
+		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
+		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' order by `"
+		+ AwsFacade.Key.AUCTION_END + "` desc";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		if (results.size() == 0) {
+			//return auction;
+		}
+		else {
+			for (int i = 0; i < results.size(); i++){
+				Auction auction = new Auction();
+				auction = auction.getAuction(results.get(i).get(AwsFacade.Key.PURCHASE_AUCTION_ID));
+				auctions.add(auction);
+			}
+			
+			
+		}
+			return auctions;
 			
 	}
 	

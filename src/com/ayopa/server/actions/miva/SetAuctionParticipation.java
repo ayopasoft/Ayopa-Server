@@ -17,8 +17,8 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SetAuctionParticipation extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
-	private String auction_id;
-	private String buyer_id;
+	private String auctionID;
+	private String buyerID;
 	private Integer quantity;
 	private String success;
 	
@@ -33,19 +33,20 @@ public class SetAuctionParticipation extends ActionSupport {
 	}
 
 
-	public void setAuction_id(String auction_id) {
-		this.auction_id = auction_id;
+	public void setAuctionID(String auctionID) {
+		this.auctionID = auctionID;
 	}
 
-	public void setBuyer_id(String buyer_id) {
-		this.buyer_id = buyer_id;
+
+	public void setBuyerID(String buyerID) {
+		this.buyerID = buyerID;
 	}
 
 
 	@Override
 	public String execute() throws Exception {
 		
-		success = Purchase.putPurchase(auction_id, buyer_id, quantity);
+		success = Purchase.putPurchase(auctionID, buyerID, quantity);
 		
 		return Action.SUCCESS;
 	}

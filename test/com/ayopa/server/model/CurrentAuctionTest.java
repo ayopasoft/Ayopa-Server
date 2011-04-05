@@ -31,17 +31,17 @@ public class CurrentAuctionTest {
 	@Test
 	public void testGetAuctionTimeRemaining()
 	{
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd h:mm a"); 
 		
 		Auction auction = new Auction();
 		try {
-			auction.setAuction_start(df.parse("2011-03-28"));
+			auction.setAuction_start(df.parse("2011-03-28 10:00 am"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			log.error(e);
 		}
 		try {
-			auction.setAuction_end(df.parse("2011-04-04"));
+			auction.setAuction_end(df.parse("2011-04-05 10:00 am"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			log.error(e);

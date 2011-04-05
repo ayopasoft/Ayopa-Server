@@ -47,15 +47,19 @@ public class CheckLogin extends ActionSupport {
 		Merchant merchant = new Merchant();
 		
 		if (username == null || username.trim().length() == 0)
-			merchantID = "0";
+			merchantID = "<merchant_id value = \"0\">";
 		else if (password == null || password.trim().length() == 0)
-			merchantID = "0";
+			merchantID = "<merchant_id value = \"0\">";
 		else {
 			
 			merchant = merchant.authenticate_login(username, password);
-			merchantID = merchant.getMerchant_id();
+			
+			merchantID = "<merchant_id value = \"" + merchant.getMerchant_id() + "\">";
+			merchantID += "<merchant_name value =\"" + merchant.getMerchant_name() + "\">";
+			merchantID += "<merchant_website value=\"" + merchant.getMerchant_website() + "\">";
+			
 			if (merchantID == null)
-				merchantID = "0";
+				merchantID = "<merchant_id value = \"0\">";
 		}
 		
 		return Action.SUCCESS;

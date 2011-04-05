@@ -129,12 +129,23 @@ float:left;}
 	position:relative;
 }
 
-.ayopa_side_nav{
+.ayopa_categories_header{
+	width:175px;
+	height:30px;
+	background:url(http://www.ayopadev.com/ayopa/images/categories_header.png) no-repeat center #ffffff;
 	margin:0;
 	padding:0;
+	border-bottom:1px dotted #185C7E;
+	margin-bottom:5px;
+}
+
+.ayopa_side_nav{
+	margin:0;
+	padding:0 0 5px 0;
 	list-style:none;
 	width:175px;
 	position:absolute;
+	border:1px dotted #185C7E;
 }
 
 .ayopa_side_nav li{
@@ -144,7 +155,7 @@ float:left;}
 
 .ayopa_side_nav a{
 	line-height:27px;
-	font-size:12px;
+	font-size:14px;
 	color:#ffffff;
 	font-weight:normal;
 	text-decoration:none;
@@ -202,6 +213,7 @@ float:left;}
 	background-image:url(http://www.ayopadev.com/ayopa/images/tile_bottom.png);
 }
 
+
 .highlighted .ayopa_auction_tile_top{
 	background-image:url(http://www.ayopadev.com/ayopa/images/tile_top_highlighted.png);
 }
@@ -249,16 +261,16 @@ float:left;}
 }
 
 .ayopa_start{
-	color:#888888;
+	color:#aaaaaa;
 }
 .ayopa_current{
-	color:#229944;
+	color:#85a91c;
 }
 .ayopa_next{
-	color:#999900;
+	color:#6ea0bb;
 }
 .ayopa_lowest{
-	color:#992222;
+	color:#e09e1a;
 }
 
 .ayopa_graph{
@@ -332,7 +344,6 @@ float:left;}
 }
 
 .ayopa_time_left_time div{
-	
 	font-size:12px;
 	font-weight:bold;
 	float:right;
@@ -341,11 +352,11 @@ float:left;}
 	text-align:center;
 }
 
+
 .ayopa_splash_screen{
 	width:520px;
-	height:391px;
-	background:url(http://www.ayopadev.com/ayopa/images/ayopa_splash_screen.jpg) no-repeat;
-	background-repeat: no-repeat;
+	height:391;
+	background-image:url(http://www.ayopadev.com/ayopa/images/ayopa_splash_screen.jpg);
 	color:#1A5C7E;
 }
 

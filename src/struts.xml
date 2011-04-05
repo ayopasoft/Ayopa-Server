@@ -6,10 +6,13 @@
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
 	
 	<package name="application" namespace="/" extends="convention-default">
+	 	 
 		<result-types>
 			<result-type name="json" class="org.apache.struts2.json.JSONResult"/>
 			<result-type name="string" class="com.ayopa.server.results.StringResult"/>
 		</result-types>
+	
+    
 	<!-- 
 		<interceptors>
 			<interceptor name="current-user"
@@ -24,8 +27,11 @@
 		</interceptors>
 		<default-interceptor-ref name="defaultSecureStack"></default-interceptor-ref>
 		<global-results>
-			<result name="login">/Login.jsp</result>
+			<result name="redirect" type="redirect">${url}</result>
 		</global-results>
 		-->
+		
+		
 	</package>
+	
 </struts>

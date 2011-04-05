@@ -15,39 +15,55 @@
 
 	<body bgcolor="#ffffff">
 		<div class="main_buy_with_ayopa">
-		
+							
 							<div class="buy_with_ayopa_data">
 								<div class="buy_with_ayopa_buyer_count">
 									<div class="buy_with_ayopa_current">
 										<s:property value="current_quant"/>
 									</div>
 
-									<div class="buy_with_ayopa_next"><s:property value="next_quant"/></div>
-									<div class="buy_with_ayopa_last"><s:property value="highest_quant"/></div>
+									<div class="buy_with_ayopa_next">
+										<s:property value="next_quant"/>
+									</div>
+									<div class="buy_with_ayopa_last">
+										<s:property value="highest_quant"/>
+									</div>
 								</div>
-								<div>
-									<s:text name="format.graphcurr">
+								<div class="buy_with_ayopa_price_count">
+									<div class="buy_with_ayopa_current_price">
+										<s:text name="format.graphcurr">
 											<s:param name="value" value="current_price"/>
 										</s:text>
+									</div>
+									<div class="buy_with_ayopa_next_price">
+										<s:text name="format.graphcurr">
+											<s:param name="value" value="next_price"/>
+										</s:text>
+									</div>
+									<div class="buy_with_ayopa_last_price">
+										<s:text name="format.graphcurr">
+											<s:param name="value" value="lowest_price"/>
+										</s:text>
+									</div>
+
 								</div>
 								<div class="buy_with_ayopa_time_left">
 									<div class="buy_with_ayopa_time_left_header">
 										<div>Sec</div>
 										<div>Min</div>
-
 										<div>Hrs</div>
 										<div>Day</div>
+
 									</div>
 									<div class="buy_with_ayopa_time_left_numbers">
 										<div><s:property value="time_seconds"/></div>  <!--Seconds-->
 										<div><s:property value="time_minutes"/></div>  <!--Minutes-->
-
 										<div><s:property value="time_hours"/></div>  <!--Hours-->
 										<div><s:property value="time_days"/></div>	<!--Days-->
+
 									</div>
 								</div>
 							</div>	
-		</div>
-
+						</div>
 </body>
 </html>

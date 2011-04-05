@@ -1,5 +1,10 @@
 package com.ayopa.server.model;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class AuctionDTO {
 	private String title;
 	private String link;
@@ -13,10 +18,10 @@ public class AuctionDTO {
 	private int next_quant;
 	private int highest_quant;
 	private double purchase_price;
-	private int time_seconds;
-	private int time_minutes;
-	private int time_hours;
-	private int time_days;
+	private long time_seconds;
+	private long time_minutes;
+	private long time_hours;
+	private long time_days;
 	
 
 	public String getLink() {
@@ -93,33 +98,69 @@ public class AuctionDTO {
 		this.highest_quant = highest_quant;
 	}
 	
-	public int getTime_seconds() {
+	
+	
+	
+	public long getTime_seconds() {
 		return time_seconds;
 	}
-	public void setTime_seconds(int time_seconds) {
+	public void setTime_seconds(long time_seconds) {
 		this.time_seconds = time_seconds;
 	}
-	public int getTime_minutes() {
+	public long getTime_minutes() {
 		return time_minutes;
 	}
-	public void setTime_minutes(int time_minutes) {
+	public void setTime_minutes(long time_minutes) {
 		this.time_minutes = time_minutes;
 	}
-	public int getTime_hours() {
+	public long getTime_hours() {
 		return time_hours;
 	}
-	public void setTime_hours(int time_hours) {
+	public void setTime_hours(long time_hours) {
 		this.time_hours = time_hours;
 	}
-	public int getTime_days() {
+	public long getTime_days() {
 		return time_days;
 	}
-	public void setTime_days(int time_days) {
+	public void setTime_days(long time_days) {
 		this.time_days = time_days;
 	}
 	
-	
-	
+	public static List<AuctionDTO> auctionsToAuctionDTO (List<Auction> auctions) throws IOException {
+		
+		List<AuctionDTO> dtoList = new ArrayList<AuctionDTO>();
+		
+		
+		for (int i = 0; i < auctions.size(); i++) {
+			AuctionDTO auctionDTO = new AuctionDTO();
+			auctionDTO.setTitle(auctions.get(i).getProduct_title());
+			auctionDTO.setLink(auctions.get(i).getProduct_url());
+			auctionDTO.setImage(auctions.get(i).getProduct_image());
+			auctionDTO.setStart_price(auctions.get(i).getAuction_startprice());
+			
+			CurrentAuction currAuction = new CurrentAuction();
+			int quantity = currAuction .getCurrentQuantity(auctions.get(i).getAuction_id());
+			currAuction = CurrentAuction.getCurrentAuctionInfo(auctions.get(i), quantity);
+			
+			auctionDTO.setCurrent_price(currAuction.getCurrent_price());
+			auctionDTO.setNext_price(currAuction.getNext_price());
+			auctionDTO.setLowest_price(currAuction.getLowest_price());
+			auctionDTO.setStart_quant(currAuction.getCurrent_level());
+			auctionDTO.setCurrent_quant(currAuction.getCurrent_level());
+			auctionDTO.setNext_quant(currAuction.getNext_level());
+			auctionDTO.setHighest_quant(currAuction.getLowest_level());
+			auctionDTO.setPurchase_price(0);  //need to get the purchase price
+			Map<String,Long> time = CurrentAuction.getAuctionTimeRemaining(auctions.get(i));
+			auctionDTO.setTime_days(time.get("days"));
+			auctionDTO.setTime_hours(time.get("hours"));
+			auctionDTO.setTime_minutes(time.get("minutes"));
+			auctionDTO.setTime_seconds(time.get("seconds"));
+			
+			dtoList.add(auctionDTO);
+		}
+		
+		return dtoList;
+	}
 	
 	
 }

@@ -1,6 +1,5 @@
 package com.ayopa.server.actions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -14,10 +13,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @ParentPackage (value="application")
 @Results({
-	@Result( name=Action.SUCCESS, location="ConsumerCanvas.jsp" ),
+	@Result( name=Action.SUCCESS, location="ConsumerAuctions.jsp" ),
 
 })
-public class ConsumerCanvas extends ActionSupport {
+public class ConsumerAuctions extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	private String buyer_id;
@@ -37,13 +36,7 @@ public class ConsumerCanvas extends ActionSupport {
 		return auctions;
 	}
 	
-	private List<AuctionDTO> getActiveAuctionsForUser() {
-		
-		List<AuctionDTO> userAuctions = new ArrayList<AuctionDTO>();
-		// get current auctions for user
-		return userAuctions;
-		
-	}
+	
 
 	@Override
 	public String execute() throws Exception {
@@ -52,7 +45,7 @@ public class ConsumerCanvas extends ActionSupport {
 		
 		Auction auction = new Auction();
 		
-		auctions = AuctionDTO.auctionsToAuctionDTO(auction.getAuctionsForBuyer(buyer_id));
+		auctions = AuctionDTO.auctionsToAuctionDTO(auction.getCurrentAuctions());
 		
 		
 		return Action.SUCCESS;

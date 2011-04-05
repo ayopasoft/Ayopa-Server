@@ -1,19 +1,13 @@
 package com.ayopa.server.actions;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.apache.struts2.interceptor.CookiesAware;
 
+import com.ayopa.server.utils.FBUtils;
 import com.ayopa.server.utils.HTTPRequestPoster;
 import com.ayopa.server.utils.JsonUtils;
 import com.opensymphony.xwork2.Action;
@@ -23,18 +17,29 @@ import com.restfb.FacebookClient;
 import com.restfb.types.User;
 
 
+
 @ParentPackage (value="application")
 @Results({
 	@Result( name=Action.SUCCESS, type="string", params={ "contentType", "text/plain", "property", "jsonReturn" } ),
 })
-public class GetUserByFbId extends ActionSupport {
+public class GetUserByFbId extends ActionSupport implements CookiesAware{
 	private static final long serialVersionUID = 1L;
-
+	private Map<String,String> cookiesMap;
+	
 	private String fbID;
 	private String jsoncallback;
 	private String jsonReturn;
 	private String jsonString;
 	
+	public Map<String,String> getCookiesMap() {
+		    return cookiesMap;
+		  }
+	
+	 @Override
+		public void setCookiesMap(Map<String, String> cookiesMap) {
+			this.cookiesMap = cookiesMap;
+			
+		}
 
 	public void setFbID(String fbID) {
 		this.fbID = fbID;
@@ -58,29 +63,45 @@ public class GetUserByFbId extends ActionSupport {
 	
 	@Override
 	public String execute() throws Exception {
-		String appID = "120882414650116";
+		String appID = "186996844658023";
 		String appSecret = "17ce975710ce3ac5670fa17d5e70fef3";
 		
-		String accessToken = "";
+		System.out.println(cookiesMap);
 		
-		accessToken = HTTPRequestPoster.sendGetRequest("https://graph.facebook.com/oauth/access_token"
-		     , "client_id=" + appID + "&client_secret=" + appSecret + "&grant_type=client_credentials");
+		//String accessToken = FBUtils.getAccessTokenFromCookieValue(cookiesMap.get("fbs_186996844658023"), "access_token");
 		
-		accessToken = accessToken.split("&")[0].replaceFirst("access_token=", "");
 		
-		FacebookClient facebookClient = new DefaultFacebookClient(accessToken);
 		
-		@SuppressWarnings("rawtypes")
-		User user = facebookClient.fetchObject("me", User.class);
+		//accessToken = HTTPRequestPoster.sendGetRequest("https://graph.facebook.com/oauth/access_token"
+		 //    , "client_id=" + appID + "&client_secret=" + appSecret + "&grant_type=client_credentials");
 		
-		System.out.println("AccessToken:"+ accessToken);
+		//System.out.println(accessToken);
 		
-		jsonString = "{\"User\": \"" + user.getId() + "\"}";
+		
+		
+		//accessToken = accessToken.split("&")[0].replaceFirst("access_token=", "");
+		
+		//FacebookClient facebookClient = new DefaultFacebookClient(accessToken);
+		
+		
+		//User user = facebookClient.fetchObject("me", User.class);
+		
+		//System.out.println("AccessToken:"+ accessToken);
+		
+		//jsonString = "{\"User\": \"" + user.getId() + "\"}";
 		if ( jsoncallback != null ) jsonReturn = jsoncallback + "(" + jsonString + ");";
 		else jsonReturn = jsonString;
+		
+		jsonReturn = cookiesMap.toString();
 
 		return Action.SUCCESS;
 	}
+
+
+	
+
+
+	
 	     
 	
 }

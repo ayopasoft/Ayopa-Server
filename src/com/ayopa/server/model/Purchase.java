@@ -1,6 +1,7 @@
 package com.ayopa.server.model;
 
 import java.io.IOException;
+import java.util.Date;
 
 import com.ayopa.server.model.persistence.PurchasePersistence;
 
@@ -11,6 +12,10 @@ public class Purchase {
 	private String purchase_buyer_id;
 	private int purchase_quantity;
 	private double purchase_price;
+	private Date auction_start;
+	private Date auction_end;
+	
+	
 	
 	public String getPurchase_id() {
 		return purchase_id;
@@ -52,6 +57,23 @@ public class Purchase {
 		this.purchase_price = d;
 	}
 	
+	
+	public Date getAuction_start() {
+		return auction_start;
+	}
+
+	public void setAuction_start(Date auction_start) {
+		this.auction_start = auction_start;
+	}
+
+	public Date getAuction_end() {
+		return auction_end;
+	}
+
+	public void setAuction_end(Date auction_end) {
+		this.auction_end = auction_end;
+	}
+
 	public static String putPurchase(String auction_id, String buyer_id, Integer quantity) throws IOException {
 		
 		PurchasePersistence pp = new PurchasePersistence();
@@ -60,7 +82,7 @@ public class Purchase {
 		purchase.setPurchase_auction_id(auction_id);
 		purchase.setPurchase_buyer_id(buyer_id);
 		purchase.setPurchase_quantity(quantity);
-		
+	
 		Auction auction = new Auction();
 		auction = auction.getAuction(auction_id);
 				
@@ -70,6 +92,8 @@ public class Purchase {
 			int currQuantity = currAuction.getCurrentQuantity(auction_id);
 			currAuction = CurrentAuction.getCurrentAuctionInfo(auction, currQuantity);
 			purchase.setPurchase_price(currAuction.getCurrent_price());
+			purchase.setAuction_start(auction.getAuction_start());
+			purchase.setAuction_end(auction.getAuction_end());
 		}	
 		
 		String purchaseReturn = pp.putPurchase(purchase);

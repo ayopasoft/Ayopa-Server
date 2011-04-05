@@ -1,46 +1,84 @@
 /*---------------------  BUY WITH AYOPA BUTTON  -------------------------*/
+body
+{
+	width:220px;
+}
+.main_buy_with_ayopa
+{
+	width:220px;
+}
 
 .main_buy_with_ayopa a{text-decoration:none;}
 
 
 .buy_with_ayopa{
-	width:220px;
-	height:37px;
+	width:217px;
+	height:95px;
 }
 .buy_with_ayopa_data{
-	width:220px;
-	height:49px;
-	background-image:url(../images/buy_with_ayopa_data.png);
+	width:217px;
+	height:95px;
+	background-image:url(http://www.ayopadev.com/ayopa/images/auction_status.png);
 	position:relative;
-
+	left:20px;
 }
 
 .buy_with_ayopa_buyer_count{
 	position:relative;
-	top:-1px;
+	top:2px;
 	padding-left:90px;
 }
 
 .buy_with_ayopa_current{
 float:left;
-width:30px;
+width:42px;
 color:#366425;
+font-size:11px;
 }
 
 .buy_with_ayopa_next{
 	float:left;
 	width:50px;
 	color:#cccccc;
+	font-size:11px;
 }
 
 .buy_with_ayopa_last{
 	float:left;
 	color:#cccccc;
+	font-size:11px;
+}
+
+.buy_with_ayopa_price_count{
+	position:relative;
+	top:23px;
+	left:80px;
+	clear:both;
+}
+
+.buy_with_ayopa_current_price{
+float:left;
+width:42px;
+color:#366425;
+font-size:11px;
+}
+
+.buy_with_ayopa_next_price{
+	float:left;
+	width:50px;
+	color:#cccccc;
+	font-size:11px;
+}
+
+.buy_with_ayopa_last_price{
+	float:left;
+	color:#cccccc;
+	font-size:11px;
 }
 
 .buy_with_ayopa_time_left{
 	position:absolute;
-	top:15px;
+	top:60px;
 }
 
 .buy_with_ayopa_time_left_header{
