@@ -26,7 +26,7 @@ public class FBUtils {
         return res;
      }  
 
-	public static Map<String,String> ParseSignedRequest(String signed_request) throws Exception{
+	public static Map<String,String> ParseRegistration(String signed_request) throws Exception{
 		String[] sig_parts = signed_request.split("\\.",2);
 		//String sig = base64_url_decode(sig_parts[0].getBytes());
 		//Replace special character in payload as indicated by FB
@@ -45,6 +45,19 @@ public class FBUtils {
 		map.put("oauth_token", request.getString("oauth_token"));
 		
 		return map;
+	}
+	
+	public static JSONObject ParseSignedRequest(String signed_request) throws Exception{
+		String[] sig_parts = signed_request.split("\\.",2);
+		//String sig = base64_url_decode(sig_parts[0].getBytes());
+		//Replace special character in payload as indicated by FB
+        String payload = sig_parts[1].replace("-", "+").replace("_", "/").trim();
+		byte[] data = base64_url_decode(payload.getBytes());
+		String value = new String(data);
+	
+		JSONObject request = (JSONObject) JSONSerializer.toJSON( value );
+		
+		return request;
 	}
 	
 	public static String getAccessTokenFromCookieValue(String cookieValue,

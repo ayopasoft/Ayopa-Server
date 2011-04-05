@@ -82,7 +82,7 @@ public class AuctionTest {
 	@Test
 	public void testGetAuctionsForBuyer() throws IOException
 	{
-		List<Auction> list = new ArrayList<Auction>();
+		List<AuctionDTO> list = new ArrayList<AuctionDTO>();
 		Auction auction = new Auction();
 		String buyer_id = "556659695";
 		list = auction.getAuctionsForBuyer(buyer_id);

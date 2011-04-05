@@ -286,9 +286,13 @@
 							</div>
 							<!-- ************* END OF SIDE NAVIGATION  *************** -->
 							<div class="size_right"></div>
+						
 						</div>
 						<!-- ************ END MAIN CONTENT  ******************* -->
 						<div class="ayopa_content_bottom">
+						</div>
+						<div style="float:right">
+							<a href="http://ayopa1dev.happyjacksoftware.com/privacy-policy" target="_blank">Privacy Policy</a>
 						</div>
 					</div>
 

@@ -1,4 +1,4 @@
-package com.ayopa.server.actions;
+package com.ayopa.server.actions.FBCanvas;
 
 import java.util.Map;
 
@@ -17,12 +17,12 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @ParentPackage (value="application")
 @Results({
-	@Result( name=Action.SUCCESS, location="Index.jsp" ),
+	@Result( name=Action.SUCCESS, location="FBCanvas/Canvas.jsp" ),
 	@Result( name="consumerRedirect", type="redirect", location="consumer-canvas?buyer_id=${buyer_id}"),
 	@Result( name="permsRedirect", type="redirect", location="${perms_url}")
 	
 })
-public class Index extends ActionSupport {
+public class Canvas extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private String signed_request;
@@ -79,14 +79,13 @@ public class Index extends ActionSupport {
 		}
 		else
 		{
-			String cancel_url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/";
-			String next_url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/";
+			String cancel_url = "http://localhost:8080/AyopaServer/canvas";
+			String next_url = "http://localhost:8080/AyopaServer/canvas";
 			
-			perms_url = "https://www.facebook.com/login.php?api_key=" + FBUtils.FACEBOOK_API_KEY + "&req_perms=publish_stream,email,offline_access,manage_pages&canvas=1&fbconnect=0&cancel_url=" + cancel_url + "&next=" + next_url;
+			perms_url = "https://www.facebook.com/login.php?api_key=" + FBUtils.FACEBOOK_API_KEY + "&display=page&return_session=1&session_version=3&v=1.0&req_perms=publish_stream,email,offline_access,manage_pages&canvas=1&fbconnect=0&cancel_url=" + cancel_url + "&next=" + next_url;
 			 
 			return "permsRedirect";
 		}
 		
 	}
 }
-

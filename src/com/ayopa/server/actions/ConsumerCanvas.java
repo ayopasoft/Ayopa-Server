@@ -2,6 +2,7 @@ package com.ayopa.server.actions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -10,6 +11,7 @@ import org.apache.struts2.convention.annotation.Results;
 import com.ayopa.server.model.Auction;
 import com.ayopa.server.model.AuctionDTO;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @ParentPackage (value="application")
@@ -46,7 +48,15 @@ public class ConsumerCanvas extends ActionSupport {
 		
 		Auction auction = new Auction();
 		
+		if (buyer_id == null || buyer_id == "") {
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			if (session.containsKey("buyer_id")){
+				buyer_id = (String) session.get("buyer_id");
+			}
+		}
+		
 		auctions = auction.getAuctionsForBuyer(buyer_id);
+		
 		
 		
 		return Action.SUCCESS;

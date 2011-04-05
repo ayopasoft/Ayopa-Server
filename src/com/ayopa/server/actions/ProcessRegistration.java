@@ -1,15 +1,12 @@
 package com.ayopa.server.actions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
-import com.ayopa.server.model.AuctionDTO;
 import com.ayopa.server.model.Buyer;
 import com.ayopa.server.model.persistence.BuyerPersistence;
 import com.ayopa.server.utils.FBUtils;
@@ -45,7 +42,7 @@ public class ProcessRegistration extends ActionSupport {
 		BuyerPersistence bp = new BuyerPersistence();
 		
 		Map<String,String> map = new HashMap<String,String>();
-		map = FBUtils.ParseSignedRequest(signed_request);
+		map = FBUtils.ParseRegistration(signed_request);
 		
 		buyer.setBuyer_id(map.get("user_id"));
 		buyer.setBuyer_name(map.get("name"));
