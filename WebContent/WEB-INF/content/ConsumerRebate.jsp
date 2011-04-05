@@ -145,28 +145,28 @@
 					<div class="main_content">
 						<!--*********** BEGINNING OF MENU **************** -->
 						<ul class="ayopa_menu">
-							<a href="/ayopa/consumer">
-								<li class="ayopa_myAuctions active">
+							<a href="consumer-canvas">
+								<li class="ayopa_myAuctions">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
 									<div class="ayopa_menu_item_right"></div>
 								</li>
 							</a>
-							<a href="/ayopa/consumer/auctions">
+							<a href="consumer-auctions">
 								<li class="ayopa_ayopaAuctions">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
 									<div class="ayopa_menu_item_right"></div>
 								</li>
 							</a>
-							<a href="/ayopa/consumer/rebate">
-								<li class="ayopa_rebate">
+							<a href="consumer-rebate">
+								<li class="ayopa_rebate active">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
 									<div class="ayopa_menu_item_right"></div>
 								</li>
 							</a>
-							<a href="/ayopa/consumer/info">
+							<a href="consumer-info">
 								<li class="ayopa_info">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
@@ -191,7 +191,14 @@
 								<div class="ayopa_auction_tile_middle">
 									<!-- **** TITLE  *** -->
 									<div class="ayopa_item_title"><s:property value="title" /></div>
-
+									
+									<s:if test="%{auction.expired == true}">
+										<img src="http://www.ayopadev.com/ayopa/images/rebate_ac.png">
+									</s:if>
+									<s:else>
+										<img src="http://www.ayopadev.com/ayopa/images/rebate_aip.png">
+									</s:else>
+									
 									<!-- **** PHOTO *** -->
 									<div class="ayopa_item_photo"><a href="<s:property value="link"/>" target="_blank"><img width="100px" src="<s:property value="image"/>"></a></div>
 

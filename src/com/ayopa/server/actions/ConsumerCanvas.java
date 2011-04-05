@@ -37,13 +37,7 @@ public class ConsumerCanvas extends ActionSupport {
 		return auctions;
 	}
 	
-	private List<AuctionDTO> getActiveAuctionsForUser() {
-		
-		List<AuctionDTO> userAuctions = new ArrayList<AuctionDTO>();
-		// get current auctions for user
-		return userAuctions;
-		
-	}
+	
 
 	@Override
 	public String execute() throws Exception {
@@ -52,7 +46,7 @@ public class ConsumerCanvas extends ActionSupport {
 		
 		Auction auction = new Auction();
 		
-		auctions = AuctionDTO.auctionsToAuctionDTO(auction.getAuctionsForBuyer(buyer_id));
+		auctions = auction.getAuctionsForBuyer(buyer_id);
 		
 		
 		return Action.SUCCESS;

@@ -153,7 +153,7 @@
 								</li>
 							</a>
 							<a href="consumer-auctions">
-								<li class="ayopa_ayopaAuctions  active">
+								<li class="ayopa_ayopaAuctions">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
 									<div class="ayopa_menu_item_right"></div>
@@ -167,7 +167,7 @@
 								</li>
 							</a>
 							<a href="consumer-info">
-								<li class="ayopa_info">
+								<li class="ayopa_info active">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
 									<div class="ayopa_menu_item_right"></div>
@@ -182,100 +182,6 @@
 						
 						
 
-
-						<s:iterator value="auctions" >
-						
-							<!--  ************** START OF PURCHASED ITEM ****************-->
-							<div class="ayopa_auction_tile">
-								<div class="ayopa_auction_tile_top"></div>
-								<div class="ayopa_auction_tile_middle">
-									<!-- **** TITLE  *** -->
-									<div class="ayopa_item_title"><s:property value="title" /></div>
-
-									<!-- **** PHOTO *** -->
-									<div class="ayopa_item_photo"><a href="<s:property value="link"/>" target="_blank"><img width="100px" src="<s:property value="image"/>"></a></div>
-
-
-									<!-- *** scale *** -->
-									<div class="ayopa_sell_scale">
-										<div class="ayopa_start">
-											Start<br />
-											<s:text name="format.graphcurr">
-												<s:param name="value" value="start_price"/>
-											</s:text>
-										</div>
-										<div class="ayopa_current">
-											Currently<br />
-											<s:text name="format.graphcurr">
-												<s:param name="value" value="current_price"/>
-											</s:text>
-										</div>
-										<div class="ayopa_next">
-											Next<br />
-											<s:text name="format.graphcurr">
-												<s:param name="value" value="next_price"/>
-											</s:text>
-										</div>
-										<div class="ayopa_lowest">
-											Lowest<br />
-											<s:text name="format.graphcurr">
-												<s:param name="value" value="lowest_price"/>
-											</s:text>
-										</div>		
-									</div>
-
-									<!-- *** GRAPH  *** -->
-									<div class="ayopa_graph">
-										<div>
-											<img src="http://www.ayopadev.com/ayopa/images/buyer_graph.png" />
-										</div>
-										<div class="ayopa_buyer_amount">
-											<div class="ayopa_start"><s:property value="start_quant"/></div>
-											<div class="ayopa_current"><s:property value="current_quant"/></div>
-											<div class="ayopa_next"><s:property value="next_quant"/></div>
-											<div class="ayopa_lowest"><s:property value="highest_quant"/></div>
-										</div>
-										<div class="ayopa_graph_label">Buyers</div>
-									</div>
-
-									<!-- *** PRICE AND BUY SECTION  ** -->
-									<div class="ayopa_tile_right_content">
-										<div class="ayopa_current_price">Current Price: 
-											<s:text name="format.graphcurr">
-												<s:param name="value" value="current_price"/>
-											</s:text>
-										</div>
-										<div class="ayopa_you_bought">You bought this item for: 
-											<s:text name="format.graphcurr">
-												<s:param name="value" value="purchase_price"/>
-											</s:text>
-										</div>
-											<div><a href="<s:property value="link"/>" target="_blank"><img src="http://www.ayopadev.com/ayopa/images/buy_now.png" /></a></div>
-									</div>
-
-									<!-- *** TIME LEFT  *** -->
-									<div class="ayopa_time_left">
-										<div class="ayopa_time_left_labels">
-											<div>Sec</div>	
-											<div>Min</div>
-											<div>Hrs</div>
-											<div>Day</div>
-										</div>
-										<div class="ayopa_time_left_time">
-											<div><s:property value="time_seconds"/></div>	<!--seconds-->
-											<div><s:property value="time_minutes"/></div>	<!--minutes-->
-											<div><s:property value="time_hours"/></div>	<!--hours-->
-											<div><s:property value="time_days"/></div>	<!--Days-->
-										</div>
-									</div>
-
-									<div class="size_right"></div>
-								</div>
-								<div class="ayopa_auction_tile_bottom"></div>
-							</div>
-							<!--  ************** END OF PURCHASED ITEM ****************-->
-						
-						</s:iterator>
 							
 
 

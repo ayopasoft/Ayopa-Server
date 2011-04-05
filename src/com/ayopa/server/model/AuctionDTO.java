@@ -22,8 +22,24 @@ public class AuctionDTO {
 	private long time_minutes;
 	private long time_hours;
 	private long time_days;
+	private double rebate;
+	private boolean expired;
+	private boolean rebate_sent;
+
 	
 
+	public boolean isRebate_sent() {
+		return rebate_sent;
+	}
+	public void setRebate_sent(boolean rebate_sent) {
+		this.rebate_sent = rebate_sent;
+	}
+	public boolean isExpired() {
+		return expired;
+	}
+	public void setExpired(boolean expired) {
+		this.expired = expired;
+	}
 	public String getLink() {
 		return link;
 	}
@@ -124,6 +140,42 @@ public class AuctionDTO {
 	}
 	public void setTime_days(long time_days) {
 		this.time_days = time_days;
+	}
+	
+	public double getRebate() {
+		return rebate;
+	}
+	public void setRebate(double rebate) {
+		this.rebate = rebate;
+	}
+	
+	public static AuctionDTO auctionToAuctionDTO (Auction auction) throws IOException {
+		AuctionDTO auctionDTO = new AuctionDTO();
+		auctionDTO.setTitle(auction.getProduct_title());
+		auctionDTO.setLink(auction.getProduct_url());
+		auctionDTO.setImage(auction.getProduct_image());
+		auctionDTO.setStart_price(auction.getAuction_startprice());
+		
+		CurrentAuction currAuction = new CurrentAuction();
+		int quantity = currAuction .getCurrentQuantity(auction.getAuction_id());
+		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, quantity);
+		
+		auctionDTO.setCurrent_price(currAuction.getCurrent_price());
+		auctionDTO.setNext_price(currAuction.getNext_price());
+		auctionDTO.setLowest_price(currAuction.getLowest_price());
+		auctionDTO.setStart_quant(currAuction.getCurrent_level());
+		auctionDTO.setCurrent_quant(currAuction.getCurrent_level());
+		auctionDTO.setNext_quant(currAuction.getNext_level());
+		auctionDTO.setHighest_quant(currAuction.getLowest_level());
+		auctionDTO.setPurchase_price(0);  //need to get the purchase price
+		Map<String,Long> time = CurrentAuction.getAuctionTimeRemaining(auction);
+		auctionDTO.setTime_days(time.get("days"));
+		auctionDTO.setTime_hours(time.get("hours"));
+		auctionDTO.setTime_minutes(time.get("minutes"));
+		auctionDTO.setTime_seconds(time.get("seconds"));
+		
+		return auctionDTO;
+		
 	}
 	
 	public static List<AuctionDTO> auctionsToAuctionDTO (List<Auction> auctions) throws IOException {

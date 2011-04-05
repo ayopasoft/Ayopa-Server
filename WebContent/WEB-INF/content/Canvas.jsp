@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<div id="fb_root"></div>
 <script>
 window.fbAsyncInit = function() {                 
 		FB.init({appId: '120882414650116', status: true, cookie: true, xfbml: true});                   

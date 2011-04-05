@@ -278,9 +278,10 @@ public class Auction {
 			
 	}
 	
-	public List<Auction> getAuctionsForBuyer (String buyer_id) throws IOException{
-		List<Auction> auctions = new ArrayList<Auction>();
+	public List<AuctionDTO> getAuctionsForBuyer (String buyer_id) throws IOException{
 		
+		
+		List<AuctionDTO> auctions = new ArrayList<AuctionDTO>();
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		
@@ -292,7 +293,7 @@ public class Auction {
 		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` = '" + buyer_id + "' and `" 
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
 		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' order by `"
-		+ AwsFacade.Key.AUCTION_END + "` desc";
+		+ AwsFacade.Key.AUCTION_END + "` asc";
 		
 		log.info(query);
 		
@@ -304,8 +305,60 @@ public class Auction {
 		else {
 			for (int i = 0; i < results.size(); i++){
 				Auction auction = new Auction();
+				AuctionDTO auctionDTO = new AuctionDTO();
 				auction = auction.getAuction(results.get(i).get(AwsFacade.Key.PURCHASE_AUCTION_ID));
-				auctions.add(auction);
+				
+				if (auction.getAuction_ended() != "1" && auction.getAuction_deleted() != "1") {
+					auctionDTO = AuctionDTO.auctionToAuctionDTO(auction);
+					auctionDTO.setPurchase_price(Double.parseDouble(results.get(i).get(AwsFacade.Key.PURCHASE_PRICE)));
+					auctionDTO.setRebate(auctionDTO.getPurchase_price() - auctionDTO.getCurrent_price());
+				}
+				
+				auctions.add(auctionDTO);
+			}
+			
+			
+		}
+			return auctions;
+			
+	}
+	
+public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOException{
+		
+		
+		List<AuctionDTO> auctions = new ArrayList<AuctionDTO>();
+		
+		AwsFacade aws = AwsFacade.getInstance();
+		
+		Date now = Calendar.getInstance().getTime();
+	
+		String query = "select * from `" + AwsFacade.Table.PURCHASE + "` where `" 
+		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` = '" + buyer_id + "'";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		if (results.size() == 0) {
+			//return auction;
+		}
+		else {
+			for (int i = 0; i < results.size(); i++){
+				Auction auction = new Auction();
+				AuctionDTO auctionDTO = new AuctionDTO();
+				
+				auction = auction.getAuction(results.get(i).get(AwsFacade.Key.PURCHASE_AUCTION_ID));
+				if (auction.getAuction_deleted() != "1") {
+					
+					auctionDTO = AuctionDTO.auctionToAuctionDTO(auction);
+					auctionDTO.setPurchase_price(Double.parseDouble(results.get(i).get(AwsFacade.Key.PURCHASE_PRICE)));
+					auctionDTO.setRebate(auctionDTO.getPurchase_price() - auctionDTO.getCurrent_price());
+					if (auction.getAuction_end().before(now)) {
+						auctionDTO.setExpired(Boolean.TRUE);
+					}
+				}
+				
+				auctions.add(auctionDTO);
 			}
 			
 			
