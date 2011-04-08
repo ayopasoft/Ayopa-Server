@@ -249,4 +249,32 @@ public class Merchant {
 			return merchant;
 	}
 	
+	public static String getMerchantFBPage(String merchant_id) throws IOException{
+		
+		String fb_page = "";
+		AwsFacade aws = AwsFacade.getInstance();
+	
+		String query = "select * from `" + AwsFacade.Table.MERCHANT + "` where `" 
+		+ AwsFacade.Key.MERCHANT_ID + "` = '" + merchant_id + "'"; 
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		
+		if (results.size() == 0) {
+			//return empty fb_page;
+		}
+		else {
+			if (results.size() > 1){
+				log.info("Get by Merchant id returned more than 1 result");
+			}
+			
+			fb_page = (results.get(0).get(AwsFacade.Key.MERCHANT_FB_PAGE));
+			
+		}
+		
+			return fb_page;
+	}
+	
 }

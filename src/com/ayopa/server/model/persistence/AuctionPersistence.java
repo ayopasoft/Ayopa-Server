@@ -46,6 +46,7 @@ public class AuctionPersistence {
 		map.put(AwsFacade.Key.MERCHANT_WEBSITE, auction.getMerchant_website());
 		map.put(AwsFacade.Key.AUCTION_ENDED, auction.getAuction_ended());
 		map.put(AwsFacade.Key.AUCTION_DELETED, auction.getAuction_deleted());
+		map.put(AwsFacade.Key.MERCHANT_FB_PAGE, auction.getMerchant_fb_page());
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		aws.putRow(AwsFacade.Table.AUCTION, auction.getAuction_id(), map);
@@ -93,6 +94,7 @@ public class AuctionPersistence {
 		auction.setMerchant_website(map.get(AwsFacade.Key.MERCHANT_WEBSITE));
 		auction.setAuction_deleted(map.get(AwsFacade.Key.AUCTION_DELETED));
 		auction.setAuction_ended(map.get(AwsFacade.Key.AUCTION_END));
+		auction.setMerchant_fb_page(map.get(AwsFacade.Key.MERCHANT_FB_PAGE));
 		
 		
 		return auction;

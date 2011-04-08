@@ -257,8 +257,6 @@
 												<s:param name="value" value="purchase_price"/>
 											</s:text>
 										</div>
-										<div><a href="" onclick="inviteFriends(); return false;"><img src="http://www.ayopadev.com/ayopa/images/invite_friends.png" /></a></div>
-										<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, we can get it for <s:property value="lowest_price"/>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://www.ayopadev.com/ayopa/images/post_to_wall.png" /></a></div>
 									</div>
 
 									<!-- *** TIME LEFT  *** -->

@@ -131,15 +131,15 @@ window.fbAsyncInit = function() {
 					<div class="main_content">
 						<!--*********** BEGINNING OF MENU **************** -->
 						<ul class="ayopa_menu">
-							<a href="/ayopa">
-								<li class="ayopa_info">
+							<a href="index">
+								<li class="ayopa_info active">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
 									<div class="ayopa_menu_item_right"></div>
 								</li>
 							</a>
 							
-							<a href="/ayopa/auctions">
+							<a href="ayopa-auctions">
 								<li class="ayopa_ayopaAuctions">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
@@ -169,10 +169,12 @@ window.fbAsyncInit = function() {
 									</ul>
 								</div>
 								<div class="ayopa_splash_action">
-									<a href="http://apps.facebook.com/ayopa_auctions/consumer"><img src="http://www.ayopadev.com/ayopa/images/ayopa_consumer-demo.png"></a>
-				<a href="http://apps.facebook.com/ayopa_auctions/merchant"><img src="http://www.ayopadev.com/ayopa/images/ayopa_merchant-demo.png"></a>
+									<!--  <a href="http://apps.facebook.com/ayopa_auctions/consumer"><img src="http://www.ayopadev.com/ayopa/images/ayopa_consumer-demo.png"></a>
+				<a href="http://apps.facebook.com/ayopa_auctions/merchant"><img src="http://www.ayopadev.com/ayopa/images/ayopa_merchant-demo.png"></a>-->
 									
 								</div>
+								<p>&nbsp;</p>
+								<p>&nbsp;</p>
 							</div>
 							
 							<!-- ************* START OF SIDE NAVIGATION  *************** -->

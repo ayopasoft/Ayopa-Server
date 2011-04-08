@@ -56,8 +56,8 @@
 			    	screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,                  
 			    	uterWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,                  
 			    	outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22), 
-			    	width    = 500,                  
-			    	height   = 270,                  
+			    	width    = 885,                  
+			    	height   = 575,                  
 			    	left     = parseInt(screenX + ((outerWidth - width) / 2), 10),                  
 			    	top      = parseInt(screenY + ((outerHeight - height) / 2.5), 10),                  
 			    	features = ( 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top );               

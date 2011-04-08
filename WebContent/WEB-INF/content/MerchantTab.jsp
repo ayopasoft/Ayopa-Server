@@ -8,7 +8,6 @@
 
 </head>
 <body>
-
 <div id="fb-root"></div>
 
 <script type="text/javascript">             
@@ -141,41 +140,22 @@
 
 
 
-					<!--  main_content restricts to 760px wide  -->
-					<div class="main_content">
-						<!--*********** BEGINNING OF MENU **************** -->
-						<ul class="ayopa_menu">
-							<a href="index">
-								<li class="ayopa_info">
-									<div class="ayopa_menu_item_left"></div>
-									<div class="ayopa_menu_item_middle"></div>
-									<div class="ayopa_menu_item_right"></div>
-								</li>
-							</a>
-							
-							<a href="ayopa-auctions">
-								<li class="ayopa_ayopaAuctions active">
-									<div class="ayopa_menu_item_left"></div>
-									<div class="ayopa_menu_item_middle"></div>
-									<div class="ayopa_menu_item_right"></div>
-								</li>
-							</a>
-							
-							
-						</ul>
-						<!--*********** END OF MENU **************** -->
-						<div class="ayopa_content_top">
-						</div>
-						<!-- ***************MAIN CONTENT HOES IN THE AYOPA_CONTENT_MIDDLE DIV  *****************-->
-						<div class="ayopa_content_middle">
-						
-						
 
+					<!--  main_content restricts to 760px wide  -->
+					<div class="main_content" style="width:510px">
+						<!--*********** BEGINNING OF MENU **************** -->
+						
+						<!--*********** END OF MENU **************** -->
+						
+						<!-- ***************MAIN CONTENT HOES IN THE AYOPA_CONTENT_MIDDLE DIV  *****************-->
+						<div class="ayopa_content_middle" style="width:510px;background:url();padding:0px;">
+						
+						
 
 						<s:iterator value="auctions" >
 						
 							<!--  ************** START OF PURCHASED ITEM ****************-->
-							<div class="ayopa_auction_tile">
+							<div class="ayopa_auction_tile" style="margin-right:0px">
 								<div class="ayopa_auction_tile_top"></div>
 								<div class="ayopa_auction_tile_middle">
 									<!-- **** TITLE  *** -->
@@ -284,12 +264,10 @@
 							<div class="size_right"></div>
 						</div>
 						<!-- ************ END MAIN CONTENT  ******************* -->
-						<div class="ayopa_content_bottom">
-						</div>
 						<div style="float:right">
 							<a href="http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/privacy-policy" target="_blank">Privacy Policy</a>
 						</div>
 					</div>
 
-
-</body></html>
+</body>
+</html>

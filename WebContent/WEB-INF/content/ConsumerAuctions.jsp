@@ -245,11 +245,7 @@
 												<s:param name="value" value="current_price"/>
 											</s:text>
 										</div>
-										<div class="ayopa_you_bought">You bought this item for: 
-											<s:text name="format.graphcurr">
-												<s:param name="value" value="purchase_price"/>
-											</s:text>
-										</div>
+										
 											<div><a href="<s:property value="link"/>" target="_blank"><img src="http://www.ayopadev.com/ayopa/images/buy_now.png" /></a></div>
 									</div>
 

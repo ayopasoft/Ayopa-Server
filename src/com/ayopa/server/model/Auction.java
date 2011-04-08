@@ -71,10 +71,18 @@ public class Auction {
 	private String merchant_id;
 	private String merchant_name;
 	private String merchant_website;
+	private String merchant_fb_page;
 	private String auction_ended;
 	private String auction_deleted;
 	
 	
+	
+	public String getMerchant_fb_page() {
+		return merchant_fb_page;
+	}
+	public void setMerchant_fb_page(String merchant_fb_page) {
+		this.merchant_fb_page = merchant_fb_page;
+	}
 	public String getAuction_ended() {
 		return auction_ended;
 	}
@@ -278,6 +286,50 @@ public class Auction {
 			
 	}
 	
+	
+ public List<AuctionDTO> getAuctionsForFBPage (String page_id) throws IOException{
+		
+		
+		List<AuctionDTO> auctions = new ArrayList<AuctionDTO>();
+		
+		AwsFacade aws = AwsFacade.getInstance();
+		AuctionPersistence ap = new AuctionPersistence();
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		
+		String now = df.format(Calendar.getInstance().getTime());
+	
+		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
+		+ AwsFacade.Key.MERCHANT_FB_PAGE + "` = '" + page_id + "' and `" 
+		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
+		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
+		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
+		+ AwsFacade.Key.AUCTION_START + "` desc";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		if (results.size() == 0) {
+			//return auction;
+		}
+		else {
+			for (int i = 0; i < results.size(); i++){
+				Auction auction = new Auction();
+				AuctionDTO auctionDTO = new AuctionDTO();
+				
+				auction = ap.mapToAuction(results.get(i));
+				auctionDTO = AuctionDTO.auctionToAuctionDTO(auction);
+				auctions.add(auctionDTO);
+			}
+			
+			
+		}
+			return auctions;
+			
+	}
+	
 	public List<AuctionDTO> getAuctionsForBuyer (String buyer_id) throws IOException{
 		
 		
@@ -373,6 +425,8 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 		AuctionPersistence awsAuction = new AuctionPersistence();
 		
 		auction = auction.jsonToAuction(auctionDef);
+		
+		auction.setMerchant_fb_page(Merchant.getMerchantFBPage(auction.getMerchant_id()));
 		
 		String auctionReturn = awsAuction.putAuction(auction);
 		
