@@ -54,7 +54,7 @@ public class Index extends ActionSupport {
 		//otherwise display canvas page
 	
 		JSONObject jsonObject = new JSONObject();
-		jsonObject = FBUtils.parseSignedRequest2(signed_request);
+		jsonObject = FBUtils.parseSignedRequest(signed_request);
 		
 		BuyerPersistence bp = new BuyerPersistence();
 		Buyer buyer = new Buyer();

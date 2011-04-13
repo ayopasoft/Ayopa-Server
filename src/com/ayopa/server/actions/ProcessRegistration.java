@@ -1,7 +1,6 @@
 package com.ayopa.server.actions;
 
-import java.util.HashMap;
-import java.util.Map;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -41,13 +40,16 @@ public class ProcessRegistration extends ActionSupport {
 		Buyer buyer = new Buyer();
 		BuyerPersistence bp = new BuyerPersistence();
 		
-		Map<String,String> map = new HashMap<String,String>();
-		map = FBUtils.ParseRegistration(signed_request);
+		//Map<String,String> map = new HashMap<String,String>();
+		//map = FBUtils.ParseRegistration(signed_request);
 		
-		buyer.setBuyer_id(map.get("user_id"));
-		buyer.setBuyer_name(map.get("name"));
-		buyer.setBuyer_email(map.get("email"));
-		buyer.setBuyer_access_token(map.get("oauth_token"));
+		JSONObject request = FBUtils.parseSignedRequest(signed_request);
+		JSONObject registration = (JSONObject) request.get("registration");
+			
+		buyer.setBuyer_id(request.getString("user_id"));
+		buyer.setBuyer_name(registration.getString("name"));
+		buyer.setBuyer_email(registration.getString("email"));
+		buyer.setBuyer_access_token(request.getString("oauth_token"));
 		
 		String buyer_id = bp.putBuyer(buyer);
 		

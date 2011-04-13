@@ -41,7 +41,7 @@ public class CurrentAuctionTest {
 			log.error(e);
 		}
 		try {
-			auction.setAuction_end(df.parse("2011-04-05 10:00 am"));
+			auction.setAuction_end(df.parse("2011-04-15 10:00 am"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			log.error(e);
@@ -89,11 +89,26 @@ public class CurrentAuctionTest {
 		auction.setMerchant_website("Merchant Website");
 		auction.setAuction_highlighted(Boolean.TRUE);
 	
-		String strInput = "[{\"min\":10,\"max\":20,\"dis\":5,\"add\":5},{\"min\":30,\"max\":50,\"dis\":25,\"add\":0}]";
+		String strInput = "[{\"min\":5,\"max\":30,\"dis\":5,\"add\":5}]";
 		list = ScheduleSerializer.toSchedule(strInput);
 		auction.setAuction_schedule(list);
 		
 		CurrentAuction currAuction = new CurrentAuction();
+		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 3);
+		assertEquals("Current price computation for quantity below 1st min value failed",100,currAuction.getCurrent_price(),0);
+		assertEquals("Current level computation for quantity below 1st min value failed",3,currAuction.getCurrent_level(),0);
+		assertEquals("Next price computation for quantity below 1st min value failed",95,currAuction.getNext_price(),0);
+		assertEquals("Next level computation for quantity below 1st min value failed",5,currAuction.getNext_level());
+		assertEquals("Lowest price computation for quantity below 1st min value failed",70,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity below 1st min value failed",30,currAuction.getLowest_level());
+		
+		
+		strInput = "[{\"min\":10,\"max\":20,\"dis\":5,\"add\":5},{\"min\":30,\"max\":50,\"dis\":25,\"add\":0}]";
+		list.clear();
+		list = ScheduleSerializer.toSchedule(strInput);
+		auction.setAuction_schedule(list);
+		
+		currAuction = new CurrentAuction();
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 3);
 		
 		assertEquals("Current price computation for quantity below 1st min value failed",100,currAuction.getCurrent_price(),0);
@@ -181,6 +196,7 @@ public class CurrentAuctionTest {
 		
 		//a little more complicated
 		strInput = "[{\"min\":10,\"max\":20,\"dis\":5,\"add\":5},{\"min\":30,\"max\":50,\"dis\":25,\"add\":0},{\"min\":50,\"max\":60,\"dis\":5,\"add\":5}]";
+		list.clear();
 		list = ScheduleSerializer.toSchedule(strInput);
 		auction.setAuction_schedule(list);
 		

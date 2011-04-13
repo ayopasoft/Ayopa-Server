@@ -24,9 +24,18 @@ public class MerchantTab extends ActionSupport {
 	
 	private String page_id;
 	private String signed_request;
+	private String admin;
 	
 	
 	
+	public String getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
+
 	public String getSigned_request() {
 		return signed_request;
 	}
@@ -62,7 +71,7 @@ public class MerchantTab extends ActionSupport {
 		JSONObject jsonObject = new JSONObject();
 		
 		try {
-			jsonObject = FBUtils.parseSignedRequest2(signed_request);
+			jsonObject = FBUtils.parseSignedRequest(signed_request);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Signed request is blank: " + e);
@@ -71,6 +80,7 @@ public class MerchantTab extends ActionSupport {
 		if (jsonObject.containsKey("page")){
 			JSONObject page = (JSONObject) jsonObject.get("page");
 			page_id = page.getString("id");
+			admin = page.getString("admin");
 		}
 		
 		

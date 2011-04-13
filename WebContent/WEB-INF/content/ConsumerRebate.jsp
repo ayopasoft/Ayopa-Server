@@ -192,7 +192,7 @@
 									<!-- **** TITLE  *** -->
 									<div class="ayopa_item_title"><s:property value="title" /></div>
 									
-									<s:if test="%{auction.expired == true}">
+									<s:if test="%{expired}">
 										<img src="http://www.ayopadev.com/ayopa/images/rebate_ac.png">
 									</s:if>
 									<s:else>
@@ -258,7 +258,8 @@
 											</s:text>
 										</div>
 									</div>
-
+									
+									<s:if test="%{!expired}">	
 									<!-- *** TIME LEFT  *** -->
 									<div class="ayopa_time_left">
 										<div class="ayopa_time_left_labels">
@@ -274,7 +275,7 @@
 											<div><s:property value="time_days"/></div>	<!--Days-->
 										</div>
 									</div>
-
+									</s:if>
 									<div class="size_right"></div>
 								</div>
 								<div class="ayopa_auction_tile_bottom"></div>

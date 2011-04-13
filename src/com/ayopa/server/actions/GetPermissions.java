@@ -26,10 +26,8 @@ public class GetPermissions extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		
-		String cancel_url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-permissions.action";
-		String next_url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-registration.action";
 		
-		 url = "https://www.facebook.com/login.php?api_key=" + FBUtils.FACEBOOK_API_KEY + "&display=page&return_session=1&session_version=3&v=1.0&req_perms=publish_stream,email,offline_access,manage_pages&canvas=0&fbconnect=1&cancel_url=" + cancel_url + "&next=" + next_url;
+		 url = "https://www.facebook.com/login.php?api_key=" + FBUtils.FACEBOOK_API_KEY + "&display=page&return_session=1&session_version=3&v=1.0&req_perms=publish_stream,email,offline_access,manage_pages&canvas=0&fbconnect=1&cancel_url=" + FBUtils.FACEBOOK_CANCEL_URL + "&next=" + FBUtils.FACEBOOK_NEXT_URL;
 		 return Action.SUCCESS;
 		 
 		 /*$cancel_url = 'http://www.ayopadev.com/ayopa/process_register.php';

@@ -79,7 +79,18 @@
 			function login(){                 
 				
 				FB.api('/me', function(response) {                     
-					           
+					var newwindow;
+			    	var  screenX    = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,                  
+			    	screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,                  
+			    	uterWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,                  
+			    	outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22), 
+			    	width    = 500,                  
+			    	height   = 200,                  
+			    	left     = parseInt(screenX + ((outerWidth - width) / 2), 10),                  
+			    	top      = parseInt(screenY + ((outerHeight - height) / 2.5), 10),                  
+			    	features = ( 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top );               
+			    	newwindow=window.open('http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/post-to-facebook','Post To Facebook',features);                
+			    	        
 				});             
 				}             
 			

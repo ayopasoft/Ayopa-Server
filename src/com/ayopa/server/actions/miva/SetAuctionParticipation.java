@@ -6,6 +6,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.ayopa.server.model.Purchase;
+import com.ayopa.server.utils.FBUtils;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -20,8 +21,22 @@ public class SetAuctionParticipation extends ActionSupport {
 	private String auctionID;
 	private String buyerID;
 	private Integer quantity;
+	private double price;
+	
 	private String success;
 	
+	
+	
+
+	public double getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 
 	public String getSuccess() {
 		return success;
@@ -46,7 +61,9 @@ public class SetAuctionParticipation extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		
-		success = Purchase.putPurchase(auctionID, buyerID, quantity);
+		success = Purchase.putPurchase(auctionID, buyerID, quantity, price);
+		
+		FBUtils.postAuctionToFacebook(auctionID, buyerID);
 		
 		return Action.SUCCESS;
 	}

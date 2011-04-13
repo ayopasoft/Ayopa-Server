@@ -215,7 +215,12 @@
 											</s:text>
 										</div>
 										
-											<div><a href="<s:property value="link"/>" target="_blank"><img src="http://www.ayopadev.com/ayopa/images/buy_now.png" /></a></div>
+										<s:if test="admin">
+											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://www.ayopadev.com/ayopa/images/invite_fans.png" /></a></div>
+										</s:if>
+									    <s:else>
+									    	<div><a href="<s:property value="link"/>" target="_blank"><img src="http://www.ayopadev.com/ayopa/images/buy_now.png" /></a></div>
+									    </s:else>
 									</div>
 
 									<!-- *** TIME LEFT  *** -->

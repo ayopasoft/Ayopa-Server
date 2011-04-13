@@ -74,7 +74,7 @@ public class Purchase {
 		this.auction_end = auction_end;
 	}
 
-	public static String putPurchase(String auction_id, String buyer_id, Integer quantity) throws IOException {
+	public static String putPurchase(String auction_id, String buyer_id, Integer quantity, Double price) throws IOException {
 		
 		PurchasePersistence pp = new PurchasePersistence();
 		
@@ -88,10 +88,10 @@ public class Purchase {
 				
 		if (auction.getAuction_id() != null) {
 			
-			CurrentAuction currAuction = new CurrentAuction();
-			int currQuantity = currAuction.getCurrentQuantity(auction_id);
-			currAuction = CurrentAuction.getCurrentAuctionInfo(auction, currQuantity);
-			purchase.setPurchase_price(currAuction.getCurrent_price());
+			//CurrentAuction currAuction = new CurrentAuction();
+			//int currQuantity = currAuction.getCurrentQuantity(auction_id);
+			//currAuction = CurrentAuction.getCurrentAuctionInfo(auction, currQuantity);
+			purchase.setPurchase_price(price);
 			purchase.setAuction_start(auction.getAuction_start());
 			purchase.setAuction_end(auction.getAuction_end());
 		}	
