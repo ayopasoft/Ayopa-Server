@@ -7,12 +7,12 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.ayopa.server.model.Buyer;
 import com.ayopa.server.model.persistence.BuyerPersistence;
 import com.ayopa.server.utils.FBUtils;
 import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @ParentPackage (value="application")
@@ -22,14 +22,18 @@ import com.opensymphony.xwork2.ActionSupport;
 	@Result( name="permsRedirect", type="redirect", location="${perms_url}")
 	
 })
-public class Index extends ActionSupport {
+public class Index extends ActionSupport implements SessionAware {
 	private static final long serialVersionUID = 1L;
 
 	private String signed_request;
 	private String buyer_id;
 	private String perms_url;
 	
-	
+	private Map<String, Object> session;
+
+	public void setSession(Map<String,Object> map) {
+		this.session = map;
+	}
 	
 	public String getPerms_url() {
 		return perms_url;
@@ -54,13 +58,14 @@ public class Index extends ActionSupport {
 		//otherwise display canvas page
 	
 		JSONObject jsonObject = new JSONObject();
-		jsonObject = FBUtils.parseSignedRequest(signed_request);
-		
 		BuyerPersistence bp = new BuyerPersistence();
 		Buyer buyer = new Buyer();
 		
+		
 		try {
+			jsonObject = FBUtils.parseSignedRequest(signed_request);
 			buyer = bp.getBuyer(jsonObject.getString("user_id"));
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,7 +74,7 @@ public class Index extends ActionSupport {
 		if (buyer.getBuyer_id() != null)
 		{
 			buyer_id = buyer.getBuyer_id();
-			Map<String, Object> session = ActionContext.getContext().getSession();   
+			 
 		    session.put("buyer_id", buyer_id);
 			return "consumerRedirect";
 		}

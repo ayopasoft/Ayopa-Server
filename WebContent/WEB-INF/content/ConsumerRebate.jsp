@@ -276,6 +276,8 @@
 										</div>
 									</div>
 									</s:if>
+									<div class="ayopa_merchant_name"><a href="<s:property value="merchant_url"/>" target="_blank"><s:property value="merchant_name"/></a></div>
+									
 									<div class="size_right"></div>
 								</div>
 								<div class="ayopa_auction_tile_bottom"></div>

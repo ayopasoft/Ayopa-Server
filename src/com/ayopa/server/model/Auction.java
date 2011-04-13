@@ -285,7 +285,50 @@ public class Auction {
 			return auction;
 			
 	}
+
+	public List<AuctionDTO> getHighlightedAuctionsForFBPage (String page_id) throws IOException{
+		
+		
+		List<AuctionDTO> auctions = new ArrayList<AuctionDTO>();
+		
+		AwsFacade aws = AwsFacade.getInstance();
+		AuctionPersistence ap = new AuctionPersistence();
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		
+		String now = df.format(Calendar.getInstance().getTime());
 	
+		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
+		+ AwsFacade.Key.MERCHANT_FB_PAGE + "` = '" + page_id + "' and `" 
+		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
+		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
+		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_HIGHLIGHTED + "` = 'true' and `"
+		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
+		+ AwsFacade.Key.AUCTION_START + "` desc";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		if (results.size() == 0) {
+			//return auction;
+		}
+		else {
+			for (int i = 0; i < results.size(); i++){
+				Auction auction = new Auction();
+				AuctionDTO auctionDTO = new AuctionDTO();
+				
+				auction = ap.mapToAuction(results.get(i));
+				auctionDTO = AuctionDTO.auctionToAuctionDTO(auction);
+				auctions.add(auctionDTO);
+			}
+			
+			
+		}
+			return auctions;
+			
+	}
 	
  public List<AuctionDTO> getAuctionsForFBPage (String page_id) throws IOException{
 		
@@ -304,6 +347,7 @@ public class Auction {
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
 		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
 		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_HIGHLIGHTED + "` != 'true' and `"
 		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
 		+ AwsFacade.Key.AUCTION_START + "` desc";
 		

@@ -25,9 +25,22 @@ public class AuctionDTO {
 	private double rebate;
 	private boolean expired;
 	private boolean rebate_sent;
-
+    private String merchant_name;
+    private String merchant_url;
 	
-
+    
+	public String getMerchant_name() {
+		return merchant_name;
+	}
+	public void setMerchant_name(String merchant_name) {
+		this.merchant_name = merchant_name;
+	}
+	public String getMerchant_url() {
+		return merchant_url;
+	}
+	public void setMerchant_url(String merchant_url) {
+		this.merchant_url = merchant_url;
+	}
 	public boolean isRebate_sent() {
 		return rebate_sent;
 	}
@@ -173,6 +186,8 @@ public class AuctionDTO {
 		auctionDTO.setTime_hours(time.get("hours"));
 		auctionDTO.setTime_minutes(time.get("minutes"));
 		auctionDTO.setTime_seconds(time.get("seconds"));
+		auctionDTO.setMerchant_name(auction.getMerchant_name());
+		auctionDTO.setMerchant_url(auction.getMerchant_website());
 		
 		return auctionDTO;
 		
@@ -207,6 +222,8 @@ public class AuctionDTO {
 			auctionDTO.setTime_hours(time.get("hours"));
 			auctionDTO.setTime_minutes(time.get("minutes"));
 			auctionDTO.setTime_seconds(time.get("seconds"));
+			auctionDTO.setMerchant_name(auctions.get(i).getMerchant_name());
+			auctionDTO.setMerchant_url(auctions.get(i).getMerchant_website());
 			
 			dtoList.add(auctionDTO);
 		}
