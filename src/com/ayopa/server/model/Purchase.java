@@ -14,9 +14,18 @@ public class Purchase {
 	private double purchase_price;
 	private Date auction_start;
 	private Date auction_end;
+	private Date purchase_date;
 	
 	
 	
+	public Date getPurchase_date() {
+		return purchase_date;
+	}
+
+	public void setPurchase_date(Date purchase_date) {
+		this.purchase_date = purchase_date;
+	}
+
 	public String getPurchase_id() {
 		return purchase_id;
 	}

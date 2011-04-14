@@ -98,11 +98,18 @@ public class CurrentAuction {
 		if (quantity != 0) {
 			//where does that quantity fall in the schedule
 			
-			if (quantity >= schedule.get(0).getMin()) {  //check to see if quantity is above first minimum level
-			
+			//if (quantity >= schedule.get(0).getMin()) {  //check to see if quantity is above first minimum level
+				
+				
 				double total_discount = 0.00;
+				int total_level = 0;
 				double current_discount = 0.00;
 				double next_discount = 0.00;
+				
+				if (quantity < schedule.get(0).getMin()){
+					current_level = quantity;
+					current_discount = 0;
+				}
 				
 				double dis = 0.00;
 				int min = 0;
@@ -118,12 +125,14 @@ public class CurrentAuction {
 					
 										
 						if (add != 0) {  //loop through add
+							int add_level = 0;
 							
 							for (int j=0; j < ((max - min)/add) + 1; j++) {
 								
 								total_discount += (dis);
-								
-								if (quantity >= (min + (add * j)) && quantity < (min + (add * (j + 1)))) //quantity is in this level
+								add_level += add;
+									
+								if (quantity >= (min + (add * j)) && quantity <= (min + (add * (j + 1)))) //quantity is in this level
 								{	
 									current_discount = total_discount;
 									current_level = quantity;
@@ -131,24 +140,26 @@ public class CurrentAuction {
 								else
 								{	
 									
-									if (current_discount != 0.0 && next_discount == 0.0) {
+									if (current_level != 0 && next_discount == 0.0) {
 									    next_discount = total_discount;
 										next_level = min + (add * j);
 									}	
 								}
 							}
+							total_level += add_level;
 						} 
 						else {
 							
-							total_discount = dis;
+							total_discount += dis;
+							total_level = min;
 							
-							if (quantity >= min && quantity <= max){  //quantity is in this level
+							if (quantity >= min){  //quantity is in this level
 								current_discount = total_discount;
 								current_level = quantity;
 							}
 							else
 							{
-								if (current_discount != 0.0 && next_discount == 0.0) {
+								if (current_level != 0 && next_discount == 0.0) {
 								    next_discount = total_discount;
 									next_level = min;
 								}	
@@ -157,7 +168,12 @@ public class CurrentAuction {
 						}
 				}	
 				
-				if (current_discount != 0.0 && next_discount == 0.0) {
+				lowest_level = total_level;
+				
+				if (lowest_level < schedule.get(schedule.size()-1).getMin())
+					lowest_level = schedule.get(schedule.size()-1).getMin(); 
+				
+				if (current_level != 0 && next_discount == 0.0) {
 				    next_discount = total_discount;
 					next_level = min;
 				}	
@@ -176,11 +192,11 @@ public class CurrentAuction {
 					next_price = auction.getAuction_startprice() - next_discount;
 					lowest_price = auction.getAuction_startprice() - total_discount;
 				}
-			}
-			else
-			{
-				current_level = quantity;
-			}
+			//}
+			//else
+			//{
+			//	current_level = quantity;
+			//}
 		}
 		
 		CurrentAuction currAuction = new CurrentAuction();

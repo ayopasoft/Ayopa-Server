@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +22,7 @@ public class PurchasePersistence {
 		if (purchase.getPurchase_id() == null || purchase.getPurchase_id().length() == 0)
 			purchase.setPurchase_id(UUID.randomUUID().toString());		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		String now = df.format(Calendar.getInstance().getTime());
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put(AwsFacade.Key.PURCHASE_ID,purchase.getPurchase_id());
@@ -30,6 +32,7 @@ public class PurchasePersistence {
 		map.put(AwsFacade.Key.PURCHASE_PRICE, Double.toString(purchase.getPurchase_price()));
 		map.put(AwsFacade.Key.AUCTION_START, df.format(purchase.getAuction_start()));
 		map.put(AwsFacade.Key.AUCTION_END, df.format(purchase.getAuction_end()));
+		map.put(AwsFacade.Key.PURCHASE_DATE, now);
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		aws.putRow(AwsFacade.Table.PURCHASE, purchase.getPurchase_id(), map);
@@ -60,6 +63,7 @@ public class PurchasePersistence {
 		try {
 			purchase.setAuction_start(df.parse(map.get(AwsFacade.Key.AUCTION_START)));
 			purchase.setAuction_end(df.parse(map.get(AwsFacade.Key.AUCTION_END)));
+			purchase.setPurchase_date(df.parse(map.get(AwsFacade.Key.PURCHASE_DATE)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			log.error("Purchase auction start date or auction end date encountered bad date" + e);

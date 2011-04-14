@@ -103,7 +103,7 @@ public class CurrentAuctionTest {
 		assertEquals("Lowest level computation for quantity below 1st min value failed",30,currAuction.getLowest_level());
 		
 		
-		strInput = "[{\"min\":10,\"max\":20,\"dis\":5,\"add\":5},{\"min\":30,\"max\":50,\"dis\":25,\"add\":0}]";
+		strInput = "[{\"min\":10,\"max\":20,\"dis\":5,\"add\":5},{\"min\":21,\"max\":50,\"dis\":25,\"add\":0}]";
 		list.clear();
 		list = ScheduleSerializer.toSchedule(strInput);
 		auction.setAuction_schedule(list);
@@ -115,8 +115,8 @@ public class CurrentAuctionTest {
 		assertEquals("Current level computation for quantity below 1st min value failed",3,currAuction.getCurrent_level(),0);
 		assertEquals("Next price computation for quantity below 1st min value failed",95,currAuction.getNext_price(),0);
 		assertEquals("Next level computation for quantity below 1st min value failed",10,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity below 1st min value failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity below 1st min value failed",30,currAuction.getLowest_level());
+		assertEquals("Lowest price computation for quantity below 1st min value failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity below 1st min value failed",21,currAuction.getLowest_level());
 		
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 10);
 		
@@ -124,8 +124,8 @@ public class CurrentAuctionTest {
 		assertEquals("Current level computation for quantity in add range - min failed",10,currAuction.getCurrent_level(),0);
 		assertEquals("Next price level computation for quantity in add range - min level failed",90,currAuction.getNext_price(),0);
 		assertEquals("Next level computation for quantity in add range - min level failed",15,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity in add range - min level failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity in add range - min level failed",30,currAuction.getLowest_level());
+		assertEquals("Lowest price computation for quantity in add range - min level failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity in add range - min level failed",21,currAuction.getLowest_level());
 		
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 13);
 		
@@ -133,8 +133,8 @@ public class CurrentAuctionTest {
 		assertEquals("Current level computation for quantity in add range - 1st level failed",13,currAuction.getCurrent_level(),0);
 		assertEquals("Next price level computation for quantity in add range - 1st level failed",90,currAuction.getNext_price(),0);
 		assertEquals("Next level computation for quantity in add range - 1st level failed",15,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity in add range - 1st level failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity in add range - 1st level failed",30,currAuction.getLowest_level());
+		assertEquals("Lowest price computation for quantity in add range - 1st level failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity in add range - 1st level failed",21,currAuction.getLowest_level());
 	
 		
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 15);
@@ -142,56 +142,56 @@ public class CurrentAuctionTest {
 		assertEquals("Current level computation for quantity in add range - 2nd level failed",15,currAuction.getCurrent_level(),0);
 		assertEquals("Next price level computation for quantity in add range - 2nd level failed",85,currAuction.getNext_price(),0);
 		assertEquals("Next level computation for quantity in add range - 2nd level failed",20,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity in add range - 2nd level failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity in add range - 1st level failed",30,currAuction.getLowest_level());
+		assertEquals("Lowest price computation for quantity in add range - 2nd level failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity in add range - 1st level failed",21,currAuction.getLowest_level());
 		
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 20);
 		assertEquals("Current price computation for quantity in add range - max value failed",85,currAuction.getCurrent_price(),0);
 		assertEquals("Current level computation for quantity in add range - max value failed",20,currAuction.getCurrent_level(),0);
-		assertEquals("Next price level computation for quantity in add range - max value level failed",75,currAuction.getNext_price(),0);
-		assertEquals("Next level computation for quantity in add range - max value failed",30,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity in add range - value failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity in add range - value failed",30,currAuction.getLowest_level());
+		assertEquals("Next price level computation for quantity in add range - max value level failed",60,currAuction.getNext_price(),0);
+		assertEquals("Next level computation for quantity in add range - max value failed",21,currAuction.getNext_level());
+		assertEquals("Lowest price computation for quantity in add range - value failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity in add range - value failed",21,currAuction.getLowest_level());
 		
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 22);
-		assertEquals("Current price computation for quantity  - between levels failed",85,currAuction.getCurrent_price(),0);
+		assertEquals("Current price computation for quantity  - between levels failed",60,currAuction.getCurrent_price(),0);
 		assertEquals("Current level computation for quantity  - between levels failed",22,currAuction.getCurrent_level(),0);
-		assertEquals("Next price level computation for quantity  - between levels failed",75,currAuction.getNext_price(),0);
-		assertEquals("Next level computation for quantity  - between levels failed",30,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity  - between levels failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity  - between levels failed",30,currAuction.getLowest_level());
+		assertEquals("Next price level computation for quantity  - between levels failed",60,currAuction.getNext_price(),0);
+		assertEquals("Next level computation for quantity  - between levels failed",21,currAuction.getNext_level());
+		assertEquals("Lowest price computation for quantity  - between levels failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity  - between levels failed",21,currAuction.getLowest_level());
 		
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 30);
-		assertEquals("Current price computation for quantity static level min failed",75,currAuction.getCurrent_price(),0);
+		assertEquals("Current price computation for quantity static level min failed",60,currAuction.getCurrent_price(),0);
 		assertEquals("Current level computation for quantity static level min failed",30,currAuction.getCurrent_level(),0);
-		assertEquals("Next price level computation for quantity  static level min failed",75,currAuction.getNext_price(),0);
-		assertEquals("Next level computation for quantity static level min failed",30,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity  static level min failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity static level min failed",30,currAuction.getLowest_level());
+		assertEquals("Next price level computation for quantity  static level min failed",60,currAuction.getNext_price(),0);
+		assertEquals("Next level computation for quantity static level min failed",21,currAuction.getNext_level());
+		assertEquals("Lowest price computation for quantity  static level min failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity static level min failed",21,currAuction.getLowest_level());
 	
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 45);
-		assertEquals("Current price computation for quantity static level between failed",75,currAuction.getCurrent_price(),0);
+		assertEquals("Current price computation for quantity static level between failed",60,currAuction.getCurrent_price(),0);
 		assertEquals("Current level computation for quantity static level between  failed",45,currAuction.getCurrent_level(),0);
-		assertEquals("Next price level computation for quantity  static level between  failed",75,currAuction.getNext_price(),0);
-		assertEquals("Next level computation for quantity static level between  failed",30,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity  static level between  failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity static level between  failed",30,currAuction.getLowest_level());
+		assertEquals("Next price level computation for quantity  static level between  failed",60,currAuction.getNext_price(),0);
+		assertEquals("Next level computation for quantity static level between  failed",21,currAuction.getNext_level());
+		assertEquals("Lowest price computation for quantity  static level between  failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity static level between  failed",21,currAuction.getLowest_level());
 	
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 50);
-		assertEquals("Current price computation for quantity static level max failed",75,currAuction.getCurrent_price(),0);
+		assertEquals("Current price computation for quantity static level max failed",60,currAuction.getCurrent_price(),0);
 		assertEquals("Current level computation for quantity static level max failed",50,currAuction.getCurrent_level(),0);
-		assertEquals("Next price level computation for quantity  static level max failed",75,currAuction.getNext_price(),0);
-		assertEquals("Next level computation for quantity static level max failed",30,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity  static level max failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity static level max failed",30,currAuction.getLowest_level());
+		assertEquals("Next price level computation for quantity  static level max failed",60,currAuction.getNext_price(),0);
+		assertEquals("Next level computation for quantity static level max failed",21,currAuction.getNext_level());
+		assertEquals("Lowest price computation for quantity  static level max failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity static level max failed",21,currAuction.getLowest_level());
 	
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 60);
-		assertEquals("Current price computation for quantity beyond max failed",75,currAuction.getCurrent_price(),0);
+		assertEquals("Current price computation for quantity beyond max failed",60,currAuction.getCurrent_price(),0);
 		assertEquals("Current level computation for quantity beyond max failed",60,currAuction.getCurrent_level(),0);
-		assertEquals("Next price level computation for quantity  beyond max failed",75,currAuction.getNext_price(),0);
+		assertEquals("Next price level computation for quantity  beyond max failed",60,currAuction.getNext_price(),0);
 		assertEquals("Next level computation for quantity static beyond failed",50,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity  beyond max failed",75,currAuction.getLowest_price(),0);
-		assertEquals("Lowest level computation for quantity beyond max failed",30,currAuction.getLowest_level());
+		assertEquals("Lowest price computation for quantity  beyond max failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest level computation for quantity beyond max failed",21,currAuction.getLowest_level());
 	
 		
 		//a little more complicated
@@ -201,19 +201,19 @@ public class CurrentAuctionTest {
 		auction.setAuction_schedule(list);
 		
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 55);
-		assertEquals("Current price computation for quantity beyond max failed",65,currAuction.getCurrent_price(),0);
+		assertEquals("Current price computation for quantity beyond max failed",50,currAuction.getCurrent_price(),0);
 		assertEquals("Current level computation for quantity beyond max failed",55,currAuction.getCurrent_level(),0);
-		assertEquals("Next price level computation for quantity  beyond max failed",60,currAuction.getNext_price(),0);
+		assertEquals("Next price level computation for quantity  beyond max failed",45,currAuction.getNext_price(),0);
 		assertEquals("Next level computation for quantity static beyond failed",60,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity  beyond max failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest price computation for quantity  beyond max failed",45,currAuction.getLowest_price(),0);
 		assertEquals("Lowest level computation for quantity beyond max failed",50,currAuction.getLowest_level());
 	
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, 61);
-		assertEquals("Current price computation for quantity beyond max failed",60,currAuction.getCurrent_price(),0);
+		assertEquals("Current price computation for quantity beyond max failed",45,currAuction.getCurrent_price(),0);
 		assertEquals("Current level computation for quantity beyond max failed",61,currAuction.getCurrent_level(),0);
-		assertEquals("Next price level computation for quantity  beyond max failed",60,currAuction.getNext_price(),0);
+		assertEquals("Next price level computations for quantity  beyond max failed",45,currAuction.getNext_price(),0);
 		assertEquals("Next level computation for quantity static beyond failed",60,currAuction.getNext_level());
-		assertEquals("Lowest price computation for quantity  beyond max failed",60,currAuction.getLowest_price(),0);
+		assertEquals("Lowest price computation for quantity  beyond max failed",45,currAuction.getLowest_price(),0);
 		assertEquals("Lowest level computation for quantity beyond max failed",50,currAuction.getLowest_level());
 	
 		

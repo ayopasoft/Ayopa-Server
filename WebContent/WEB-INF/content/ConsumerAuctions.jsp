@@ -145,28 +145,28 @@
 					<div class="main_content">
 						<!--*********** BEGINNING OF MENU **************** -->
 						<ul class="ayopa_menu">
-							<a href="consumer-canvas">
+							<a href="<s:url action='consumer-canvas'/>">
 								<li class="ayopa_myAuctions">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
 									<div class="ayopa_menu_item_right"></div>
 								</li>
 							</a>
-							<a href="consumer-auctions">
-								<li class="ayopa_ayopaAuctions  active">
+							<a href="<s:url action='consumer-auctions'/>">
+								<li class="ayopa_ayopaAuctions active">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
 									<div class="ayopa_menu_item_right"></div>
 								</li>
 							</a>
-							<a href="consumer-rebate">
+							<a href="<s:url action='consumer-rebate'/>">
 								<li class="ayopa_rebate">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>
 									<div class="ayopa_menu_item_right"></div>
 								</li>
 							</a>
-							<a href="consumer-info">
+							<a href="<s:url action='consumer-info'/>">
 								<li class="ayopa_info">
 									<div class="ayopa_menu_item_left"></div>
 									<div class="ayopa_menu_item_middle"></div>

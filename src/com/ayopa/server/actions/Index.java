@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @ParentPackage (value="application")
 @Results({
 	@Result( name=Action.SUCCESS, location="Index.jsp" ),
-	@Result( name="consumerRedirect", type="redirect", location="consumer-canvas?buyer_id=${buyer_id}"),
+	@Result( name="consumerRedirect", type="redirectAction", params={ "actionName", "consumer-canvas" }),
 	@Result( name="permsRedirect", type="redirect", location="${perms_url}")
 	
 })

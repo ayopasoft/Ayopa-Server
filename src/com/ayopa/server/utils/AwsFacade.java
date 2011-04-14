@@ -107,6 +107,7 @@ public class AwsFacade {
 		public static final String PURCHASE_BUYER_ID = "purchase-buyer-id";
 		public static final String PURCHASE_QUANTITY = "purchase-quantity";
 		public static final String PURCHASE_PRICE = "purchase-price";
+		public static final String PURCHASE_DATE = "purchase-date";
 		
 		public static final String BUYER_ID = "buyer-id";
 		public static final String BUYER_ACCESS_TOKEN = "buyer-access-token";
