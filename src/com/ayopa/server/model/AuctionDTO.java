@@ -27,8 +27,15 @@ public class AuctionDTO {
 	private boolean rebate_sent;
     private String merchant_name;
     private String merchant_url;
+    private double price_conflict;
 	
     
+	public double getPrice_conflict() {
+		return price_conflict;
+	}
+	public void setPrice_conflict(double price_conflict) {
+		this.price_conflict = price_conflict;
+	}
 	public String getMerchant_name() {
 		return merchant_name;
 	}
@@ -188,6 +195,7 @@ public class AuctionDTO {
 		auctionDTO.setTime_seconds(time.get("seconds"));
 		auctionDTO.setMerchant_name(auction.getMerchant_name());
 		auctionDTO.setMerchant_url(auction.getMerchant_website());
+		auctionDTO.setPrice_conflict(auction.getAuction_priceconflict());
 		
 		return auctionDTO;
 		
@@ -224,6 +232,7 @@ public class AuctionDTO {
 			auctionDTO.setTime_seconds(time.get("seconds"));
 			auctionDTO.setMerchant_name(auctions.get(i).getMerchant_name());
 			auctionDTO.setMerchant_url(auctions.get(i).getMerchant_website());
+			auctionDTO.setPrice_conflict(auctions.get(i).getAuction_priceconflict());
 			
 			dtoList.add(auctionDTO);
 		}

@@ -35,6 +35,17 @@ public class DisplayAuctionButton extends ActionSupport {
 	private double next_price;
 	private double lowest_price;
 	private double start_price;
+	private double price_conflict;
+	
+	
+
+	public double getPrice_conflict() {
+		return price_conflict;
+	}
+
+	public void setPrice_conflict(double price_conflict) {
+		this.price_conflict = price_conflict;
+	}
 
 	public long getTime_seconds() {
 		return time_seconds;
@@ -112,7 +123,8 @@ public class DisplayAuctionButton extends ActionSupport {
 		time_hours = map.get("hours");
 		time_minutes = map.get("minutes");
 		time_seconds = map.get("seconds");
-
+		price_conflict = auction.getAuction_priceconflict();
+		
 		return Action.SUCCESS;
 	}
 

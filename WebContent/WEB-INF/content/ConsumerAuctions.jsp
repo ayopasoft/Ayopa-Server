@@ -195,7 +195,8 @@
 									<!-- **** PHOTO *** -->
 									<div class="ayopa_item_photo"><a href="<s:property value="link"/>" target="_blank"><img width="100px" src="<s:property value="image"/>"></a></div>
 
-
+									<s:if test="current_price >= price_conflict">
+									
 									<!-- *** scale *** -->
 									<div class="ayopa_sell_scale">
 										<div class="ayopa_start">
@@ -226,6 +227,7 @@
 
 									<!-- *** GRAPH  *** -->
 									<div class="ayopa_graph">
+											
 										<div>
 											<img src="http://www.ayopadev.com/ayopa/images/buyer_graph.png" />
 										</div>
@@ -237,15 +239,26 @@
 										</div>
 										<div class="ayopa_graph_label">Buyers</div>
 									</div>
-
+									</s:if>
+										<s:else>
+											<div class="ayopa_auction_tile_price_conflict">The current "Buy and Save" price of this item is too low to show, 
+											but we can tell you it's no more than 
+											<s:text name="format.currency">
+												<s:param name="value" value="price_conflict"/>
+											</s:text>
+											</div>
+										</s:else>
+										
 									<!-- *** PRICE AND BUY SECTION  ** -->
+										
 									<div class="ayopa_tile_right_content">
+									  <s:if test="current_price >= price_conflict">
 										<div class="ayopa_current_price">Current Price: 
 											<s:text name="format.graphcurr">
 												<s:param name="value" value="current_price"/>
 											</s:text>
 										</div>
-										
+									</s:if>	
 											<div><a href="<s:property value="link"/>" target="_blank"><img src="http://www.ayopadev.com/ayopa/images/buy_now.png" /></a></div>
 									</div>
 

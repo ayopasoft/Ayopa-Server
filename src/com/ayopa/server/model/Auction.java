@@ -387,9 +387,10 @@ public class Auction {
 	
 		String query = "select * from `" + AwsFacade.Table.PURCHASE + "` where `" 
 		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` = '" + buyer_id + "' and `" 
+		+ AwsFacade.Key.PURCHASE_DATE + "` != '' and `" 
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
 		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' order by `"
-		+ AwsFacade.Key.AUCTION_END + "` asc";
+		+ AwsFacade.Key.PURCHASE_DATE + "` desc";
 		
 		log.info(query);
 		

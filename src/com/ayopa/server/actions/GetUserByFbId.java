@@ -21,6 +21,7 @@ import com.ayopa.server.utils.FBUtils;
 import com.ayopa.server.utils.HTTPRequestPoster;
 import com.ayopa.server.utils.JsonUtils;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -92,7 +93,7 @@ public class GetUserByFbId extends ActionSupport implements CookiesAware{
 		//String accessToken = FBUtils.getAccessTokenFromCookieValue(cookiesMap.get("fbs_186996844658023"), "access_token");
 		
         
-        String loginURL = FBUtils.getLoginRedirectURL();
+        String loginURL = "https://graph.facebook.com/oauth/authorize?client_id=186996844658023&redirect_uri=http://localhost:8080/AyopaServer/home";
         URL logURL = new URL(loginURL);
         
         URLConnection uconn = logURL.openConnection( );
@@ -146,7 +147,10 @@ public class GetUserByFbId extends ActionSupport implements CookiesAware{
         
         jsonReturn = nextList2.toString();
         
-        
+		
+		
+		//System.out.println(session.get("fbs_"+FBUtils.FACEBOOK_API_KEY));
+        //jsonReturn = (String) session.get("fbs_"+FBUtils.FACEBOOK_API_KEY);
         
         /*String accessToken = "";
 		

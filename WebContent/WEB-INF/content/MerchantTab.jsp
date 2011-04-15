@@ -162,7 +162,8 @@
 									<!-- **** PHOTO *** -->
 									<div class="ayopa_item_photo"><a href="<s:property value="link"/>" target="_blank"><img width="100px" src="<s:property value="image"/>"></a></div>
 
-
+									<s:if test="current_price >= price_conflict">
+									
 									<!-- *** scale *** -->
 									<div class="ayopa_sell_scale">
 										<div class="ayopa_start">
@@ -204,15 +205,26 @@
 										</div>
 										<div class="ayopa_graph_label">Buyers</div>
 									</div>
-
+									
+									</s:if>
+										<s:else>
+											<div class="ayopa_auction_tile_price_conflict">The current "Buy and Save" price of this item is too low to show, 
+											but we can tell you it's no more than 
+											<s:text name="format.currency">
+												<s:param name="value" value="price_conflict"/>
+											</s:text>
+											</div>
+										</s:else>
+										
 									<!-- *** PRICE AND BUY SECTION  ** -->
 									<div class="ayopa_tile_right_content">
+										<s:if test="current_price >= price_conflict">
 										<div class="ayopa_current_price">Current Price: 
 											<s:text name="format.graphcurr">
 												<s:param name="value" value="current_price"/>
 											</s:text>
 										</div>
-										
+										</s:if>
 										<s:if test="admin">
 											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://www.ayopadev.com/ayopa/images/invite_fans.png" /></a></div>
 										</s:if>
@@ -257,7 +269,8 @@
 									<!-- **** PHOTO *** -->
 									<div class="ayopa_item_photo"><a href="<s:property value="link"/>" target="_blank"><img width="100px" src="<s:property value="image"/>"></a></div>
 
-
+									<s:if test="current_price >= price_conflict">
+									
 									<!-- *** scale *** -->
 									<div class="ayopa_sell_scale">
 										<div class="ayopa_start">
@@ -299,15 +312,25 @@
 										</div>
 										<div class="ayopa_graph_label">Buyers</div>
 									</div>
-
+									
+									</s:if>
+										<s:else>
+											<div class="ayopa_auction_tile_price_conflict">The current "Buy and Save" price of this item is too low to show, 
+											but we can tell you it's no more than 
+											<s:text name="format.currency">
+												<s:param name="value" value="price_conflict"/>
+											</s:text>
+											</div>
+										</s:else>
 									<!-- *** PRICE AND BUY SECTION  ** -->
 									<div class="ayopa_tile_right_content">
+									<s:if test="current_price >= price_conflict">
 										<div class="ayopa_current_price">Current Price: 
 											<s:text name="format.graphcurr">
 												<s:param name="value" value="current_price"/>
 											</s:text>
 										</div>
-										
+									</s:if>
 										<s:if test="admin">
 											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://www.ayopadev.com/ayopa/images/invite_fans.png" /></a></div>
 										</s:if>

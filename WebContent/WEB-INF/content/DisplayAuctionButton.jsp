@@ -15,8 +15,10 @@
 
 	<body bgcolor="#ffffff">
 		<div class="main_buy_with_ayopa">
+						
 							
-							<div class="buy_with_ayopa_data">
+							<s:if test="current_price >= price_conflict">
+							<div class="buy_with_ayopa_data">	
 								<div class="buy_with_ayopa_buyer_count">
 									<div class="buy_with_ayopa_current">
 										<s:property value="current_quant"/>
@@ -47,6 +49,17 @@
 									</div>
 
 								</div>
+								</s:if>
+								<s:else>
+									<div class="buy_with_ayopa_data_pc">	
+									<div class="ayopa_price_conflict">The current "Buy and Save" price of this item is too low to show, 
+									but we can tell you it's no more than 
+									<s:text name="format.currency">
+											<s:param name="value" value="price_conflict"/>
+									</s:text>
+									</div>
+								</s:else>
+								
 								<div class="buy_with_ayopa_time_left">
 									<div class="buy_with_ayopa_time_left_header">
 										<div>Sec</div>
@@ -63,7 +76,11 @@
 
 									</div>
 								</div>
-							</div>	
+							</div>
+							
+							
+							
+										
 						</div>
 </body>
 </html>
