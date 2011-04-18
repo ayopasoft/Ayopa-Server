@@ -11,41 +11,59 @@ import com.opensymphony.xwork2.ActionSupport;
 @ParentPackage (value="application")
 @Results({
 	@Result( name=Action.SUCCESS, type="string", params={ "contentType", "text/plain", "property", "jsonReturn" } ),
-})
-public class CreateAuction extends ActionSupport {
+	})
+public class EndAuction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
-	private String auctionDef;
+	private String auctionID;
 	private String jsoncallback;
 	private String jsonReturn;
-
 	
+	
+	
+
+
+	public String getJsoncallback() {
+		return jsoncallback;
+	}
+
+
 	public void setJsoncallback(String jsoncallback) {
-		//this.jsoncallback = JsonUtils.sanitizeJsonpParam(jsoncallback);
 		this.jsoncallback = jsoncallback;
 	}
-	
-	public void setAuctionDef(String auctionDef) {
-		this.auctionDef = auctionDef;
-	}
-		
+
+
 	public String getJsonReturn() {
 		return jsonReturn;
 	}
+
+
+	public void setJsonReturn(String jsonReturn) {
+		this.jsonReturn = jsonReturn;
+	}
+
+
+	public String getAuctionID() {
+		return auctionID;
+	}
+
+
+	public void setAuctionID(String auctionID) {
+		this.auctionID = auctionID;
+	}
+
 
 	@Override
 	public String execute() throws Exception {
 		
 		Auction auction = new Auction();
-		
-		String jsonString = auction.putAuction(auctionDef);
+				
+		String jsonString = auction.endAuction(auctionID);
 		
 		if ( jsoncallback != null || jsoncallback != "" ) jsonReturn = jsoncallback + "(" + jsonString + ");";
 		else jsonReturn = jsonString;
 		
 		return Action.SUCCESS;
 	}
-	
-	
 	
 }

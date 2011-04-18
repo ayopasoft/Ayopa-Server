@@ -21,7 +21,7 @@ public class PurchasePersistence {
 	public String putPurchase (Purchase purchase) throws IOException {
 		if (purchase.getPurchase_id() == null || purchase.getPurchase_id().length() == 0)
 			purchase.setPurchase_id(UUID.randomUUID().toString());		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
 		String now = df.format(Calendar.getInstance().getTime());
 		
 		Map<String, String> map = new HashMap<String, String>();
@@ -53,7 +53,7 @@ public class PurchasePersistence {
 	
 	public Purchase mapToPurchase(Map<String, String> map)  {
 		Purchase purchase = new Purchase ();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
 		
 		purchase.setPurchase_id(map.get(AwsFacade.Key.PURCHASE_ID));
 		purchase.setPurchase_auction_id(map.get(AwsFacade.Key.PURCHASE_AUCTION_ID));

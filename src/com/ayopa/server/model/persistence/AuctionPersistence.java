@@ -1,12 +1,17 @@
 package com.ayopa.server.model.persistence;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,8 +27,23 @@ public class AuctionPersistence {
 		if (auction.getAuction_id() == null || auction.getAuction_id().length() == 0)
 			auction.setAuction_id(UUID.randomUUID().toString());
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		AwsFacade aws = AwsFacade.getInstance();
 		
+		
+		//write product image to AWS bucket
+		
+		URL url = new URL(auction.getProduct_image());
+	    BufferedImage image = ImageIO.read(url);
+	    File file = new File(auction.getAuction_id() + ".jpg");
+	    ImageIO.write(image, "jpg", file);
+		
+	    aws.createBucket(AwsFacade.Bucket.PRODUCT_IMAGES);
+	    aws.writeFileToS3(AwsFacade.Bucket.PRODUCT_IMAGES, file.getName(), file);
+	    aws.makePublic(AwsFacade.Bucket.PRODUCT_IMAGES, file.getName());
+	    
+	    auction.setProduct_image("http://" + AwsFacade.Bucket.PRODUCT_IMAGES + ".s3.amazonaws.com/"  + file.getName());
+	    file.delete();
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put(AwsFacade.Key.AUCTION_ID,auction.getAuction_id());
@@ -48,7 +68,7 @@ public class AuctionPersistence {
 		map.put(AwsFacade.Key.AUCTION_DELETED, auction.getAuction_deleted());
 		map.put(AwsFacade.Key.MERCHANT_FB_PAGE, auction.getMerchant_fb_page());
 		
-		AwsFacade aws = AwsFacade.getInstance();
+		
 		aws.putRow(AwsFacade.Table.AUCTION, auction.getAuction_id(), map);
 		
 		return auction.getAuction_id();
@@ -68,7 +88,7 @@ public class AuctionPersistence {
 	public Auction mapToAuction(Map<String, String> map) {
 		Auction auction = new Auction ();
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
 		
 		auction.setAuction_id (map.get(AwsFacade.Key.AUCTION_ID));
 		auction.setProduct_id(map.get(AwsFacade.Key.PRODUCT_ID));

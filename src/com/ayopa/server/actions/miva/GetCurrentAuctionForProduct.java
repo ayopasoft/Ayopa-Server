@@ -6,6 +6,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.ayopa.server.model.Auction;
+import com.ayopa.server.model.CurrentAuction;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -42,6 +43,7 @@ public class GetCurrentAuctionForProduct extends ActionSupport {
 		//Basically, don't return id if auction is not active
 		
 		Auction auction = new Auction();
+		CurrentAuction currAuction = new CurrentAuction();
 		
 		if (merchantID == null || merchantID.trim().length() == 0)
 			auctionID = "0";
@@ -50,12 +52,17 @@ public class GetCurrentAuctionForProduct extends ActionSupport {
 		else
 			{
 			
-			auction = auction.getAuctionForProduct(merchantID, productID);
-			auctionID = auction.getAuction_id();
-			if (auctionID == null)
-				auctionID = "0";
+				auction = auction.getAuctionForProduct(merchantID, productID);
+				
+				if (auctionID != null){
+					if (auction.getAuction_maxunits() > currAuction.getCurrentQuantity(auction.getAuction_id())){
+						auctionID = auction.getAuction_id();
+					}
+				}
+				else{
+					auctionID = "0";
+				}
 			}
-		
 		return Action.SUCCESS;
 	}
 

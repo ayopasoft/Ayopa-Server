@@ -253,7 +253,7 @@ public class AwsFacade {
 		sdb.createDomain(new CreateDomainRequest(domain));
 	}
 
-	private void createBucket(String bucket) {
+	public void createBucket(String bucket) {
 		if (s3.doesBucketExist(bucket)) {
 			if (DELETE_FIRST) {
 				ObjectListing objects = null;

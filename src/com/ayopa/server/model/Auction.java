@@ -11,13 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 import com.ayopa.server.model.persistence.AuctionPersistence;
 import com.ayopa.server.utils.AwsFacade;
@@ -215,7 +214,7 @@ public class Auction {
 	public List<Auction> getCurrentAuctions () throws IOException{
 		List<Auction> auctions = new ArrayList<Auction>();
 		AwsFacade aws = AwsFacade.getInstance();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
 		
 		String now = df.format(Calendar.getInstance().getTime());
 		
@@ -251,7 +250,7 @@ public class Auction {
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
 		
 		String now = df.format(Calendar.getInstance().getTime());
 	
@@ -294,7 +293,7 @@ public class Auction {
 		AwsFacade aws = AwsFacade.getInstance();
 		AuctionPersistence ap = new AuctionPersistence();
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
 		
 		String now = df.format(Calendar.getInstance().getTime());
 	
@@ -338,7 +337,7 @@ public class Auction {
 		AwsFacade aws = AwsFacade.getInstance();
 		AuctionPersistence ap = new AuctionPersistence();
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
 		
 		String now = df.format(Calendar.getInstance().getTime());
 	
@@ -381,7 +380,7 @@ public class Auction {
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
 		
 		String now = df.format(Calendar.getInstance().getTime());
 	
@@ -409,9 +408,10 @@ public class Auction {
 					auctionDTO = AuctionDTO.auctionToAuctionDTO(auction);
 					auctionDTO.setPurchase_price(Double.parseDouble(results.get(i).get(AwsFacade.Key.PURCHASE_PRICE)));
 					auctionDTO.setRebate(auctionDTO.getPurchase_price() - auctionDTO.getCurrent_price());
+					auctions.add(auctionDTO);
 				}
 				
-				auctions.add(auctionDTO);
+				
 			}
 			
 			
@@ -430,7 +430,9 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 		Date now = Calendar.getInstance().getTime();
 	
 		String query = "select * from `" + AwsFacade.Table.PURCHASE + "` where `" 
-		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` = '" + buyer_id + "'";
+		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` = '" + buyer_id + "' and `"
+		+ AwsFacade.Key.PURCHASE_DATE + "` != '' order by `"
+		+ AwsFacade.Key.PURCHASE_DATE + "` desc";
 		
 		log.info(query);
 		
@@ -464,16 +466,28 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 			
 	}
 	
-	
+	public String endAuction(String auctionID) throws IOException{
+		Auction auction = new Auction();
+				
+		auction = auction.getAuction(auctionID);
+		auction.setAuction_ended("1");
+		auction.setAuction_end(Calendar.getInstance().getTime());
+		
+		String result = auction.putAuction(auction.auctionToJson(auction));
+		
+		return result;
+		
+	}
+
 	public String putAuction(String auctionDef) throws IOException {
 		Auction auction = new Auction();
-		AuctionPersistence awsAuction = new AuctionPersistence();
+		AuctionPersistence ap = new AuctionPersistence();
 		
 		auction = auction.jsonToAuction(auctionDef);
 		
 		auction.setMerchant_fb_page(Merchant.getMerchantFBPage(auction.getMerchant_id()));
 		
-		String auctionReturn = awsAuction.putAuction(auction);
+		String auctionReturn = ap.putAuction(auction);
 		
 		Map<String,String> mapReturn = new HashMap<String, String> ();
 		mapReturn.put("auction_id", auctionReturn);
@@ -484,7 +498,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 	}
 	
 	public String auctionToJson(Auction auction){
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a"); 
 		Map<String,Object> auctionMap = new HashMap<String, Object> ();
 		Map<String, List<Map<String,Object>>> auction_schedule = new HashMap<String, List<Map<String,Object>>>();
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
@@ -544,7 +558,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 	public Auction jsonToAuction(String json)
 	{
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a"); 
 		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( json ); 
 		Auction auction = new Auction();
 		

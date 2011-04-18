@@ -162,7 +162,7 @@
 									<!-- **** PHOTO *** -->
 									<div class="ayopa_item_photo"><a href="<s:property value="link"/>" target="_blank"><img width="100px" src="<s:property value="image"/>"></a></div>
 
-									<s:if test="current_price >= price_conflict">
+									<s:if test="current_price >= price_conflict || admin">
 									
 									<!-- *** scale *** -->
 									<div class="ayopa_sell_scale">
@@ -208,7 +208,7 @@
 									
 									</s:if>
 										<s:else>
-											<div class="ayopa_auction_tile_price_conflict">The current "Buy and Save" price of this item is too low to show, 
+											<div class="ayopa_auction_tile_price_conflict">The current "Group Buy and Save" price of this item is too low to show, 
 											but we can tell you it's no more than 
 											<s:text name="format.currency">
 												<s:param name="value" value="price_conflict"/>
@@ -218,7 +218,7 @@
 										
 									<!-- *** PRICE AND BUY SECTION  ** -->
 									<div class="ayopa_tile_right_content">
-										<s:if test="current_price >= price_conflict">
+										<s:if test="current_price >= price_conflict || admin">
 										<div class="ayopa_current_price">Current Price: 
 											<s:text name="format.graphcurr">
 												<s:param name="value" value="current_price"/>
@@ -269,7 +269,7 @@
 									<!-- **** PHOTO *** -->
 									<div class="ayopa_item_photo"><a href="<s:property value="link"/>" target="_blank"><img width="100px" src="<s:property value="image"/>"></a></div>
 
-									<s:if test="current_price >= price_conflict">
+									<s:if test="current_price >= price_conflict || admin">
 									
 									<!-- *** scale *** -->
 									<div class="ayopa_sell_scale">
@@ -315,7 +315,7 @@
 									
 									</s:if>
 										<s:else>
-											<div class="ayopa_auction_tile_price_conflict">The current "Buy and Save" price of this item is too low to show, 
+											<div class="ayopa_auction_tile_price_conflict">The current "Group Buy and Save" price of this item is too low to show, 
 											but we can tell you it's no more than 
 											<s:text name="format.currency">
 												<s:param name="value" value="price_conflict"/>
@@ -324,7 +324,7 @@
 										</s:else>
 									<!-- *** PRICE AND BUY SECTION  ** -->
 									<div class="ayopa_tile_right_content">
-									<s:if test="current_price >= price_conflict">
+									<s:if test="current_price >= price_conflict || admin">
 										<div class="ayopa_current_price">Current Price: 
 											<s:text name="format.graphcurr">
 												<s:param name="value" value="current_price"/>

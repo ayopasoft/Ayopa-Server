@@ -241,7 +241,7 @@
 									</div>
 									</s:if>
 										<s:else>
-											<div class="ayopa_auction_tile_price_conflict">The current "Buy and Save" price of this item is too low to show, 
+											<div class="ayopa_auction_tile_price_conflict">The current "Group Buy and Save" price of this item is too low to show, 
 											but we can tell you it's no more than 
 											<s:text name="format.currency">
 												<s:param name="value" value="price_conflict"/>
