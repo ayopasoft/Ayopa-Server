@@ -100,30 +100,32 @@ public class DisplayAuctionButton extends ActionSupport {
 	public String execute() throws Exception {
 
 		// detects pricing conflict
+		
+		
+			Auction auction = new Auction();
+			CurrentAuction currAuction = new CurrentAuction();
+			Map<String, Long> map = new HashMap<String, Long>();
 
-		Auction auction = new Auction();
-		CurrentAuction currAuction = new CurrentAuction();
-		Map<String, Long> map = new HashMap<String, Long>();
+			auction = auction.getAuction(auctionID);
+			int quantity = currAuction.getCurrentQuantity(auctionID);
+			currAuction = CurrentAuction.getCurrentAuctionInfo(auction, quantity);
 
-		auction = auction.getAuction(auctionID);
-		int quantity = currAuction.getCurrentQuantity(auctionID);
-		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, quantity);
+			map = CurrentAuction.getAuctionTimeRemaining(auction);
 
-		map = CurrentAuction.getAuctionTimeRemaining(auction);
-
-		current_price = currAuction.getCurrent_price();
-		start_price = auction.getAuction_startprice();
-		next_price = currAuction.getNext_price();
-		lowest_price = currAuction.getLowest_price();
-		highest_quant = currAuction.getLowest_level();
-		start_quant = auction.getAuction_schedule().get(0).getMin();
-		current_quant = currAuction.getCurrent_level();
-		next_quant = currAuction.getNext_level();
-		time_days = map.get("days");
-		time_hours = map.get("hours");
-		time_minutes = map.get("minutes");
-		time_seconds = map.get("seconds");
-		price_conflict = auction.getAuction_priceconflict();
+			current_price = currAuction.getCurrent_price();
+			start_price = auction.getAuction_startprice();
+			next_price = currAuction.getNext_price();
+			lowest_price = currAuction.getLowest_price();
+			highest_quant = currAuction.getLowest_level();
+			start_quant = auction.getAuction_schedule().get(0).getMin();
+			current_quant = currAuction.getCurrent_level();
+			next_quant = currAuction.getNext_level();
+			time_days = map.get("days");
+			time_hours = map.get("hours");
+			time_minutes = map.get("minutes");
+			time_seconds = map.get("seconds");
+			price_conflict = auction.getAuction_priceconflict();
+		
 		
 		return Action.SUCCESS;
 	}

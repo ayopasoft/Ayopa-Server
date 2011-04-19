@@ -12,7 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @ParentPackage (value="application")
 @Results({
-	@Result( name=Action.SUCCESS, type="string", params={ "contentType", "text/plain", "property", "success" } ),
+	@Result( name=Action.SUCCESS, type="string", params={ "contentType", "text/plain", "property", "purchaseID" } ),
 
 })
 public class SetAuctionParticipation extends ActionSupport {
@@ -23,7 +23,7 @@ public class SetAuctionParticipation extends ActionSupport {
 	private Integer quantity;
 	private double price;
 	
-	private String success;
+	private String purchaseID;
 	
 	
 	
@@ -38,8 +38,16 @@ public class SetAuctionParticipation extends ActionSupport {
 	}
 
 
-	public String getSuccess() {
-		return success;
+	
+
+
+	public String getPurchaseID() {
+		return purchaseID;
+	}
+
+
+	public void setPurchaseID(String purchaseID) {
+		this.purchaseID = purchaseID;
 	}
 
 
@@ -61,9 +69,15 @@ public class SetAuctionParticipation extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		
-		success = Purchase.putPurchase(auctionID, buyerID, quantity, price);
-		
-		FBUtils.postAuctionToFacebook(auctionID, buyerID);
+		try {
+			purchaseID = Purchase.putPurchase(auctionID, buyerID, quantity, price);
+			
+			FBUtils.postAuctionToFacebook(auctionID, buyerID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			purchaseID = "";
+		}
 		
 		return Action.SUCCESS;
 	}

@@ -113,7 +113,7 @@ public class AuctionPersistence {
 		auction.setMerchant_name(map.get(AwsFacade.Key.MERCHANT_NAME));
 		auction.setMerchant_website(map.get(AwsFacade.Key.MERCHANT_WEBSITE));
 		auction.setAuction_deleted(map.get(AwsFacade.Key.AUCTION_DELETED));
-		auction.setAuction_ended(map.get(AwsFacade.Key.AUCTION_END));
+		auction.setAuction_ended(map.get(AwsFacade.Key.AUCTION_ENDED));
 		auction.setMerchant_fb_page(map.get(AwsFacade.Key.MERCHANT_FB_PAGE));
 		
 		

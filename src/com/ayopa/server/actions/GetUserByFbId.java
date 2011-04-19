@@ -1,8 +1,10 @@
 package com.ayopa.server.actions;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -93,7 +95,11 @@ public class GetUserByFbId extends ActionSupport implements CookiesAware{
 		//String accessToken = FBUtils.getAccessTokenFromCookieValue(cookiesMap.get("fbs_186996844658023"), "access_token");
 		
         
-        String loginURL = "https://graph.facebook.com/oauth/authorize?client_id=186996844658023&redirect_uri=http://localhost:8080/AyopaServer/home";
+        String loginURL = "https://graph.facebook.com/oauth/authorize?client_id=186996844658023&redirect_uri=http://localhost:8080/AyopaServer/home&type=web_server";
+        //loginURL = "https://www.facebook.com/login.php?api_key=186996844658023&skip_api_login=1&display=page";
+        //loginURL = "https://graph.facebook.com/oauth/access_token?client_id=186996844658023&redirect_uri=http://localhost:8080/AyopaServer/home&client_secret=4db64bc60336d88d8547dcfb059cd7b6&type=client_cred&code=";
+        
+        
         URL logURL = new URL(loginURL);
         
         URLConnection uconn = logURL.openConnection( );
@@ -104,11 +110,17 @@ public class GetUserByFbId extends ActionSupport implements CookiesAware{
 
 
         conn.connect();
+        System.out.println(conn.getResponseMessage());
+        
+        
+        
         URL responseURL = conn.getURL( );
         Map<String,List<String>> header = conn.getHeaderFields( );
 
         conn.disconnect();
+        
         List<String> list = header.get("Location");
+        System.out.println("Next URL: " + list.get(0));
         
         URL nextURL = new URL(list.get(0));
         uconn = nextURL.openConnection();
@@ -125,7 +137,7 @@ public class GetUserByFbId extends ActionSupport implements CookiesAware{
         
         List<String> nextList = header2.get("Location");
         
-        System.out.println(nextList);
+        System.out.println("Next URL 2: " + nextList.get(0));
         
         jsonReturn = nextList.toString();
         
@@ -137,15 +149,30 @@ public class GetUserByFbId extends ActionSupport implements CookiesAware{
         conn.setReadTimeout( 10000 );
         
         conn.connect();
+        System.out.println("nextURL2 response: " + conn.getResponseMessage());
+        
         
         
         Map<String,List<String>> header3 = conn.getHeaderFields( );
         
-        List<String> nextList2 = header3.get("Location");
+        System.out.println(header3);
         
-        System.out.println(nextList2);
+        InputStream is = conn.getInputStream();
+        int len = conn.getContentLength();
+        InputStreamReader in = new InputStreamReader((InputStream) conn.getContent());
+        BufferedReader buff = new BufferedReader(in);
         
-        jsonReturn = nextList2.toString();
+        String line;
+        do {
+          line = buff.readLine();
+            System.out.println(line);
+        } while (line != null);
+        
+        //System.out.println("Next URL 3:" + nextList2.get(0));
+        
+        //System.out.println("Next URL 3: " + nextList2.get(0));
+        
+        //jsonReturn = nextList2.toString();
         
 		
 		

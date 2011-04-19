@@ -404,7 +404,7 @@ public class Auction {
 				AuctionDTO auctionDTO = new AuctionDTO();
 				auction = auction.getAuction(results.get(i).get(AwsFacade.Key.PURCHASE_AUCTION_ID));
 				
-				if (auction.getAuction_ended() != "1" && auction.getAuction_deleted() != "1") {
+				if (!auction.getAuction_ended().equals("1") && !auction.getAuction_deleted().equals("1")) {
 					auctionDTO = AuctionDTO.auctionToAuctionDTO(auction);
 					auctionDTO.setPurchase_price(Double.parseDouble(results.get(i).get(AwsFacade.Key.PURCHASE_PRICE)));
 					auctionDTO.setRebate(auctionDTO.getPurchase_price() - auctionDTO.getCurrent_price());
@@ -447,7 +447,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 				AuctionDTO auctionDTO = new AuctionDTO();
 				
 				auction = auction.getAuction(results.get(i).get(AwsFacade.Key.PURCHASE_AUCTION_ID));
-				if (auction.getAuction_deleted() != "1") {
+				if (!auction.getAuction_deleted().equals("1")) {
 					
 					auctionDTO = AuctionDTO.auctionToAuctionDTO(auction);
 					auctionDTO.setPurchase_price(Double.parseDouble(results.get(i).get(AwsFacade.Key.PURCHASE_PRICE)));
