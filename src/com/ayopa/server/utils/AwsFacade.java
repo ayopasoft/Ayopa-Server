@@ -113,6 +113,12 @@ public class AwsFacade {
 		public static final String BUYER_ACCESS_TOKEN = "buyer-access-token";
 		public static final String BUYER_NAME = "buyer-name";
 		public static final String BUYER_EMAIL = "buyer-email";
+		public static final String BUYER_ADDR1 = "buyer-address1";
+		public static final String BUYER_ADDR2 = "buyer-address2";
+		public static final String BUYER_CITY = "buyer-city";
+		public static final String BUYER_STATE = "buyer-state";
+		public static final String BUYER_ZIP = "buyer-zip";
+		public static final String BUYER_COUNTRY = "buyer-country";
 		
 	}
 	

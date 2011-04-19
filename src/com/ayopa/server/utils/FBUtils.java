@@ -1,6 +1,8 @@
 package com.ayopa.server.utils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.NumberFormat;
 import java.util.StringTokenizer;
 
@@ -21,10 +23,14 @@ public class FBUtils {
 	
 	public static final String FACEBOOK_API_KEY = "120882414650116";
 	public static final String FACEBOOK_APPLICATION_SECRET = "17ce975710ce3ac5670fa17d5e70fef3";
-	public static final String FACEBOOK_AUTH_REDIRECT_URL = "http://ayopa1dev.happyjacksoftware.com/AyopaServer/home";
+	public static final String FACEBOOK_AUTH_REDIRECT_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-facebook-id-auth.action";
 	public static final String FACEBOOK_CANCEL_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-permissions.action";
 	public static final String FACEBOOK_NEXT_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-registration.action";
 	
+	
+	public static final String DEV_APPID = "186996844658023";
+	public static final String DEV_APPURI = "http://localhost:8080/AyopaServer/get-facebook-id-auth.action";
+	public static final String DEV_APPSECRET = "4db64bc60336d88d8547dcfb059cd7b6";
 	
 	public static JSONObject parseSignedRequest(String signedReq){
 		//The parameter contains encoded signature and payload separated by Ô.Õ
@@ -98,17 +104,57 @@ public class FBUtils {
 			    Parameter.with("caption", "Group buy and save!"));
 	}
 	
-	public static String getLoginRedirectURL() {
-        return "https://graph.facebook.com/oauth/authorize?client_id=" +
-            FBUtils.FACEBOOK_API_KEY + "&redirect_uri=" +
-            FBUtils.FACEBOOK_AUTH_REDIRECT_URL;
+	public static String getLoginURL() {
+        return "https://graph.facebook.com/oauth/authorize?" +
+        		"client_id=" + FBUtils.FACEBOOK_API_KEY + 
+                "&redirect_uri=" + FBUtils.FACEBOOK_AUTH_REDIRECT_URL;
+    }
+	
+	public static String getLoginURL(String jsoncallback) throws UnsupportedEncodingException{
+    	return "https://graph.facebook.com/oauth/authorize?" +
+		"client_id=" + FBUtils.FACEBOOK_API_KEY + 
+        "&redirect_uri=" + URLEncoder.encode(FBUtils.FACEBOOK_AUTH_REDIRECT_URL + "?jsoncallback="+jsoncallback,"UTF-8");
+    }
+	
+	public static String getTestLoginURL() throws UnsupportedEncodingException{
+    	return "https://graph.facebook.com/oauth/authorize?" +
+		"client_id=" + FBUtils.DEV_APPID + 
+        "&redirect_uri=" + FBUtils.DEV_APPURI;
+    }
+	
+	public static String getTestLoginURL(String jsoncallback) throws UnsupportedEncodingException{
+    	return "https://graph.facebook.com/oauth/authorize?" +
+		"client_id=" + FBUtils.DEV_APPID + 
+        "&redirect_uri=" + URLEncoder.encode(FBUtils.DEV_APPURI + "?jsoncallback="+jsoncallback,"UTF-8");
     }
 
     public static String getAuthURL(String authCode) {
-        return "https://graph.facebook.com/oauth/access_token?fbconnect=1&client_id=" +
-            FBUtils.FACEBOOK_API_KEY+"&redirect_uri=" +
-            FBUtils.FACEBOOK_AUTH_REDIRECT_URL+"&client_secret="+FBUtils.FACEBOOK_APPLICATION_SECRET+"&code="+authCode;
+        return "https://graph.facebook.com/oauth/access_token?" +
+        		"client_id=" + FBUtils.FACEBOOK_API_KEY +
+        		"&redirect_uri=" + FBUtils.FACEBOOK_AUTH_REDIRECT_URL+
+        		"&client_secret="+FBUtils.FACEBOOK_APPLICATION_SECRET+"&code="+authCode;
     }
 
+    public static String getAuthURL(String jsoncallback, String code) throws UnsupportedEncodingException{
+    	return "https://graph.facebook.com/oauth/access_token?" +
+		"client_id=" + FBUtils.FACEBOOK_API_KEY+
+		"&redirect_uri=" + URLEncoder.encode(FBUtils.FACEBOOK_AUTH_REDIRECT_URL + "?jsoncallback="+jsoncallback,"UTF-8") +
+		"&client_secret="+FBUtils.FACEBOOK_APPLICATION_SECRET+"&code="+code;
+    }
 	
+    public static String getTestAuthURL(String authCode) {
+        return "https://graph.facebook.com/oauth/access_token?" +
+        		"client_id=" + FBUtils.DEV_APPID +
+        		"&redirect_uri=" + FBUtils.DEV_APPURI+
+        		"&client_secret="+FBUtils.DEV_APPSECRET+"&code="+authCode;
+    }
+    
+    public static String getTestAuthURL(String jsoncallback, String code) throws UnsupportedEncodingException{
+    	return "https://graph.facebook.com/oauth/access_token?" +
+		"client_id=" + FBUtils.DEV_APPID+
+		"&redirect_uri=" + URLEncoder.encode(FBUtils.DEV_APPURI + "?jsoncallback="+jsoncallback,"UTF-8") +
+		"&client_secret="+FBUtils.DEV_APPSECRET+"&code="+code;
+    }
+    
+    
 }
