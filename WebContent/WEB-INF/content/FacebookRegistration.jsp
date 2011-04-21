@@ -54,7 +54,7 @@
 			    	var newwindow;
 			    	var  screenX    = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,                  
 			    	screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,                  
-			    	uterWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,                  
+			    	outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,                  
 			    	outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22), 
 			    	width    = 885,                  
 			    	height   = 575,                  
@@ -82,7 +82,7 @@
 					var newwindow;
 			    	var  screenX    = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,                  
 			    	screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,                  
-			    	uterWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,                  
+			    	outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,                  
 			    	outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22), 
 			    	width    = 500,                  
 			    	height   = 200,                  

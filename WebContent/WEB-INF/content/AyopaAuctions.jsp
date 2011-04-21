@@ -4,7 +4,7 @@
 <html> 
 
 <head>
-<link href="http://www.ayopadev.com/ayopa/css/page.css" rel="stylesheet" type="text/css">
+<link href="http://ayopa-resources.s3.amazonaws.com/css/page.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -216,7 +216,7 @@
 									<!-- *** GRAPH  *** -->
 									<div class="ayopa_graph">
 										<div>
-											<img src="http://www.ayopadev.com/ayopa/images/buyer_graph.png" />
+											<img src="http://ayopa-resources.s3.amazonaws.com/images/buyer_graph.png" />
 										</div>
 										<div class="ayopa_buyer_amount">
 											<div class="ayopa_start"><s:property value="start_quant"/></div>
@@ -235,7 +235,7 @@
 											</s:text>
 										</div>
 										
-											<div><a href="<s:property value="link"/>" target="_blank"><img src="http://www.ayopadev.com/ayopa/images/buy_now.png" /></a></div>
+											<div><a href="<s:property value="link"/>" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/buy_now.png" /></a></div>
 									</div>
 
 									<!-- *** TIME LEFT  *** -->

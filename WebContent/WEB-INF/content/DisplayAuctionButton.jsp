@@ -5,8 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ayopa Server</title>
 <s:head />
-	<LINK REL=stylesheet HREF="http://www.ayopadev.com/ayopa/css/buy_with_ayopa.css" TYPE="text/css">
-	<LINK REL=stylesheet HREF="http://www.ayopadev.com/ayopa/css/page.css" TYPE="text/css">
+	<LINK REL=stylesheet HREF="http://ayopa-resources.s3.amazonaws.com/css/buy_with_ayopa.css" TYPE="text/css">
+	<LINK REL=stylesheet HREF="http://ayopa-resources.s3.amazonaws.com/css/page.css" TYPE="text/css">
 </head>
 <body>
 

@@ -4,7 +4,7 @@
 <html> 
 
 <head>
-<link href="http://www.ayopadev.com/ayopa/css/page.css" rel="stylesheet" type="text/css">
+<link href="http://ayopa-resources.s3.amazonaws.com/css/page.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -75,9 +75,8 @@
                    
 				 	},                     
 				 	action_links: [                         
-				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' },
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'},
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'}                     
+				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' }
+				                        
 				 	],                     
 				 	user_prompt_message: userPrompt                 
 				 	},                 
@@ -195,7 +194,7 @@
 									<!-- *** GRAPH  *** -->
 									<div class="ayopa_graph">
 										<div>
-											<img src="http://www.ayopadev.com/ayopa/images/buyer_graph.png" />
+											<img src="http://ayopa-resources.s3.amazonaws.com/images/buyer_graph.png" />
 										</div>
 										<div class="ayopa_buyer_amount">
 											<div class="ayopa_start"><s:property value="start_quant"/></div>
@@ -226,10 +225,10 @@
 										</div>
 										</s:if>
 										<s:if test="admin">
-											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://www.ayopadev.com/ayopa/images/invite_fans.png" /></a></div>
+											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_fans.png" /></a></div>
 										</s:if>
 									    <s:else>
-									    	<div><a href="<s:property value="link"/>" target="_blank"><img src="http://www.ayopadev.com/ayopa/images/buy_now.png" /></a></div>
+									    	<div><a href="<s:property value="link"/>" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/buy_now.png" /></a></div>
 									    </s:else>
 									</div>
 
@@ -302,7 +301,7 @@
 									<!-- *** GRAPH  *** -->
 									<div class="ayopa_graph">
 										<div>
-											<img src="http://www.ayopadev.com/ayopa/images/buyer_graph.png" />
+											<img src="http://ayopa-resources.s3.amazonaws.com/images/buyer_graph.png" />
 										</div>
 										<div class="ayopa_buyer_amount">
 											<div class="ayopa_start"><s:property value="start_quant"/></div>
@@ -332,10 +331,10 @@
 										</div>
 									</s:if>
 										<s:if test="admin">
-											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://www.ayopadev.com/ayopa/images/invite_fans.png" /></a></div>
+											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_fans.png" /></a></div>
 										</s:if>
 									    <s:else>
-									    	<div><a href="<s:property value="link"/>" target="_blank"><img src="http://www.ayopadev.com/ayopa/images/buy_now.png" /></a></div>
+									    	<div><a href="<s:property value="link"/>" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/buy_now.png" /></a></div>
 									    </s:else>
 									</div>
 

@@ -24,6 +24,17 @@ public class ConsumerRebate extends ActionSupport implements SessionAware {
 	private String buyer_id;
 	private String signed_request;
 	private Map<String,Object> session;
+	private boolean session_expired;
+	
+	
+
+	public boolean isSession_expired() {
+		return session_expired;
+	}
+
+	public void setSession_expired(boolean session_expired) {
+		this.session_expired = session_expired;
+	}
 
 	public void setSession(Map<String,Object> map) {
 		this.session = map;
@@ -34,7 +45,18 @@ public class ConsumerRebate extends ActionSupport implements SessionAware {
 		
 	}
 
+	public String getSigned_request() {
+		return signed_request;
+	}
 
+
+
+	public void setSigned_request(String signed_request) {
+		this.signed_request = signed_request;
+	}
+
+
+	
 	private List<AuctionDTO> auctions;
 	//define getters for data elements
 	
@@ -55,26 +77,23 @@ public class ConsumerRebate extends ActionSupport implements SessionAware {
 		if (buyer_id == null || buyer_id == "") {
 			if (session.containsKey("buyer_id")){
 				buyer_id = (String) session.get("buyer_id");
+				auctions = auction.getAllAuctionsForBuyer(buyer_id);
+			}
+			else {
+				session_expired = Boolean.TRUE;
 			}
 		}
-		auctions = auction.getAllAuctionsForBuyer(buyer_id);
+		else
+		{
+			session.put("buyer_id", buyer_id);
+		}
 		
 		return Action.SUCCESS;
 	}
 
 
 
-	public String getSigned_request() {
-		return signed_request;
-	}
-
-
-
-	public void setSigned_request(String signed_request) {
-		this.signed_request = signed_request;
-	}
-
-
+	
 
 	
 }

@@ -4,7 +4,7 @@
 <html> 
 
 <head>
-<link href="http://www.ayopadev.com/ayopa/css/page.css" rel="stylesheet" type="text/css">
+<link href="http://ayopa-resources.s3.amazonaws.com/css/page.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -76,9 +76,8 @@
                    
 				 	},                     
 				 	action_links: [                         
-				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' },
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'},
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'}                     
+				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' }
+				      
 				 	],                     
 				 	user_prompt_message: userPrompt                 
 				 	},                 

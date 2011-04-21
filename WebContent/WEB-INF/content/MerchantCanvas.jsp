@@ -4,7 +4,7 @@
 <html> 
 
 <head>
-<link href="http://www.ayopadev.com/ayopa/css/page.css" rel="stylesheet" type="text/css">
+<link href="http://ayopa-resources.s3.amazonaws.com/css/page.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -76,9 +76,7 @@
                    
 				 	},                     
 				 	action_links: [                         
-				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' },
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'},
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'}                     
+				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' }                     
 				 	],                     
 				 	user_prompt_message: userPrompt                 
 				 	},                 
@@ -224,7 +222,7 @@
 									<!-- *** GRAPH  *** -->
 									<div class="ayopa_graph">
 										<div>
-											<img src="http://www.ayopadev.com/ayopa/images/buyer_graph.png" />
+											<img src="http://ayopa-resources.s3.amazonaws.com/images/buyer_graph.png" />
 										</div>
 										<div class="ayopa_buyer_amount">
 											<div class="ayopa_start"><s:property value="start_quant"/></div>
@@ -243,7 +241,7 @@
 											</s:text>
 										</div>
 										
-										<div><a href="" onclick="inviteFriends(); return false;"><img src="http://www.ayopadev.com/ayopa/images/invite_fans.png" /></a></div>
+										<div><a href="" onclick="inviteFriends(); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_fans.png" /></a></div>
 											</div>
 
 									<!-- *** TIME LEFT  *** -->
@@ -315,7 +313,7 @@
 									<!-- *** GRAPH  *** -->
 									<div class="ayopa_graph">
 										<div>
-											<img src="http://www.ayopadev.com/ayopa/images/buyer_graph.png" />
+											<img src="http://ayopa-resources.s3.amazonaws.com/images/buyer_graph.png" />
 										</div>
 										<div class="ayopa_buyer_amount">
 											<div class="ayopa_start"><s:property value="start_quant"/></div>
@@ -334,7 +332,7 @@
 											</s:text>
 										</div>
 										
-										<div><a href="" onclick="inviteFriends(); return false;"><img src="http://www.ayopadev.com/ayopa/images/invite_fans.png" /></a></div>
+										<div><a href="" onclick="inviteFriends(); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_fans.png" /></a></div>
 										</div>
 
 									<!-- *** TIME LEFT  *** -->

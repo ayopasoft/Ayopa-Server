@@ -4,7 +4,7 @@
 <html> 
 
 <head>
-<link href="http://www.ayopadev.com/ayopa/css/page.css" rel="stylesheet" type="text/css">
+<link href="http://ayopa-resources.s3.amazonaws.com/css/page.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -76,9 +76,8 @@
                    
 				 	},                     
 				 	action_links: [                         
-				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' },
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'},
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'}                     
+				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' }
+				                     
 				 	],                     
 				 	user_prompt_message: userPrompt                 
 				 	},                 
@@ -139,7 +138,7 @@
 				 	 }         
 				 	 </script>
 
-
+					
 
 					<!--  main_content restricts to 760px wide  -->
 					<div class="main_content">
@@ -181,7 +180,9 @@
 						<div class="ayopa_content_middle">
 						
 						
-
+						<s:if test="session_expired">
+							Your session has expired.  Please refresh your web browser.
+						</s:if>
 
 						<s:iterator value="auctions" >
 						
@@ -193,10 +194,10 @@
 									<div class="ayopa_item_title"><s:property value="title" /></div>
 									
 									<s:if test="%{expired}">
-										<img src="http://www.ayopadev.com/ayopa/images/rebate_ac.png">
+										<img src="http://ayopa-resources.s3.amazonaws.com/images/rebate_ac.png">
 									</s:if>
 									<s:else>
-										<img src="http://www.ayopadev.com/ayopa/images/rebate_aip.png">
+										<img src="http://ayopa-resources.s3.amazonaws.com/images/rebate_aip.png">
 									</s:else>
 									
 									<!-- **** PHOTO *** -->
@@ -234,7 +235,7 @@
 									<!-- *** GRAPH  *** -->
 									<div class="ayopa_graph">
 										<div>
-											<img src="http://www.ayopadev.com/ayopa/images/buyer_graph.png" />
+											<img src="http://ayopa-resources.s3.amazonaws.com/images/buyer_graph.png" />
 										</div>
 										<div class="ayopa_buyer_amount">
 											<div class="ayopa_start"><s:property value="start_quant"/></div>
