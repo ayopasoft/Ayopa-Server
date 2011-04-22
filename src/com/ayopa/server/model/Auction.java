@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -242,6 +243,69 @@ public class Auction {
 			
 		}
 			return auctions;
+	}
+	
+	public List<Auction> getCurrentAuctions(String category) throws IOException {
+		List<Auction> auctions = new ArrayList<Auction>();
+		AwsFacade aws = AwsFacade.getInstance();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		
+		String now = df.format(Calendar.getInstance().getTime());
+		
+		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
+		+ AwsFacade.Key.PRODUCT_CAT + "` = '" + category + "' and `"
+		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
+		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
+		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
+		+ AwsFacade.Key.AUCTION_START + "` desc";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		if (results.size() == 0) {
+			//return auction;
+		}
+		else {
+			for (int i = 0; i < results.size(); i++){
+				Auction auction = new Auction();
+				auction = auction.getAuction(results.get(i).get(AwsFacade.Key.AUCTION_ID));
+				auctions.add(auction);
+			}
+			
+			
+		}
+			return auctions;
+	}
+	
+	public List<String> getCurrentCategories() throws IOException {
+		List<String> categories = new ArrayList<String>();
+		AwsFacade aws = AwsFacade.getInstance();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		
+		String now = df.format(Calendar.getInstance().getTime());
+		
+		String query = "select `" + AwsFacade.Key.PRODUCT_CAT + "` from `" + AwsFacade.Table.AUCTION + "` where `" 
+		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
+		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
+		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
+		+ AwsFacade.Key.AUCTION_START + "` desc";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		
+			for (int i = 0; i < results.size(); i++){
+				if (!categories.contains(results.get(i).get(AwsFacade.Key.PRODUCT_CAT)))
+					categories.add(results.get(i).get(AwsFacade.Key.PRODUCT_CAT));
+			}
+			
+			Collections.sort(categories);
+			
+			return categories;
 	}
 	
 	public Auction getAuctionForProduct (String merchant_id, String product_id) throws IOException{
@@ -483,7 +547,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 		Auction auction = new Auction();
 		AuctionPersistence ap = new AuctionPersistence();
 		
-		auction = auction.jsonToAuction(auctionDef);
+		auction = auction.jsonToAuction(auctionDef);		
 		
 		auction.setMerchant_fb_page(Merchant.getMerchantFBPage(auction.getMerchant_id()));
 		
@@ -566,7 +630,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 			
 			
 			JSONObject jsonAuction = (JSONObject) jsonObject.get("auction");
-			
+						
 			auction.setAuction_id(jsonAuction.getString(Auction.Key.AUCTION_ID));
 			auction.setProduct_id(jsonAuction.getString(Auction.Key.PRODUCT_ID));
 			auction.setProduct_title(jsonAuction.getString(Auction.Key.PRODUCT_NAME));
@@ -602,6 +666,76 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 		}
 		return auction;
 	}
+	
+	public String validateAuction(String auctionDef) throws Exception {
+		
+		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( auctionDef ); 
+		
+		if (auctionDef.length() != 0 && auctionDef != null){
+			
+			JSONObject jsonAuction = (JSONObject) jsonObject.get("auction");
+			
+			if (!jsonAuction.containsKey(Auction.Key.PRODUCT_ID))
+				throw new Exception ("Product ID is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.PRODUCT_NAME))
+				throw new Exception ("Product Name is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.PRODUCT_DESCR))
+				throw new Exception ("Product Description is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.PRODUCT_ID))
+				throw new Exception ("Product ID is missing");
+			
+			if (jsonAuction.getString(Auction.Key.PRODUCT_ID).length() == 0)
+					throw new Exception("Product ID cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.PRODUCT_NAME).length() == 0)
+				throw new Exception ("Product Name cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.PRODUCT_DESCR).length() == 0)
+				throw new Exception ("Product Description cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.PRODUCT_IMAGE_URL).length() == 0)
+				throw new Exception ("Product Image URL cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.PRODUCT_CAT).length() == 0)
+				throw new Exception ("Product Category cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.PRODUCT_URL).length() == 0)
+				throw new Exception ("Product URL cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.AUCTION_START).length() == 0)
+				throw new Exception ("Auction Start date cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.AUCTION_END).length() == 0)
+				throw new Exception ("Auction End date cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.AUCTION_MAXUNITS).length() == 0)
+				throw new Exception ("Auction Max Units cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.AUCTION_STARTPRICE).length() == 0)
+				throw new Exception ("Auction Start Price cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.AUCTION_PRICECONFLICT).length() == 0)
+				throw new Exception ("Product Description cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.MERCHANT_ID).length() == 0)
+				throw new Exception ("Merchant ID cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.MERCHANT_NAME).length() == 0)
+				throw new Exception ("Merchant Name cannot be blank");
+			
+			if (jsonAuction.getString(Auction.Key.MERCHANT_WEBSITE).length() == 0)
+				throw new Exception ("Merchant Website cannot be blank");
+			
+		}
+		
+		
+		return null;
+	}
+
+	
 	
 	
 	

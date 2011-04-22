@@ -29,6 +29,7 @@
 			FB.Canvas.setAutoResize(50);
 			//FB.Canvas.setSize({height:$('.main_content').css('height') + 'px'});
 			
+			
 			             
 				};             
 			(function() {                

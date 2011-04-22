@@ -38,6 +38,8 @@ public class CreateAuction extends ActionSupport {
 		
 		Auction auction = new Auction();
 		
+		//String validates = auction.validateAuction(auctionDef);
+		
 		String jsonString = auction.putAuction(auctionDef);
 		
 		if ( jsoncallback != null || jsoncallback != "" ) jsonReturn = jsoncallback + "(" + jsonString + ");";

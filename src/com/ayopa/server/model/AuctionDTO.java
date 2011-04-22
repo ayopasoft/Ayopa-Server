@@ -2,6 +2,7 @@ package com.ayopa.server.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +29,16 @@ public class AuctionDTO {
     private String merchant_name;
     private String merchant_url;
     private double price_conflict;
+    private String category;
 	
     
+    
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public double getPrice_conflict() {
 		return price_conflict;
 	}
@@ -134,9 +143,6 @@ public class AuctionDTO {
 		this.highest_quant = highest_quant;
 	}
 	
-	
-	
-	
 	public long getTime_seconds() {
 		return time_seconds;
 	}
@@ -196,6 +202,7 @@ public class AuctionDTO {
 		auctionDTO.setMerchant_name(auction.getMerchant_name());
 		auctionDTO.setMerchant_url(auction.getMerchant_website());
 		auctionDTO.setPrice_conflict(auction.getAuction_priceconflict());
+		auctionDTO.setCategory(auction.getProduct_category());
 		
 		return auctionDTO;
 		
@@ -233,12 +240,31 @@ public class AuctionDTO {
 			auctionDTO.setMerchant_name(auctions.get(i).getMerchant_name());
 			auctionDTO.setMerchant_url(auctions.get(i).getMerchant_website());
 			auctionDTO.setPrice_conflict(auctions.get(i).getAuction_priceconflict());
+			auctionDTO.setCategory(auctions.get(i).getProduct_category());
 			
 			dtoList.add(auctionDTO);
 		}
 		
 		return dtoList;
 	}
+	
+	public static List<String> getCategories(List<AuctionDTO> auctions) {
+		
+		
+		List<String> categories = new ArrayList<String>();
+		
+		for (int i =0; i < auctions.size(); i++){
+			if (!categories.contains(auctions.get(i).getCategory())){
+				categories.add(auctions.get(i).getCategory());
+				
+			}
+		}
+		
+		Collections.sort(categories);
+		
+		return categories;
+	}
+	
 	
 	
 }

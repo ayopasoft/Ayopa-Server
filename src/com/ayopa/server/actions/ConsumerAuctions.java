@@ -22,9 +22,33 @@ public class ConsumerAuctions extends ActionSupport implements SessionAware {
 	private static final long serialVersionUID = 1L;
 	
 	private String buyer_id;
-	
 	private Map<String, Object> session;
+	private List<AuctionDTO> auctions;
+	private List<String> categories;
+	private String category;
+	
+	
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
+
+	public List<AuctionDTO> getAuctions() {
+		return auctions;
+	}
+	
 	public void setSession(Map<String, Object> map) {
 		this.session = map;
 	}
@@ -37,12 +61,6 @@ public class ConsumerAuctions extends ActionSupport implements SessionAware {
 		this.buyer_id = buyer_id;
 	}
 
-	private List<AuctionDTO> auctions;
-	//define getters for data elements
-	
-	public List<AuctionDTO> getAuctions() {
-		return auctions;
-	}
 	
 	
 
@@ -52,10 +70,13 @@ public class ConsumerAuctions extends ActionSupport implements SessionAware {
 		//authenticate by FB ID
 		
 		Auction auction = new Auction();
+		if (category == null || category.equals(""))
+			auctions = AuctionDTO.auctionsToAuctionDTO(auction.getCurrentAuctions());
+		else
+			auctions = AuctionDTO.auctionsToAuctionDTO(auction.getCurrentAuctions(category));
 		
-		auctions = AuctionDTO.auctionsToAuctionDTO(auction.getCurrentAuctions());
-		
-		
+		categories = auction.getCurrentCategories();
+			
 		return Action.SUCCESS;
 	}
 

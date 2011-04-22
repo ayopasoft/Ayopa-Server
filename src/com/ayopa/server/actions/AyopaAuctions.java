@@ -20,7 +20,27 @@ public class AyopaAuctions extends ActionSupport {
 private static final long serialVersionUID = 1L;
 	
 	private String buyer_id;
+	private List<String> categories;
+	private String category;
 	
+	
+	
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String getBuyer_id() {
 		return buyer_id;
 	}
@@ -45,8 +65,13 @@ private static final long serialVersionUID = 1L;
 		
 		Auction auction = new Auction();
 		
-		auctions = AuctionDTO.auctionsToAuctionDTO(auction.getCurrentAuctions());
+		if (category == null || category.equals(""))
+			auctions = AuctionDTO.auctionsToAuctionDTO(auction.getCurrentAuctions());
+		else
+			auctions = AuctionDTO.auctionsToAuctionDTO(auction.getCurrentAuctions(category));
 		
+		
+		categories = auction.getCurrentCategories();
 		
 		return Action.SUCCESS;
 	}

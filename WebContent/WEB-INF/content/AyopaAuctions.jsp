@@ -266,19 +266,17 @@
 
 							<!-- ************* START OF SIDE NAVIGATION  *************** -->
 							<div class="ayopa_side_nav_container">
-							<!-- 	<ul class="ayopa_side_nav">
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Clothing & Accessories<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Baby & Toddlers<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li class="active"><div class="ayopa_side_nav_left"></div>Electronics<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Furniture<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Hardware<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Home & Garden<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Office Supplies<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Software<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Sporting & Outdoors<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Toys & Games<div class="ayopa_side_nav_right"></div></li></a>
+							<ul class="ayopa_side_nav">
+							 		<div class="ayopa_categories_header"></div>
+							 		<a href="?category="><li <s:if test="category == ''"></s:if>><div class="ayopa_side_nav_left"></div>All<div class="ayopa_side_nav_right"></div></li></a>
+							 	    <s:iterator value="categories" status="categoriesStatus">
+							 	    <s:url id="url" action="ayopa-auctions">
+  										<s:param name="category">%{categories[#categoriesStatus.index]}</s:param>
+									</s:url>
 									
-								</ul> -->
+									<s:a href="%{url}"><li <s:if test="category == categories[#categoriesStatus.index]">class = "active"</s:if>><div class="ayopa_side_nav_left"></div><s:property /><div class="ayopa_side_nav_right"></div></li></s:a>
+									</s:iterator>
+								</ul> 
 							</div>
 							<!-- ************* END OF SIDE NAVIGATION  *************** -->
 							<div class="size_right"></div>

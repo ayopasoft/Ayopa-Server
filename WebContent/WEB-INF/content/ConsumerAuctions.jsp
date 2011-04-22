@@ -8,7 +8,41 @@
 
 </head>
 <body>
+<div id="fb-root"></div>
+<script type="text/javascript">             
 
+	window.fbAsyncInit = function() {                 
+		FB.init({appId: '120882414650116', status: true, cookie: true, xfbml: true});                   
+		/* All the events registered */                
+			FB.Event.subscribe('auth.login', function(response) {                     
+			// do something with response                     
+			login();                 
+			});                 
+			
+			FB.Event.subscribe('auth.logout', function(response) {                     
+			// do something with response                     
+			logout();                 
+			});                   
+			
+			FB.Canvas.setAutoResize(50);
+			//FB.Canvas.setSize({height:$('.main_content').css('height') + 'px'});
+			
+			
+			             
+				};             
+			(function() {                
+				 var e = document.createElement('script');                 
+				 e.type = 'text/javascript';                 
+				 e.src = document.location.protocol +                     
+				 '//connect.facebook.net/en_US/all.js';                 
+				 e.async = true;                 
+				 document.getElementById('fb-root').appendChild(e);             
+				 }());               
+			    
+			//stream publish method    
+			
+
+</script>
 
 					<!--  main_content restricts to 760px wide  -->
 					<div class="main_content">
@@ -160,19 +194,18 @@
 
 							<!-- ************* START OF SIDE NAVIGATION  *************** -->
 							<div class="ayopa_side_nav_container">
-							<!-- 	<ul class="ayopa_side_nav">
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Clothing & Accessories<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Baby & Toddlers<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li class="active"><div class="ayopa_side_nav_left"></div>Electronics<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Furniture<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Hardware<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Home & Garden<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Office Supplies<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Software<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Sporting & Outdoors<div class="ayopa_side_nav_right"></div></li></a>
-									<a href=""><li><div class="ayopa_side_nav_left"></div>Toys & Games<div class="ayopa_side_nav_right"></div></li></a>
+							
+							 	<ul class="ayopa_side_nav">
+							 		<div class="ayopa_categories_header"></div>
+							 		<a href="?category="><li <s:if test="category == ''"></s:if>><div class="ayopa_side_nav_left"></div>All<div class="ayopa_side_nav_right"></div></li></a>
+							 	    <s:iterator value="categories" status="categoriesStatus">
+							 	    <s:url id="url" action="consumer-auctions">
+  										<s:param name="category">%{categories[#categoriesStatus.index]}</s:param>
+									</s:url>
 									
-								</ul> -->
+									<s:a href="%{url}"><li <s:if test="category == categories[#categoriesStatus.index]">class = "active"</s:if>><div class="ayopa_side_nav_left"></div><s:property /><div class="ayopa_side_nav_right"></div></li></s:a>
+									</s:iterator>
+								</ul> 
 							</div>
 							<!-- ************* END OF SIDE NAVIGATION  *************** -->
 							<div class="size_right"></div>

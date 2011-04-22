@@ -95,7 +95,7 @@ public class CurrentAuction {
 		double lowest_price = auction.getAuction_startprice() - schedule.get(schedule.size()-1).getDis();
 		int lowest_level = schedule.get(schedule.size()-1).getMin();
 		
-		if (quantity != 0) {
+		//if (quantity != 0) {
 			//where does that quantity fall in the schedule
 			
 			//if (quantity >= schedule.get(0).getMin()) {  //check to see if quantity is above first minimum level
@@ -105,10 +105,12 @@ public class CurrentAuction {
 				int total_level = 0;
 				double current_discount = 0.00;
 				double next_discount = 0.00;
+				boolean current_found = false;
 				
 				if (quantity < schedule.get(0).getMin()){
 					current_level = quantity;
 					current_discount = 0;
+					current_found = true;
 				}
 				
 				double dis = 0.00;
@@ -136,11 +138,12 @@ public class CurrentAuction {
 								{	
 									current_discount = total_discount;
 									current_level = quantity;
+									current_found = true;
 								}
 								else
 								{	
 									
-									if (current_level != 0 && next_discount == 0.0) {
+									if (current_found && next_discount == 0.0) {
 									    next_discount = total_discount;
 										next_level = min + (add * j);
 									}	
@@ -156,10 +159,11 @@ public class CurrentAuction {
 							if (quantity >= min){  //quantity is in this level
 								current_discount = total_discount;
 								current_level = quantity;
+								current_found = true;
 							}
 							else
 							{
-								if (current_level != 0 && next_discount == 0.0) {
+								if (current_found && next_discount == 0.0) {
 								    next_discount = total_discount;
 									next_level = min;
 								}	
@@ -173,7 +177,7 @@ public class CurrentAuction {
 				if (lowest_level < schedule.get(schedule.size()-1).getMin())
 					lowest_level = schedule.get(schedule.size()-1).getMin(); 
 				
-				if (current_level != 0 && next_discount == 0.0) {
+				if (current_found && next_discount == 0.0) {
 				    next_discount = total_discount;
 					next_level = min;
 				}	
@@ -197,7 +201,7 @@ public class CurrentAuction {
 			//{
 			//	current_level = quantity;
 			//}
-		}
+		//}
 		
 		CurrentAuction currAuction = new CurrentAuction();
 		
