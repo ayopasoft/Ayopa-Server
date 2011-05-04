@@ -16,6 +16,7 @@ public class MerchantPersistence {
 			merchant.setMerchant_id(UUID.randomUUID().toString());		
 		
 		Map<String, String> map = new HashMap<String, String>();
+		
 		map.put(AwsFacade.Key.MERCHANT_ID,merchant.getMerchant_id());
 		map.put(AwsFacade.Key.MERCHANT_NAME, merchant.getMerchant_name());
 		map.put(AwsFacade.Key.MERCHANT_USERNAME, merchant.getMerchant_username());
@@ -31,7 +32,8 @@ public class MerchantPersistence {
 		map.put(AwsFacade.Key.MERCHANT_WEBSITE, merchant.getMerchant_website());
 		map.put(AwsFacade.Key.MERCHANT_FB_PAGE, merchant.getMerchant_fb_page_id());
 		map.put(AwsFacade.Key.MERCHANT_AYOPA_FB, Boolean.toString(merchant.getMerchant_ayopa_fb_stream()));
-				
+	    map.put(AwsFacade.Key.MERCHANT_COMMISSION, Double.toString(merchant.getMerchant_commission()));
+	    map.put(AwsFacade.Key.MERCHANT_PAYPAL, merchant.getMerchant_paypal());
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		aws.putRow(AwsFacade.Table.MERCHANT, merchant.getMerchant_id(), map);
@@ -69,7 +71,8 @@ public class MerchantPersistence {
 		merchant.setMerchant_website(map.get(AwsFacade.Key.MERCHANT_WEBSITE));
 		merchant.setMerchant_fb_page_id(map.get(AwsFacade.Key.MERCHANT_FB_PAGE));
 		merchant.setMerchant_ayopa_fb_stream(Boolean.parseBoolean(map.get(AwsFacade.Key.MERCHANT_AYOPA_FB)));
-		
+		merchant.setMerchant_commission(Double.parseDouble(map.get(AwsFacade.Key.MERCHANT_COMMISSION)));
+		merchant.setMerchant_paypal(map.get(AwsFacade.Key.MERCHANT_PAYPAL));
 		
 		return merchant;
 	}

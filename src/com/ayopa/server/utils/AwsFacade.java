@@ -63,62 +63,76 @@ public class AwsFacade {
 		public static final String CATEGORY = "ayopa-categories";
 		public static final String BUYER = "ayopa-buyers";
 		public static final String PURCHASE = "ayopa-purchases";
+		public static final String INVOICE = "ayopa-invoices";
 	}
 	
 	public static class Key {
 		public static final String ROW_ID = "*row-id*";
-		public static final String AUCTION_ID = "auction-id";
-		public static final String PRODUCT_ID = "product-id";
-		public static final String PRODUCT_NAME = "product-name";
-		public static final String PRODUCT_DESCR = "product-descr";
-		public static final String PRODUCT_CAT = "product-cat";
-		public static final String PRODUCT_IMAGE_URL = "product-img-url";
-		public static final String PRODUCT_URL = "product-url";
-		public static final String AUCTION_START = "auction-start";
-		public static final String AUCTION_END = "auction-end";
-		public static final String AUCTION_HIGHLIGHTED = "auction-highlighted";
-		public static final String AUCTION_MAXUNITS = "auction-maxunits";
-		public static final String AUCTION_STARTPRICE = "auction-startprice";
-		public static final String AUCTION_PRICECONFLICT = "auction-priceconflict";
-		public static final String AUCTION_SCHEDULE = "auction-schedule";
-		public static final String AUCTION_DELETED = "auction-deleted";
-		public static final String AUCTION_ENDED = "auction-ended";
+		public static final String AUCTION_ID = "auction_id";
+		public static final String PRODUCT_ID = "product_id";
+		public static final String PRODUCT_NAME = "product_name";
+		public static final String PRODUCT_DESCR = "product_descr";
+		public static final String PRODUCT_CAT = "product_cat";
+		public static final String PRODUCT_IMAGE_URL = "product_img_url";
+		public static final String PRODUCT_URL = "product_url";
+		public static final String AUCTION_START = "auction_start";
+		public static final String AUCTION_END = "auction_end";
+		public static final String AUCTION_HIGHLIGHTED = "auction_highlighted";
+		public static final String AUCTION_MAXUNITS = "auction_maxunits";
+		public static final String AUCTION_STARTPRICE = "auction_startprice";
+		public static final String AUCTION_PRICECONFLICT = "auction_priceconflict";
+		public static final String AUCTION_SCHEDULE = "auction_schedule";
+		public static final String AUCTION_DELETED = "auction_deleted";
+		public static final String AUCTION_ENDED = "auction_ended";
+		public static final String AUCTION_CLEARED = "auction_cleared";
 		
-		public static final String MERCHANT_ID = "merchant-id";
-		public static final String MERCHANT_NAME = "merchant-name";
-		public static final String MERCHANT_WEBSITE = "merchant-website";
-		public static final String MERCHANT_USERNAME = "merchant-username";
-		public static final String MERCHANT_PASSWORD = "merchant-password";
-		public static final String MERCHANT_ADDRESS1 = "merchant-address1";
-		public static final String MERCHANT_ADDRESS2 = "merchant-address2";
-		public static final String MERCHANT_CITY = "merchant-city";
-		public static final String MERCHANT_STATE = "merchant-state";
-		public static final String MERCHANT_COUNTRY = "merchant-country";
-		public static final String MERCHANT_POSTALCODE = "merchant-postalcode";
-		public static final String MERCHANT_CONTACT = "merchant-contact";
-		public static final String MERCHANT_EMAIL = "merchant-email";
-		public static final String MERCHANT_FB_PAGE = "merchant-fb-page";
-		public static final String MERCHANT_AYOPA_FB = "merchant-ayopa-fb";
+		public static final String MERCHANT_ID = "merchant_id";
+		public static final String MERCHANT_NAME = "merchant_name";
+		public static final String MERCHANT_WEBSITE = "merchant_website";
+		public static final String MERCHANT_USERNAME = "merchant_username";
+		public static final String MERCHANT_PASSWORD = "merchant_password";
+		public static final String MERCHANT_ADDRESS1 = "merchant_address1";
+		public static final String MERCHANT_ADDRESS2 = "merchant_address2";
+		public static final String MERCHANT_CITY = "merchant_city";
+		public static final String MERCHANT_STATE = "merchant_state";
+		public static final String MERCHANT_COUNTRY = "merchant_country";
+		public static final String MERCHANT_POSTALCODE = "merchant_postalcode";
+		public static final String MERCHANT_CONTACT = "merchant_contact";
+		public static final String MERCHANT_EMAIL = "merchant_email";
+		public static final String MERCHANT_FB_PAGE = "merchant_fb_page";
+		public static final String MERCHANT_AYOPA_FB = "merchant_ayopa_fb";
+		public static final String MERCHANT_COMMISSION = "merchant_commission";
+		public static final String MERCHANT_PAYPAL = "merchant_paypal";
 		
-		public static final String CATEGORY_NAME = "category-name";
+		public static final String CATEGORY_NAME = "category_name";
 		
-		public static final String PURCHASE_ID = "purchase-id";
-		public static final String PURCHASE_AUCTION_ID = "purchase-auction-id";
-		public static final String PURCHASE_BUYER_ID = "purchase-buyer-id";
-		public static final String PURCHASE_QUANTITY = "purchase-quantity";
-		public static final String PURCHASE_PRICE = "purchase-price";
-		public static final String PURCHASE_DATE = "purchase-date";
+		public static final String PURCHASE_ID = "purchase_id";
+		public static final String PURCHASE_AUCTION_ID = "purchase_auction_id";
+		public static final String PURCHASE_BUYER_ID = "purchase_buyer_id";
+		public static final String PURCHASE_QUANTITY = "purchase_quantity";
+		public static final String PURCHASE_PRICE = "purchase_price";
+		public static final String PURCHASE_DATE = "purchase_date";
+		public static final String PURCHASE_REBATE = "rebate_sent";
 		
-		public static final String BUYER_ID = "buyer-id";
-		public static final String BUYER_ACCESS_TOKEN = "buyer-access-token";
-		public static final String BUYER_NAME = "buyer-name";
-		public static final String BUYER_EMAIL = "buyer-email";
-		public static final String BUYER_ADDR1 = "buyer-address1";
-		public static final String BUYER_ADDR2 = "buyer-address2";
-		public static final String BUYER_CITY = "buyer-city";
-		public static final String BUYER_STATE = "buyer-state";
-		public static final String BUYER_ZIP = "buyer-zip";
-		public static final String BUYER_COUNTRY = "buyer-country";
+		public static final String BUYER_ID = "buyer_id";
+		public static final String BUYER_ACCESS_TOKEN = "buyer_access_token";
+		public static final String BUYER_NAME = "buyer_name";
+		public static final String BUYER_EMAIL = "buyer_email";
+		public static final String BUYER_ADDR1 = "buyer_address1";
+		public static final String BUYER_ADDR2 = "buyer_address2";
+		public static final String BUYER_CITY = "buyer_city";
+		public static final String BUYER_STATE = "buyer_state";
+		public static final String BUYER_ZIP = "buyer_zip";
+		public static final String BUYER_COUNTRY = "buyer_country";
+		
+		public static final String REBATE_SENT = "rebate_sent";
+		
+		public static final String INVOICE_ID = "invoice_id";
+		public static final String INVOICE_AUCTIONS = "invoice_auctions";
+		public static final String INVOICE_DATE = "invoice_date";
+		public static final String INVOICE_PAID = "invoice_paid";
+		public static final String INVOICE_PD_DATE = "invoice_pd_date";
+		public static final String INVOICE_TOTAL = "invoice_total";
 		
 	}
 	
@@ -150,6 +164,7 @@ public class AwsFacade {
 			createDomain(Table.CATEGORY);
 			createDomain(Table.BUYER);
 			createDomain(Table.PURCHASE);
+			createDomain(Table.INVOICE);
 		}
 	}
 	

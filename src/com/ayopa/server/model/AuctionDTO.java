@@ -3,6 +3,7 @@ package com.ayopa.server.model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -176,6 +177,7 @@ public class AuctionDTO {
 	}
 	
 	public static AuctionDTO auctionToAuctionDTO (Auction auction) throws IOException {
+		Map<String, Object> map = new HashMap<String,Object>();
 		AuctionDTO auctionDTO = new AuctionDTO();
 		auctionDTO.setTitle(auction.getProduct_title());
 		auctionDTO.setLink(auction.getProduct_url());
@@ -183,7 +185,10 @@ public class AuctionDTO {
 		auctionDTO.setStart_price(auction.getAuction_startprice());
 		
 		CurrentAuction currAuction = new CurrentAuction();
-		int quantity = currAuction .getCurrentQuantity(auction.getAuction_id());
+		
+		map = currAuction.getCurrentQuantity(auction.getAuction_id());
+		int quantity = (Integer) map.get("quantity");
+		
 		currAuction = CurrentAuction.getCurrentAuctionInfo(auction, quantity);
 		
 		auctionDTO.setCurrent_price(currAuction.getCurrent_price());
@@ -211,7 +216,7 @@ public class AuctionDTO {
 	public static List<AuctionDTO> auctionsToAuctionDTO (List<Auction> auctions) throws IOException {
 		
 		List<AuctionDTO> dtoList = new ArrayList<AuctionDTO>();
-		
+		Map<String, Object> map = new HashMap<String,Object>();
 		
 		for (int i = 0; i < auctions.size(); i++) {
 			AuctionDTO auctionDTO = new AuctionDTO();
@@ -221,7 +226,9 @@ public class AuctionDTO {
 			auctionDTO.setStart_price(auctions.get(i).getAuction_startprice());
 			
 			CurrentAuction currAuction = new CurrentAuction();
-			int quantity = currAuction .getCurrentQuantity(auctions.get(i).getAuction_id());
+			map = currAuction.getCurrentQuantity(auctions.get(i).getAuction_id());
+			int quantity = (Integer) map.get("quantity");
+			
 			currAuction = CurrentAuction.getCurrentAuctionInfo(auctions.get(i), quantity);
 			
 			auctionDTO.setCurrent_price(currAuction.getCurrent_price());

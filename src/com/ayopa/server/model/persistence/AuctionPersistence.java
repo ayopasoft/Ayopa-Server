@@ -47,33 +47,79 @@ public class AuctionPersistence {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put(AwsFacade.Key.AUCTION_ID,auction.getAuction_id());
-		map.put(AwsFacade.Key.PRODUCT_ID, auction.getProduct_id());
-		map.put(AwsFacade.Key.PRODUCT_NAME, auction.getProduct_title());
-		map.put(AwsFacade.Key.PRODUCT_DESCR, auction.getProduct_description());
-		map.put(AwsFacade.Key.PRODUCT_CAT, auction.getProduct_category());
-		map.put(AwsFacade.Key.PRODUCT_IMAGE_URL, auction.getProduct_image());
-		map.put(AwsFacade.Key.PRODUCT_URL, auction.getProduct_url());
-		map.put(AwsFacade.Key.AUCTION_START, df.format(auction.getAuction_start()));
-		map.put(AwsFacade.Key.AUCTION_END, df.format(auction.getAuction_end()));
-		map.put(AwsFacade.Key.AUCTION_MAXUNITS, Integer.toString(auction.getAuction_maxunits()));
-		map.put(AwsFacade.Key.AUCTION_HIGHLIGHTED, Boolean.toString(auction.getAuction_highlighted()));
-		map.put(AwsFacade.Key.AUCTION_SCHEDULE, ScheduleSerializer.toJson(auction.getAuction_schedule()));
-		map.put(AwsFacade.Key.AUCTION_STARTPRICE, Double.toString(auction.getAuction_startprice()));
-		map.put(AwsFacade.Key.AUCTION_PRICECONFLICT, Double.toString(auction.getAuction_priceconflict()));
-		map.put(AwsFacade.Key.AUCTION_ENDED, auction.getMerchant_website());
-		map.put(AwsFacade.Key.MERCHANT_ID, auction.getMerchant_id());
-		map.put(AwsFacade.Key.MERCHANT_NAME, auction.getMerchant_name());
-		map.put(AwsFacade.Key.MERCHANT_WEBSITE, auction.getMerchant_website());
-		map.put(AwsFacade.Key.AUCTION_ENDED, auction.getAuction_ended());
-		map.put(AwsFacade.Key.AUCTION_DELETED, auction.getAuction_deleted());
-		map.put(AwsFacade.Key.MERCHANT_FB_PAGE, auction.getMerchant_fb_page());
 		
+		if (auction.getProduct_id() != null)
+			map.put(AwsFacade.Key.PRODUCT_ID, auction.getProduct_id());
+		if (auction.getProduct_title() != null)
+			map.put(AwsFacade.Key.PRODUCT_NAME, auction.getProduct_title());
+		if (auction.getProduct_description() != null)
+			map.put(AwsFacade.Key.PRODUCT_DESCR, auction.getProduct_description());
+		if (auction.getProduct_category() != null)
+			map.put(AwsFacade.Key.PRODUCT_CAT, auction.getProduct_category());
+		if (auction.getProduct_image() != null)
+			map.put(AwsFacade.Key.PRODUCT_IMAGE_URL, auction.getProduct_image());
+		if (auction.getProduct_url() != null)
+			map.put(AwsFacade.Key.PRODUCT_URL, auction.getProduct_url());
+		if (auction.getAuction_start() != null)
+			map.put(AwsFacade.Key.AUCTION_START, df.format(auction.getAuction_start()));
+		if (auction.getAuction_end() != null)
+			map.put(AwsFacade.Key.AUCTION_END, df.format(auction.getAuction_end()));
+		if (auction.getAuction_maxunits() >= 0)
+			map.put(AwsFacade.Key.AUCTION_MAXUNITS, Integer.toString(auction.getAuction_maxunits()));
+		if (auction.getAuction_highlighted() == true || auction.getAuction_highlighted() == false)
+			map.put(AwsFacade.Key.AUCTION_HIGHLIGHTED, Boolean.toString(auction.getAuction_highlighted()));
+		if (auction.getAuction_schedule() != null)
+			map.put(AwsFacade.Key.AUCTION_SCHEDULE, ScheduleSerializer.toJson(auction.getAuction_schedule()));
+		if (auction.getAuction_startprice() >= 0)
+			map.put(AwsFacade.Key.AUCTION_STARTPRICE, Double.toString(auction.getAuction_startprice()));
+		if (auction.getAuction_priceconflict() >= 0)
+			map.put(AwsFacade.Key.AUCTION_PRICECONFLICT, Double.toString(auction.getAuction_priceconflict()));
+		if (auction.getMerchant_website() != null)
+			map.put(AwsFacade.Key.AUCTION_ENDED, auction.getMerchant_website());
+		if (auction.getMerchant_id() != null)
+			map.put(AwsFacade.Key.MERCHANT_ID, auction.getMerchant_id());
+		if (auction.getMerchant_name() != null)
+			map.put(AwsFacade.Key.MERCHANT_NAME, auction.getMerchant_name());
+		if (auction.getMerchant_website() != null)
+			map.put(AwsFacade.Key.MERCHANT_WEBSITE, auction.getMerchant_website());
+		if (auction.getAuction_ended() != null)
+			map.put(AwsFacade.Key.AUCTION_ENDED, auction.getAuction_ended());
+		if (auction.getAuction_deleted() != null)
+			map.put(AwsFacade.Key.AUCTION_DELETED, auction.getAuction_deleted());
+		if (auction.getMerchant_fb_page() != null)
+			map.put(AwsFacade.Key.MERCHANT_FB_PAGE, auction.getMerchant_fb_page());
+		if (auction.getRebate_sent() != null)
+			map.put(AwsFacade.Key.REBATE_SENT, auction.getRebate_sent());
+		if (auction.getAuction_cleared() != null)
+			map.put(AwsFacade.Key.AUCTION_CLEARED, auction.getAuction_cleared());
 		
 		aws.putRow(AwsFacade.Table.AUCTION, auction.getAuction_id(), map);
 		
 		return auction.getAuction_id();
 		
 	}
+	
+	public void putAuctionCleared (String auction_id) throws IOException{
+		Map<String, String> map = new HashMap<String, String>();
+		AwsFacade aws = AwsFacade.getInstance();
+		
+		map.put(AwsFacade.Key.AUCTION_ID,auction_id);
+		map.put(AwsFacade.Key.AUCTION_CLEARED, "1");
+		
+		aws.putRow(AwsFacade.Table.AUCTION, auction_id, map);
+	}
+	
+	public static void putAttribute (String auction_id, String attribute, String value) throws IOException
+	{
+		Map<String, String> map = new HashMap<String, String>();
+		AwsFacade aws = AwsFacade.getInstance();
+		
+		map.put(AwsFacade.Key.AUCTION_ID,auction_id);
+		map.put(attribute, value);
+		
+		aws.putRow(AwsFacade.Table.AUCTION, auction_id, map);
+	}
+	
 	
 	public Auction getAuction (String auction_id) throws IOException {
 		AwsFacade aws = AwsFacade.getInstance();
@@ -89,33 +135,57 @@ public class AuctionPersistence {
 		Auction auction = new Auction ();
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		if (map.containsKey(AwsFacade.Key.AUCTION_ID))
+			auction.setAuction_id (map.get(AwsFacade.Key.AUCTION_ID));
+		if (map.containsKey(AwsFacade.Key.PRODUCT_ID))
+			auction.setProduct_id(map.get(AwsFacade.Key.PRODUCT_ID));
+		if (map.containsKey(AwsFacade.Key.PRODUCT_NAME))
+			auction.setProduct_title(map.get(AwsFacade.Key.PRODUCT_NAME));
+		if (map.containsKey(AwsFacade.Key.PRODUCT_DESCR))
+			auction.setProduct_description(map.get(AwsFacade.Key.PRODUCT_DESCR));
+		if (map.containsKey(AwsFacade.Key.PRODUCT_CAT))
+			auction.setProduct_category(map.get(AwsFacade.Key.PRODUCT_CAT));
+		if (map.containsKey(AwsFacade.Key.PRODUCT_IMAGE_URL))
+			auction.setProduct_image(map.get(AwsFacade.Key.PRODUCT_IMAGE_URL));
+		if (map.containsKey(AwsFacade.Key.PRODUCT_URL))
+			auction.setProduct_url(map.get(AwsFacade.Key.PRODUCT_URL));
 		
-		auction.setAuction_id (map.get(AwsFacade.Key.AUCTION_ID));
-		auction.setProduct_id(map.get(AwsFacade.Key.PRODUCT_ID));
-		auction.setProduct_title(map.get(AwsFacade.Key.PRODUCT_NAME));
-		auction.setProduct_description(map.get(AwsFacade.Key.PRODUCT_DESCR));
-		auction.setProduct_category(map.get(AwsFacade.Key.PRODUCT_CAT));
-		auction.setProduct_image(map.get(AwsFacade.Key.PRODUCT_IMAGE_URL));
-		auction.setProduct_url(map.get(AwsFacade.Key.PRODUCT_URL));
 		try {
-			auction.setAuction_start(df.parse(map.get(AwsFacade.Key.AUCTION_START)));
-			auction.setAuction_end(df.parse(map.get(AwsFacade.Key.AUCTION_END)));
+			if (map.containsKey(AwsFacade.Key.AUCTION_START))
+				auction.setAuction_start(df.parse(map.get(AwsFacade.Key.AUCTION_START)));
+			if (map.containsKey(AwsFacade.Key.AUCTION_END))
+				auction.setAuction_end(df.parse(map.get(AwsFacade.Key.AUCTION_END)));
 		} catch (ParseException e) {
 			log.error("Got bad date format from Amazon table: " + map.get(AwsFacade.Key.AUCTION_START) + 
 					" or " + map.get(AwsFacade.Key.AUCTION_END), e);
 		}
-		auction.setAuction_highlighted(Boolean.parseBoolean(map.get(AwsFacade.Key.AUCTION_HIGHLIGHTED)));
-		auction.setAuction_maxunits(Integer.parseInt(map.get(AwsFacade.Key.AUCTION_MAXUNITS)));
-		auction.setAuction_startprice(Double.parseDouble(map.get(AwsFacade.Key.AUCTION_STARTPRICE)));
-		auction.setAuction_priceconflict(Double.parseDouble(map.get(AwsFacade.Key.AUCTION_PRICECONFLICT)));
-		auction.setAuction_schedule(ScheduleSerializer.toSchedule(map.get(AwsFacade.Key.AUCTION_SCHEDULE)));
-		auction.setMerchant_id(map.get(AwsFacade.Key.MERCHANT_ID));
-		auction.setMerchant_name(map.get(AwsFacade.Key.MERCHANT_NAME));
-		auction.setMerchant_website(map.get(AwsFacade.Key.MERCHANT_WEBSITE));
-		auction.setAuction_deleted(map.get(AwsFacade.Key.AUCTION_DELETED));
-		auction.setAuction_ended(map.get(AwsFacade.Key.AUCTION_ENDED));
-		auction.setMerchant_fb_page(map.get(AwsFacade.Key.MERCHANT_FB_PAGE));
 		
+		if (map.containsKey(AwsFacade.Key.AUCTION_HIGHLIGHTED))
+			auction.setAuction_highlighted(Boolean.parseBoolean(map.get(AwsFacade.Key.AUCTION_HIGHLIGHTED)));
+		if (map.containsKey(AwsFacade.Key.AUCTION_MAXUNITS))
+			auction.setAuction_maxunits(Integer.parseInt(map.get(AwsFacade.Key.AUCTION_MAXUNITS)));
+		if (map.containsKey(AwsFacade.Key.AUCTION_STARTPRICE))
+			auction.setAuction_startprice(Double.parseDouble(map.get(AwsFacade.Key.AUCTION_STARTPRICE)));
+		if (map.containsKey(AwsFacade.Key.AUCTION_PRICECONFLICT))
+			auction.setAuction_priceconflict(Double.parseDouble(map.get(AwsFacade.Key.AUCTION_PRICECONFLICT)));
+		if (map.containsKey(AwsFacade.Key.AUCTION_SCHEDULE))
+			auction.setAuction_schedule(ScheduleSerializer.toSchedule(map.get(AwsFacade.Key.AUCTION_SCHEDULE)));
+		if (map.containsKey(AwsFacade.Key.MERCHANT_ID))
+			auction.setMerchant_id(map.get(AwsFacade.Key.MERCHANT_ID));
+		if (map.containsKey(AwsFacade.Key.MERCHANT_NAME))
+			auction.setMerchant_name(map.get(AwsFacade.Key.MERCHANT_NAME));
+		if (map.containsKey(AwsFacade.Key.MERCHANT_WEBSITE))
+			auction.setMerchant_website(map.get(AwsFacade.Key.MERCHANT_WEBSITE));
+		if (map.containsKey(AwsFacade.Key.AUCTION_DELETED))
+			auction.setAuction_deleted(map.get(AwsFacade.Key.AUCTION_DELETED));
+		if (map.containsKey(AwsFacade.Key.AUCTION_ENDED))
+			auction.setAuction_ended(map.get(AwsFacade.Key.AUCTION_ENDED));
+		if (map.containsKey(AwsFacade.Key.MERCHANT_FB_PAGE))
+			auction.setMerchant_fb_page(map.get(AwsFacade.Key.MERCHANT_FB_PAGE));
+		if (map.containsKey(AwsFacade.Key.REBATE_SENT))
+			auction.setRebate_sent(map.get(AwsFacade.Key.REBATE_SENT));
+		if (map.containsKey(AwsFacade.Key.AUCTION_CLEARED))
+			auction.setAuction_cleared(map.get(AwsFacade.Key.AUCTION_CLEARED));
 		
 		return auction;
 	}

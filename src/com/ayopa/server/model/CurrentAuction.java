@@ -17,7 +17,30 @@ public class CurrentAuction {
 	private int next_level;
 	private double lowest_price;
 	private int lowest_level;
+	private double rebate_total;
+	private double commission_total;
+	private double auction_total;
 	
+	
+	
+	public double getRebate_total() {
+		return rebate_total;
+	}
+	public void setRebate_total(double rebate_total) {
+		this.rebate_total = rebate_total;
+	}
+	public double getCommission_total() {
+		return commission_total;
+	}
+	public void setCommission_total(double commission_total) {
+		this.commission_total = commission_total;
+	}
+	public double getAuction_total() {
+		return auction_total;
+	}
+	public void setAuction_total(double auction_total) {
+		this.auction_total = auction_total;
+	}
 	public String getAuction_id() {
 		return auction_id;
 	}
@@ -61,9 +84,11 @@ public class CurrentAuction {
 		this.lowest_level = lowest_level;
 	}
 	
-	public int getCurrentQuantity(String auction_id) throws IOException{
+	public Map<String,Object> getCurrentQuantity(String auction_id) throws IOException{
 		
+		Map<String, Object> map = new HashMap<String,Object>();
 		int quantity = 0;
+		double purchase_total = 0;
 		
 		AwsFacade aws = AwsFacade.getInstance();
 	
@@ -77,10 +102,14 @@ public class CurrentAuction {
 		
 		for (int i=0; i<results.size(); i++)
 		{
-			quantity += Integer.parseInt(results.get(i).get(AwsFacade.Key.PURCHASE_QUANTITY));	
+			quantity += Integer.parseInt(results.get(i).get(AwsFacade.Key.PURCHASE_QUANTITY));
+			purchase_total += Double.parseDouble(results.get(i).get(AwsFacade.Key.PURCHASE_PRICE)) * Integer.parseInt(results.get(i).get(AwsFacade.Key.PURCHASE_QUANTITY));
 		}
 		
-		return quantity;
+		map.put("quantity", quantity);
+		map.put("total", purchase_total);
+		
+		return map;
 	}
 	
 	
@@ -245,6 +274,27 @@ public class CurrentAuction {
 	    
 	    return map;
 	
+	}
+	
+	public static Map<String, Object> getCurrentAuctionRebate(String merchant_id, Double current_price,
+			Double total, int quantity) throws IOException {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		Merchant merchant = new Merchant();
+		merchant = merchant.getMerchant(merchant_id);
+		
+		double rebate_total = total - (current_price * quantity);
+
+	    double commission_total = rebate_total * (merchant.getMerchant_commission()/100);
+		
+		double auction_total = rebate_total + commission_total;
+		
+		map.put("rebate_total", rebate_total);
+		map.put("commission_total", commission_total);
+		map.put("auction_total", auction_total);
+		
+		return map;
 	}
 	
 	

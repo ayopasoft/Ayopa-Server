@@ -105,9 +105,12 @@ public class DisplayAuctionButton extends ActionSupport {
 			Auction auction = new Auction();
 			CurrentAuction currAuction = new CurrentAuction();
 			Map<String, Long> map = new HashMap<String, Long>();
+			Map<String,Object> currMap = new HashMap<String, Object>();
 
 			auction = auction.getAuction(auctionID);
-			int quantity = currAuction.getCurrentQuantity(auctionID);
+			currMap = currAuction.getCurrentQuantity(auctionID);
+			int quantity = (Integer) currMap.get("quantity");
+			
 			currAuction = CurrentAuction.getCurrentAuctionInfo(auction, quantity);
 
 			map = CurrentAuction.getAuctionTimeRemaining(auction);

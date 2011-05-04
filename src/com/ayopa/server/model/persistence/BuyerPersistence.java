@@ -18,15 +18,24 @@ public class BuyerPersistence {
 		Map<String, String> map = new HashMap<String, String>();
 		
 		map.put(AwsFacade.Key.BUYER_ID,buyer.getBuyer_id());
-		map.put(AwsFacade.Key.BUYER_ACCESS_TOKEN, buyer.getBuyer_access_token());
-		map.put(AwsFacade.Key.BUYER_NAME, buyer.getBuyer_name());
-		map.put(AwsFacade.Key.BUYER_EMAIL, buyer.getBuyer_email());
-		map.put(AwsFacade.Key.BUYER_ADDR1, buyer.getBuyer_address1());
-		map.put(AwsFacade.Key.BUYER_ADDR2, buyer.getBuyer_address2());
-		map.put(AwsFacade.Key.BUYER_CITY, buyer.getBuyer_city());
-		map.put(AwsFacade.Key.BUYER_STATE, buyer.getBuyer_state());
-		map.put(AwsFacade.Key.BUYER_ZIP, buyer.getBuyer_zip());
-		map.put(AwsFacade.Key.BUYER_COUNTRY, buyer.getBuyer_country());
+		if (buyer.getBuyer_access_token() != null)
+			map.put(AwsFacade.Key.BUYER_ACCESS_TOKEN, buyer.getBuyer_access_token());
+		if (buyer.getBuyer_name() != null)
+			map.put(AwsFacade.Key.BUYER_NAME, buyer.getBuyer_name());
+		if (buyer.getBuyer_email() != null)
+			map.put(AwsFacade.Key.BUYER_EMAIL, buyer.getBuyer_email());
+		if (buyer.getBuyer_address1() != null)
+			map.put(AwsFacade.Key.BUYER_ADDR1, buyer.getBuyer_address1());
+		if (buyer.getBuyer_address2() != null)
+			map.put(AwsFacade.Key.BUYER_ADDR2, buyer.getBuyer_address2());
+		if (buyer.getBuyer_city() != null)
+			map.put(AwsFacade.Key.BUYER_CITY, buyer.getBuyer_city());
+		if (buyer.getBuyer_state() != null)
+			map.put(AwsFacade.Key.BUYER_STATE, buyer.getBuyer_state());
+		if (buyer.getBuyer_zip() != null)
+			map.put(AwsFacade.Key.BUYER_ZIP, buyer.getBuyer_zip());
+		if (buyer.getBuyer_country() != null)
+			map.put(AwsFacade.Key.BUYER_COUNTRY, buyer.getBuyer_country());
 		
 		
 		AwsFacade aws = AwsFacade.getInstance();

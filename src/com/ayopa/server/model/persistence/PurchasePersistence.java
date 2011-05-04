@@ -33,6 +33,7 @@ public class PurchasePersistence {
 		map.put(AwsFacade.Key.AUCTION_START, df.format(purchase.getAuction_start()));
 		map.put(AwsFacade.Key.AUCTION_END, df.format(purchase.getAuction_end()));
 		map.put(AwsFacade.Key.PURCHASE_DATE, now);
+		map.put(AwsFacade.Key.PURCHASE_REBATE, Integer.toString(purchase.getPurchase_rebate_sent()));
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		aws.putRow(AwsFacade.Table.PURCHASE, purchase.getPurchase_id(), map);
@@ -60,6 +61,7 @@ public class PurchasePersistence {
 		purchase.setPurchase_buyer_id(map.get(AwsFacade.Key.PURCHASE_BUYER_ID));
 		purchase.setPurchase_quantity(Integer.parseInt(map.get(AwsFacade.Key.PURCHASE_QUANTITY)));
 		purchase.setPurchase_price(Double.parseDouble(map.get(AwsFacade.Key.PURCHASE_PRICE)));
+		purchase.setPurchase_rebate_sent(Integer.parseInt(map.get(AwsFacade.Key.PURCHASE_REBATE)));
 		try {
 			purchase.setAuction_start(df.parse(map.get(AwsFacade.Key.AUCTION_START)));
 			purchase.setAuction_end(df.parse(map.get(AwsFacade.Key.AUCTION_END)));

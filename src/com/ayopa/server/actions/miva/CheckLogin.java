@@ -58,7 +58,7 @@ public class CheckLogin extends ActionSupport {
 			merchantID += "<merchant_name value =\"" + merchant.getMerchant_name() + "\">";
 			merchantID += "<merchant_website value=\"" + merchant.getMerchant_website() + "\">";
 			
-			if (merchantID == null)
+			if (merchant.getMerchant_id() == null)
 				merchantID = "<merchant_id value = \"0\">";
 		}
 		

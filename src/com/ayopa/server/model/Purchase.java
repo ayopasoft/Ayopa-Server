@@ -15,9 +15,18 @@ public class Purchase {
 	private Date auction_start;
 	private Date auction_end;
 	private Date purchase_date;
+	private int purchase_rebate_sent;
 	
 	
 	
+	public int getPurchase_rebate_sent() {
+		return purchase_rebate_sent;
+	}
+
+	public void setPurchase_rebate_sent(int purchase_rebate_sent) {
+		this.purchase_rebate_sent = purchase_rebate_sent;
+	}
+
 	public Date getPurchase_date() {
 		return purchase_date;
 	}
@@ -91,6 +100,7 @@ public class Purchase {
 		purchase.setPurchase_auction_id(auction_id);
 		purchase.setPurchase_buyer_id(buyer_id);
 		purchase.setPurchase_quantity(quantity);
+		purchase.setPurchase_rebate_sent(0);
 	
 		Auction auction = new Auction();
 		auction = auction.getAuction(auction_id);

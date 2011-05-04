@@ -51,6 +51,8 @@ public class Auction {
 		public static final String ADDITIONAL = "add";
 		public static final String AUCTION_ENDED = "auction_ended";
 		public static final String AUCTION_DELETED = "auction_deleted";
+		public static final String REBATE_SENT = "rebate_sent";
+		public static final String AUCTION_CLEARED = "auction_cleared";
 	}
 	
 	
@@ -74,9 +76,23 @@ public class Auction {
 	private String merchant_fb_page;
 	private String auction_ended;
 	private String auction_deleted;
+	private String rebate_sent;
+	private String auction_cleared;
 	
 	
 	
+	public String getAuction_cleared() {
+		return auction_cleared;
+	}
+	public void setAuction_cleared(String auction_cleared) {
+		this.auction_cleared = auction_cleared;
+	}
+	public String getRebate_sent() {
+		return rebate_sent;
+	}
+	public void setRebate_sent(String rebate_sent) {
+		this.rebate_sent = rebate_sent;
+	}
 	public String getMerchant_fb_page() {
 		return merchant_fb_page;
 	}
@@ -271,6 +287,74 @@ public class Auction {
 			for (int i = 0; i < results.size(); i++){
 				Auction auction = new Auction();
 				auction = auction.getAuction(results.get(i).get(AwsFacade.Key.AUCTION_ID));
+				auctions.add(auction);
+			}
+			
+			
+		}
+			return auctions;
+	}
+	
+	public static List<Auction> getAuctionsforRebate() throws IOException {
+		List<Auction> auctions = new ArrayList<Auction>();
+		AwsFacade aws = AwsFacade.getInstance();
+		AuctionPersistence ap = new AuctionPersistence();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		
+		String now = df.format(Calendar.getInstance().getTime());
+		
+		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
+		+ AwsFacade.Key.AUCTION_END + "` <= '" + now + "' and `"
+		+ AwsFacade.Key.REBATE_SENT + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_CLEARED + "` = '1' and `"
+		+ AwsFacade.Key.MERCHANT_ID + "` != '' order by `"
+		+ AwsFacade.Key.MERCHANT_ID + "` asc";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		if (results.size() == 0) {
+			//return empty auction;
+		}
+		else {
+			for (int i = 0; i < results.size(); i++){
+				Auction auction = new Auction();
+				auction = ap.mapToAuction(results.get(i));
+				auctions.add(auction);
+			}
+			
+			
+		}
+			return auctions;
+	}
+	
+	public static List<Auction> getAuctionsforInvoice() throws IOException {
+		List<Auction> auctions = new ArrayList<Auction>();
+		AwsFacade aws = AwsFacade.getInstance();
+		AuctionPersistence ap = new AuctionPersistence();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		
+		String now = df.format(Calendar.getInstance().getTime());
+		
+		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
+		+ AwsFacade.Key.AUCTION_END + "` <= '" + now + "' and `"
+		+ AwsFacade.Key.REBATE_SENT + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_CLEARED + "` != '1' and `"
+		+ AwsFacade.Key.MERCHANT_ID + "` != '' order by `"
+		+ AwsFacade.Key.MERCHANT_ID + "` asc";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		if (results.size() == 0) {
+			//return empty auction;
+		}
+		else {
+			for (int i = 0; i < results.size(); i++){
+				Auction auction = new Auction();
+				auction = ap.mapToAuction(results.get(i));
 				auctions.add(auction);
 			}
 			
@@ -591,6 +675,8 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 			auctionMap.put(Auction.Key.MERCHANT_WEBSITE, auction.merchant_website);	
 			auctionMap.put(Auction.Key.AUCTION_DELETED, auction.auction_deleted);
 			auctionMap.put(Auction.Key.AUCTION_ENDED, auction.auction_ended);
+			auctionMap.put(Auction.Key.REBATE_SENT, auction.rebate_sent);
+			auctionMap.put(Auction.Key.AUCTION_CLEARED, auction.auction_cleared);
 			
 			try {
 				for (int i=0; i < auction.auction_schedule.size(); i++) {
@@ -656,6 +742,8 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 			auction.setMerchant_website(jsonAuction.getString(Auction.Key.MERCHANT_WEBSITE));
 			auction.setAuction_ended(jsonAuction.getString(Auction.Key.AUCTION_ENDED));
 			auction.setAuction_deleted(jsonAuction.getString(Auction.Key.AUCTION_DELETED));
+			auction.setRebate_sent(jsonAuction.getString(Auction.Key.REBATE_SENT));
+			auction.setAuction_cleared(jsonAuction.getString(Auction.Key.AUCTION_CLEARED));
 			
 			JSONObject jsonAuctionSched = (JSONObject) JSONSerializer.toJSON( jsonAuction.get(Auction.Key.AUCTION_SCHEDULE));
 			JSONArray jsonSched = (JSONArray) JSONSerializer.toJSON( jsonAuctionSched.get(Auction.Key.SCHEDULE_ROW) ); 
@@ -668,6 +756,8 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 	}
 	
 	public String validateAuction(String auctionDef) throws Exception {
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a"); 
 		
 		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( auctionDef ); 
 		
@@ -684,8 +774,47 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 			if (!jsonAuction.containsKey(Auction.Key.PRODUCT_DESCR))
 				throw new Exception ("Product Description is missing");
 			
-			if (!jsonAuction.containsKey(Auction.Key.PRODUCT_ID))
-				throw new Exception ("Product ID is missing");
+			if (!jsonAuction.containsKey(Auction.Key.PRODUCT_IMAGE_URL))
+				throw new Exception ("Product Image is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.PRODUCT_CAT))
+				throw new Exception ("Product Category is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.PRODUCT_URL))
+				throw new Exception ("Product URL is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.AUCTION_HIGHLIGHTED))
+				throw new Exception ("Auction Highlighted is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.AUCTION_START))
+				throw new Exception ("Auction Start is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.AUCTION_END))
+				throw new Exception ("Auction End is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.AUCTION_MAXUNITS))
+				throw new Exception ("Auction Max Units is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.AUCTION_PRICECONFLICT))
+				throw new Exception ("Auction Price Conflict is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.MERCHANT_ID))
+				throw new Exception ("Merchant ID is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.MERCHANT_NAME))
+				throw new Exception ("Merchant Name is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.MERCHANT_WEBSITE))
+				throw new Exception ("Merchant Website is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.AUCTION_ENDED))
+				throw new Exception ("Auction Ended is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.AUCTION_DELETED))
+				throw new Exception ("Auction Deleted is missing");
+			
+			if (!jsonAuction.containsKey(Auction.Key.AUCTION_SCHEDULE))
+				throw new Exception ("Auction Schedule is missing");
 			
 			if (jsonAuction.getString(Auction.Key.PRODUCT_ID).length() == 0)
 					throw new Exception("Product ID cannot be blank");
@@ -729,10 +858,79 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 			if (jsonAuction.getString(Auction.Key.MERCHANT_WEBSITE).length() == 0)
 				throw new Exception ("Merchant Website cannot be blank");
 			
+			if (jsonAuction.getString(Auction.Key.AUCTION_SCHEDULE).length() == 0)
+				throw new Exception ("Auction Schedule cannot be blank");
+			
+			
+			try {
+				int maxunits = Integer.parseInt(jsonAuction.getString(Auction.Key.AUCTION_MAXUNITS));
+				if (maxunits <= 0)
+					throw new Exception ("Max Units must be greater than 0");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				throw new Exception ("Auction Max Units must be an integer");
+			}
+			
+			try {
+				double start_price = Double.parseDouble(jsonAuction.getString(Auction.Key.AUCTION_STARTPRICE));
+				if (start_price <= 0)
+					throw new Exception ("Start price must be greater than 0");
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				throw new Exception ("Start Price must be a number");
+			}
+			
+			
+			try {
+				double price_conflict = Double.parseDouble(jsonAuction.getString(Auction.Key.AUCTION_PRICECONFLICT));
+				if (price_conflict < 0)
+					throw new Exception ("Start price must be greater than or equal to 0");
+				
+			} catch (Exception e) {
+				
+				throw new Exception ("Price conflict must be a double");
+			}
+			
+
+			
+			try {
+				Date auction_start = df.parse(jsonAuction.getString(Auction.Key.AUCTION_START));
+				
+			} catch (ParseException e) {
+				
+				throw new Exception ("Auction start date is invalid");
+			}
+				
+			try {
+				Date auction_end = df.parse(jsonAuction.getString(Auction.Key.AUCTION_END));
+			} catch (Exception e) {
+				
+				throw new Exception ("Auction end date is invalid");
+			}
+			
+			if (auction_end.before(auction_start) || auction_end.equals(auction_start))
+				throw new Exception ("Auction end date must be after start date");
+			
+			
+			
+			
+			
 		}
 		
 		
 		return null;
+	}
+	
+	
+	public static void clearAuctions(List<Map<String, String>> auction_info) throws IOException {
+		
+		AuctionPersistence ap = new AuctionPersistence();
+		
+		for (int i=0; i < auction_info.size(); i++){
+			ap.putAuctionCleared(auction_info.get(i).get("auction_id"));
+		}
+		
 	}
 
 	

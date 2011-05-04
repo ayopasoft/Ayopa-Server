@@ -21,7 +21,7 @@ public class CurrentAuctionTest {
 	@Test
 	public void testGetCurrentQuantity() throws IOException {
 		CurrentAuction currAuction = new CurrentAuction();
-		int quantity = currAuction.getCurrentQuantity("518a13e1-8439-4aec-8ea9-d9e4b4f4ab4a");
+		int quantity = (Integer) currAuction.getCurrentQuantity("518a13e1-8439-4aec-8ea9-d9e4b4f4ab4a").get("quantity");
 		
 		assertEquals("GetCurrentQuantity returned incorrect value",21,quantity,0);
 		

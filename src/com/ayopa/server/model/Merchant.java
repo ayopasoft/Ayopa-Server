@@ -35,6 +35,7 @@ public class Merchant {
 		public static final String MERCHANT_WEBSITE = "merchant_website";
 		public static final String MERCHANT_FB_PAGE = "merchant_fb_page_id";
 		public static final String MERCHANT_AYOPA_FB = "merchant_ayopa_fb_stream";
+		public static final String MERCHANT_PAYPAL = "merchant_paypal";
 	}
 	
 	private String merchant_id;
@@ -52,7 +53,23 @@ public class Merchant {
 	private String merchant_website;
 	private String merchant_fb_page_id;
 	private boolean merchant_ayopa_fb_stream;
+	private double merchant_commission;
+	private String merchant_paypal;
 	
+	
+	
+	public String getMerchant_paypal() {
+		return merchant_paypal;
+	}
+	public void setMerchant_paypal(String merchant_paypal) {
+		this.merchant_paypal = merchant_paypal;
+	}
+	public double getMerchant_commission() {
+		return merchant_commission;
+	}
+	public void setMerchant_commission(double merchant_commission) {
+		this.merchant_commission = merchant_commission;
+	}
 	public String getMerchant_id() {
 		return merchant_id;
 	}
@@ -146,10 +163,10 @@ public class Merchant {
 	
 	public String putMerchant(String merchantDef) throws IOException {
 		Merchant merchant = new Merchant();
-		MerchantPersistence awsMerchant = new MerchantPersistence();
+		MerchantPersistence mp = new MerchantPersistence();
 			
 		merchant = merchant.jsonToMerchant(merchantDef);
-		String merchantReturn = awsMerchant.putMerchant(merchant);
+		String merchantReturn = mp.putMerchant(merchant);
 		
 		Map<String,String> mapReturn = new HashMap<String, String> ();
 		mapReturn.put("merchant_id", merchantReturn);
@@ -157,6 +174,15 @@ public class Merchant {
 		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( mapReturn );
 		
 		return jsonObject.toString();
+	}
+	
+	public Merchant getMerchant(String merchant_id) throws IOException {
+		
+		Merchant merchant = new Merchant();
+		MerchantPersistence mp = new MerchantPersistence();
+		
+		merchant = mp.getMerchant(merchant_id);
+		return merchant;
 	}
 	
 	public Merchant jsonToMerchant(String json)
@@ -185,6 +211,7 @@ public class Merchant {
 			merchant.setMerchant_website(jsonMerchant.getString(Merchant.Key.MERCHANT_WEBSITE));
 			merchant.setMerchant_fb_page_id(jsonMerchant.getString(Merchant.Key.MERCHANT_FB_PAGE));
 			merchant.setMerchant_ayopa_fb_stream(Boolean.parseBoolean(jsonMerchant.getString(Merchant.Key.MERCHANT_AYOPA_FB)));
+			merchant.setMerchant_paypal(jsonMerchant.getString(Merchant.Key.MERCHANT_PAYPAL));
 			
 		}
 		return merchant;
@@ -209,6 +236,7 @@ public class Merchant {
 		merchantMap.put(Merchant.Key.MERCHANT_WEBSITE, merchant.getMerchant_website());
 		merchantMap.put(Merchant.Key.MERCHANT_FB_PAGE, merchant.getMerchant_fb_page_id());
 		merchantMap.put(Merchant.Key.MERCHANT_AYOPA_FB, Boolean.toString(merchant.getMerchant_ayopa_fb_stream()));
+		merchantMap.put(Merchant.Key.MERCHANT_PAYPAL, merchant.getMerchant_paypal());
 		
 		merchant_container.put("merchant",merchantMap);
 		
@@ -226,7 +254,7 @@ public class Merchant {
 		AwsFacade aws = AwsFacade.getInstance();
 	
 		String query = "select * from `" + AwsFacade.Table.MERCHANT + "` where `" 
-		+ AwsFacade.Key.MERCHANT_USERNAME + "` = '" + username + "' and `" 
+		+ AwsFacade.Key.MERCHANT_EMAIL + "` = '" + username + "' and `" 
 		+ AwsFacade.Key.MERCHANT_PASSWORD + "` = '" + password + "'"; 
 		
 		log.info(query);
