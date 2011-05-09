@@ -36,6 +36,8 @@ public class BuyerPersistence {
 			map.put(AwsFacade.Key.BUYER_ZIP, buyer.getBuyer_zip());
 		if (buyer.getBuyer_country() != null)
 			map.put(AwsFacade.Key.BUYER_COUNTRY, buyer.getBuyer_country());
+		if (buyer.getBuyer_paypal() != null)
+			map.put(AwsFacade.Key.BUYER_PAYPAL, buyer.getBuyer_paypal());
 		
 		
 		AwsFacade aws = AwsFacade.getInstance();
@@ -97,9 +99,25 @@ public class BuyerPersistence {
 		if (map.containsKey(AwsFacade.Key.BUYER_COUNTRY)){
 			buyer.setBuyer_country(map.get(AwsFacade.Key.BUYER_COUNTRY));
 		}
+		
+		if (map.containsKey(AwsFacade.Key.BUYER_PAYPAL)){
+			buyer.setBuyer_paypal(map.get(AwsFacade.Key.BUYER_PAYPAL));
+		}
 			
 		return buyer;
 	}
+	
+	public static void putAttribute (String buyer_id, String attribute, String value) throws IOException
+	{
+		Map<String, String> map = new HashMap<String, String>();
+		AwsFacade aws = AwsFacade.getInstance();
+		
+		map.put(AwsFacade.Key.BUYER_ID,buyer_id);
+		map.put(attribute, value);
+		
+		aws.putRow(AwsFacade.Table.BUYER, buyer_id, map);
+	}
+	
 	
 	
 }

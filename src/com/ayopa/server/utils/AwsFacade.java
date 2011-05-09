@@ -124,6 +124,7 @@ public class AwsFacade {
 		public static final String BUYER_STATE = "buyer_state";
 		public static final String BUYER_ZIP = "buyer_zip";
 		public static final String BUYER_COUNTRY = "buyer_country";
+		public static final String BUYER_PAYPAL = "buyer_paypal";
 		
 		public static final String REBATE_SENT = "rebate_sent";
 		

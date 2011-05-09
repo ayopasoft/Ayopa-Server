@@ -24,10 +24,19 @@ public class ConsumerCanvas extends ActionSupport implements SessionAware{
 	private String buyer_id;
 	private Map<String, Object> session;
 	private boolean session_expired;
+	private boolean no_results;
 	
 	
 
 	
+	public boolean isNo_results() {
+		return no_results;
+	}
+
+	public void setNo_results(boolean no_results) {
+		this.no_results = no_results;
+	}
+
 	public boolean isSession_expired() {
 		return session_expired;
 	}
@@ -68,6 +77,8 @@ public class ConsumerCanvas extends ActionSupport implements SessionAware{
 			if (session.containsKey("buyer_id")){
 				buyer_id = (String) session.get("buyer_id");
 				auctions = auction.getAuctionsForBuyer(buyer_id);
+				if (auctions.size() == 0)
+					no_results = true;
 			}
 			else
 			{

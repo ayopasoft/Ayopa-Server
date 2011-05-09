@@ -17,7 +17,7 @@ import com.paypal.sdk.services.NVPCallerServices;
  */
 public class MassPay 
 {
-	public String massPayCode(String emailSub,String receiverType,String[] receiverEmail,
+	public static String massPayCode(String emailSub,String receiverType,String[] receiverEmail,
 							String[] uniqueId,String[] amount,String[] note)
 	{
 			NVPCallerServices caller = null;

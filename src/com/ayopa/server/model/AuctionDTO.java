@@ -31,6 +31,7 @@ public class AuctionDTO {
     private String merchant_url;
     private double price_conflict;
     private String category;
+   
 	
     
     
@@ -208,6 +209,11 @@ public class AuctionDTO {
 		auctionDTO.setMerchant_url(auction.getMerchant_website());
 		auctionDTO.setPrice_conflict(auction.getAuction_priceconflict());
 		auctionDTO.setCategory(auction.getProduct_category());
+		auctionDTO.setRebate_sent(Boolean.parseBoolean(auction.getRebate_sent()));
+		if (auction.getRebate_sent().equals("1"))
+			auctionDTO.setRebate_sent(Boolean.TRUE);
+		else
+			auctionDTO.setRebate_sent(Boolean.FALSE);
 		
 		return auctionDTO;
 		
@@ -248,6 +254,10 @@ public class AuctionDTO {
 			auctionDTO.setMerchant_url(auctions.get(i).getMerchant_website());
 			auctionDTO.setPrice_conflict(auctions.get(i).getAuction_priceconflict());
 			auctionDTO.setCategory(auctions.get(i).getProduct_category());
+			if (auctions.get(i).getRebate_sent().equals("1"))
+				auctionDTO.setRebate_sent(Boolean.TRUE);
+			else
+				auctionDTO.setRebate_sent(Boolean.FALSE);
 			
 			dtoList.add(auctionDTO);
 		}

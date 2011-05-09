@@ -193,9 +193,12 @@
 									<!-- **** TITLE  *** -->
 									<div class="ayopa_item_title"><s:property value="title" /></div>
 									
-									<s:if test="%{expired}">
-										<img src="http://ayopa-resources.s3.amazonaws.com/images/rebate_ac.png">
+									<s:if test="%{rebate_sent}">
+										<img src="http://ayopa-resources.s3.amazonaws.com/images/rebate_cs.png">
 									</s:if>
+									<s:elseif test="%{expired}">
+										<img src="http://ayopa-resources.s3.amazonaws.com/images/rebate_ac.png">
+									</s:elseif>
 									<s:else>
 										<img src="http://ayopa-resources.s3.amazonaws.com/images/rebate_aip.png">
 									</s:else>

@@ -179,23 +179,27 @@
 						<!-- ***************MAIN CONTENT HOES IN THE AYOPA_CONTENT_MIDDLE DIV  *****************-->
 						<div class="ayopa_content_middle">
 						<p style="margin-top:0; padding-top:10px;"><b>Who is Ayopa?<br>
-			</b>Ayopa Software is a Startup company founded by a group of successful entrepreneurs with over 40 years of experience building web based companies.&nbsp; Our application is a group buying platform that allows online business to launch group buying events from the product detail pages and enables consumers to get bigger discounts as more likeminded buyers participate.<b><br>
+			</b>Ayopa Software is a Startup company founded by a group of successful entrepreneurs with over 40 years of experience building web based companies.  Our application is a group buying platform that allows online business to launch group buying events from the product detail pages and enables consumers to get bigger discounts as more like minded buyers participate. You can contact us at <a href="mailto:info@ayopasoft.com">info@ayopasoft.com</a> (we do read these emails).<b><br>
 				<br>
 					Why should I use Ayopa?<br>
 			</b>You should only use Ayopa if you are interested in getting volume pricing for a product by sharing your purchase of that product with your social network.<b><br>
 				<br>
 			</b></p>
 		<p><strong>How does it Work?</strong></p>
-		<p><strong>Shop like you normally do</strong><br>
-			Let&rsquo;s say you are shopping for a new snow blower and see a <b>&ldquo;Group Buy and Save&rdquo;</b> button on the product detail page of the website that sells the snow blower.&nbsp; Simply click &ldquo;<b>Group Buy and Save</b>&rdquo; and proceed to the checkout page as normal or continue shopping.&nbsp; When you submit the order, Ayopa will ask for your permission to register with Ayopa using your facebook credentials. <b></b></p>
-		<p>And, that&rsquo;s really it.&nbsp;</p>
-		<p><b>Wow, it&rsquo;s that easy?<br>
-			</b>Yes, it is that easy.&nbsp; By giving permission to Ayopa to register you, you are also permitting your participation in the group buy to be published to your facebook feed.&nbsp; Because Ayopa Merchants believe the more people that see the facebook feed, the more buyers they will get, they are offering you special volume pricing.<br>
+		<p><strong>1. Shop like you normally do</strong><br>
+			Let's say you are shopping for a new LCD TV and see our Group Buy &amp; Save button on the product page of the site that sells the TV. Simply click Group Buy &amp; Save and you will proceed to the checkout page as normal. When you submit the order, Ayopa will ask for your permission to register with Ayopa using your facebook credentials.  <b></b></p>
+		
+		<p><b>2. That's It?<br>
+			</b>Yes, it is that easy. By giving permission to Ayopa to register yourself, you are permitting your participation in the group buy to be published to your facebook feed. Because Ayopa retailers believe you can help generate more immediate buyers, they are offering you special volume pricing. As more buyers join, the price drops and we rebate you the difference via PayPal.<br>
 			<br>
-			<strong>Now, track your purchase and rebate status<br>
-			</strong>Use this application and the RebateStatus tab to watch the price drop and the savings owed to you.&nbsp; We send rebate checks out every Friday, so if you use ayopa a lot you&rsquo;ll get accustomed to getting checks on a certain day of the week.<b> </b></p>
+			<strong>3. Track Savings Owed to You<br>
+			</strong>Create your account on our site and install our facebook app. Now watch the price drop and track the savings owed to you.  We send you the difference between what you paid and the final price.</p>
+			<p><b>Rebates</b>
+			<br>
+				We send rebates out every other Friday via paypal - not a bad way to start the weekend. There is no need to have a paypal account prior to using ayopa.
+			</p>
 		<p><b>How do I find Ayopa Auctions?<br>
-			</b>The best way to find ayopa auctions is to use our facebook application and then click AyopaAuctions tab, which will list every current deal.&nbsp; In addition, while you shop, simply keep an eye out for our &lsquo;<b>Group Buy and Save</b> button&rsquo; on product detail pages.&nbsp; We are a small company and you are using a Beta version of our product, so be patient as we continue to add merchants and send us any feedback at info@ayopasoft.com.</p>
+			</b>The best way to find ayopa auctions is to use our facebook application and then click AyopaAuctions tab, which will list every current deal.  In addition, while you shop, simply keep an eye out for our 'Group Buy and Save button' on product detail pages.  We are a small company and you are using a Beta version of our product, so be patient as we continue to add merchants and send us any feedback at <a href="mailto:info@ayopasoft.com">info@ayopasoft.com</a></p>
 		<b>For more information visit us at <a title="ayopasoft.com" href="http://ayopasoft.com" target="_blank">http://ayopasoft.com</a></b><br>
 		<br>
 						

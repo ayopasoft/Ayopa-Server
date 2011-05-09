@@ -74,5 +74,15 @@ public class PurchasePersistence {
 		return purchase;
 	}
 	
+	public static void putAttribute (String purchase_id, String attribute, String value) throws IOException
+	{
+		Map<String, String> map = new HashMap<String, String>();
+		AwsFacade aws = AwsFacade.getInstance();
+		
+		map.put(AwsFacade.Key.PURCHASE_ID,purchase_id);
+		map.put(attribute, value);
+		
+		aws.putRow(AwsFacade.Table.PURCHASE, purchase_id, map);
+	}
 	
 }

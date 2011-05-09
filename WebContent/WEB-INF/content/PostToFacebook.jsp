@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://ayopa-resources.s3.amazonaws.com/css/page.css" rel="stylesheet" type="text/css">
 <title>Ayopa Server</title>
 <s:head />
 </head>
@@ -24,10 +25,48 @@
     e.async = true;
     document.getElementById('fb-root').appendChild(e);
   }());
+  
+  function streamPublish(name, description, hrefTitle, hrefLink, image, userPrompt){                 
+		FB.ui(                
+		 {                     
+		 	method: 'stream.publish',                     
+		 	message: '',                     
+		 	attachment: {
+           
+		 	name: userPrompt,                         
+		 	caption: '',                         
+		 	description: (description),                         
+		 	href: hrefLink, 
+		 	media: [
+		    {
+		        "type": "image", 
+		        "src": image, 
+		        "href": hrefLink
+		    }
+		    
+		    ]
+			
+         
+		 	},                     
+		 	action_links: [                         
+		 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopasoft.com' }                   
+		 	],                     
+		 	user_prompt_message: userPrompt                 
+		 	},                 
+		 	function(response) {                   
+		 	});               
+		 	}   
+		 	          
+		 	function showStream(message, hrefTitle, hrefLink, image, title){                 
+		 	FB.api('/me', function(response) {                     
+		 	//console.log(response.id);                     
+		 	streamPublish(response.name, message, hrefTitle, hrefLink, image, title);                 
+		 	});             
+		 	}  
 </script>
 
-<h2>Thank you for your group buy with Ayopa</h2>
-<p>When you complete your purchase, we will post your purchase to your Facebook wall.</p>
-
+<h2>Thank you for participating in this ayopa auction</h2>
+<p>When you complete your purchase, we will post your purchase to your Facebook wall. Below is an example of how these types of posts look. You may also re-post this or send to specific friends from the <a href="http://apps.facebook.com/ayopa_auctions" target="_blank">ayopa facebook app.</a></p>
+	<img src="http://ayopa-resources.s3.amazonaws.com/images/FB_post_preview.png">							
 </body>
 </html>

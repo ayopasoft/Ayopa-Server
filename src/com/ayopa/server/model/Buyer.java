@@ -16,8 +16,16 @@ public class Buyer {
 	private String buyer_state;
 	private String buyer_zip;
 	private String buyer_country;
+	private String buyer_paypal;
 	
 	
+	
+	public String getBuyer_paypal() {
+		return buyer_paypal;
+	}
+	public void setBuyer_paypal(String buyer_paypal) {
+		this.buyer_paypal = buyer_paypal;
+	}
 	public String getBuyer_address1() {
 		return buyer_address1;
 	}
@@ -95,5 +103,6 @@ public class Buyer {
 		}
 		
 	}
+	
 	
 }

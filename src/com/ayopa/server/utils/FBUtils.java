@@ -25,7 +25,8 @@ public class FBUtils {
 	public static final String FACEBOOK_APPLICATION_SECRET = "17ce975710ce3ac5670fa17d5e70fef3";
 	public static final String FACEBOOK_AUTH_REDIRECT_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-facebook-id-auth.action";
 	public static final String FACEBOOK_CANCEL_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-permissions.action";
-	public static final String FACEBOOK_NEXT_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-registration.action";
+	//public static final String FACEBOOK_NEXT_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-registration.action";
+	public static final String FACEBOOK_NEXT_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/process-permissions.action";
 	
 	
 	public static final String DEV_APPID = "186996844658023";

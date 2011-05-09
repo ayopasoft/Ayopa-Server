@@ -183,6 +183,10 @@
 						<s:if test="session_expired">
 							Your session has expired.  Please refresh your web browser.
 						</s:if>
+						
+						<s:if test="no_results">
+							You don't have any current auctions. Click <a href="<s:url action='consumer-auctions'/>">here</a> to browse for auctions.
+						</s:if>
 
 						<s:iterator value="auctions" >
 						

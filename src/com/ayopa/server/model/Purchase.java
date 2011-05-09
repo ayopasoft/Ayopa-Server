@@ -1,11 +1,12 @@
 package com.ayopa.server.model;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Date;
 
 import com.ayopa.server.model.persistence.PurchasePersistence;
 
-public class Purchase {
+public class Purchase implements Comparable<Purchase> {
 
 	private String purchase_id;
 	private String purchase_auction_id;
@@ -17,7 +18,19 @@ public class Purchase {
 	private Date purchase_date;
 	private int purchase_rebate_sent;
 	
+	@Override
+	public int compareTo(Purchase arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
+	static final Comparator<Purchase> BUYER_ID =
+        new Comparator<Purchase>() {
+			public int compare(Purchase e1, Purchase e2) {
+				return e2.purchase_buyer_id.compareTo(e1.purchase_buyer_id);
+			}
+	};
+
 	
 	public int getPurchase_rebate_sent() {
 		return purchase_rebate_sent;
@@ -119,5 +132,7 @@ public class Purchase {
 		
 		return purchaseReturn;
 	}
+
+	
 	
 }

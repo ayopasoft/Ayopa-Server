@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ayopa.server.model.persistence.AuctionPersistence;
+import com.ayopa.server.model.persistence.PurchasePersistence;
 import com.ayopa.server.utils.AwsFacade;
 
 public class Auction {
@@ -520,6 +521,34 @@ public class Auction {
 			return auctions;
 			
 	}
+ 
+   public static List<Purchase> getPurchasesForAuction (String auction_id) throws IOException{
+	   List<Purchase> purchases = new ArrayList<Purchase>();
+	   AwsFacade aws = AwsFacade.getInstance();
+	   PurchasePersistence pp = new PurchasePersistence();
+	   
+	   String query = "select * from `" + AwsFacade.Table.PURCHASE + "` where `" 
+		+ AwsFacade.Key.PURCHASE_AUCTION_ID + "` = '" + auction_id + "' and `" 
+		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` != '' order by `"
+		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` asc";
+	   
+	   List<Map<String,String>> results = aws.selectRows(query);
+		
+		if (results.size() == 0) {
+			//return empty auction;
+		}
+		else {
+			for (int i = 0; i < results.size(); i++){
+				Purchase purchase = new Purchase();
+				purchase = pp.mapToPurchase(results.get(i));
+				purchases.add(purchase);
+			}
+			
+			
+		}
+			return purchases;
+	   
+   }
 	
 	public List<AuctionDTO> getAuctionsForBuyer (String buyer_id) throws IOException{
 		
