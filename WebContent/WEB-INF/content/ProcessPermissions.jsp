@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ayopa Server</title>
 <script>
-Set_Cookie("fbs_120882414650116",'<s:url encode="false" escapeAmp="false" value="%{session}" />', 1, '', '<s:property value="base_domain" />', '');
+Set_Cookie("fbs_120882414650116",'<s:url encode="false" escapeAmp="false" value="%{session}" />', 1, '/', '<s:property value="base_domain" />', '');
 
 function Set_Cookie( name, value, expires, path, domain, secure )
 {
