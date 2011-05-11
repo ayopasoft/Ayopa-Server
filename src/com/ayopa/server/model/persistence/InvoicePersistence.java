@@ -46,6 +46,8 @@ public class InvoicePersistence {
 			map.put(AwsFacade.Key.INVOICE_TOTAL, Double.toString(invoice.getInvoice_total()));
 		if (invoice.getMerchant_id() != null)
 			map.put(AwsFacade.Key.MERCHANT_ID, invoice.getMerchant_id());
+		if (invoice.getInvoice_notice() >= 0)
+			map.put(AwsFacade.Key.INVOICE_NOTICE, Integer.toString(invoice.getInvoice_notice()));
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		aws.putRow(AwsFacade.Table.INVOICE, invoice.getInvoice_id(), map);
@@ -97,6 +99,10 @@ public class InvoicePersistence {
 		
 		if (map.containsKey(AwsFacade.Key.MERCHANT_ID)){
 			invoice.setMerchant_id(map.get(AwsFacade.Key.MERCHANT_ID));
+		}
+		
+		if (map.containsKey(AwsFacade.Key.INVOICE_NOTICE)){
+			invoice.setInvoice_notice(Integer.parseInt(map.get(AwsFacade.Key.MERCHANT_ID)));
 		}
 		
 		if (map.containsKey(AwsFacade.Key.INVOICE_AUCTIONS)){

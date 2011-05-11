@@ -27,7 +27,7 @@ public class GetPermissions extends ActionSupport {
 	public String execute() throws Exception {
 		
 		
-		 url = "https://www.facebook.com/login.php?api_key=" + FBUtils.FACEBOOK_API_KEY + "&display=page&return_session=1&session_version=3&v=1.0&req_perms=publish_stream,email,offline_access,manage_pages&canvas=0&fbconnect=1&cancel_url=" + FBUtils.FACEBOOK_CANCEL_URL + "&next=" + FBUtils.FACEBOOK_NEXT_URL;
+		 url = "https://www.facebook.com/login.php?api_key=" + FBUtils.FACEBOOK_API_KEY + "&display=page&return_session=1&session_version=3&v=1.0&req_perms=publish_stream,email,offline_access&canvas=0&fbconnect=1&cancel_url=" + FBUtils.FACEBOOK_CANCEL_URL + "&next=" + FBUtils.FACEBOOK_NEXT_URL;
 		 return Action.SUCCESS;
 		
 	}

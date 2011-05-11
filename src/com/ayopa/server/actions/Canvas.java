@@ -79,8 +79,8 @@ public class Canvas extends ActionSupport {
 		}
 		else
 		{
-			String cancel_url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/";
-			String next_url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/";
+			String cancel_url = "http://beta.ayopasoft.com/AyopaServer/";
+			String next_url = "http://beta.ayopasoft.com/AyopaServer/";
 			
 			perms_url = "https://www.facebook.com/login.php?api_key=" + FBUtils.FACEBOOK_API_KEY + "&display=page&return_session=1&session_version=3&v=1.0&req_perms=publish_stream,email,offline_access,manage_pages&canvas=1&fbconnect=0&cancel_url=" + cancel_url + "&next=" + next_url;
 			 

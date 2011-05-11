@@ -30,7 +30,7 @@
 
 <fb:registration 
   fields="name,email" 
-  redirect-uri="http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/process-registration"
+  redirect-uri="http://beta.ayopasoft.com/AyopaServer/process-registration"
   width="530" fb_only="true" perms="status_update,publish_stream">
 </fb:registration>
 

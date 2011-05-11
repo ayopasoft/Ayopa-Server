@@ -72,7 +72,7 @@ public class GetRebates extends ActionSupport {
 		
 		JSONArray jsonObject = (JSONArray) JSONSerializer.toJSON(rebates);
 		
-		String jsonString = jsonObject.toString() + response;
+		String jsonString = response + jsonObject.toString();
 		
 	
 		

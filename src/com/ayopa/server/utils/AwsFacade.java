@@ -85,6 +85,7 @@ public class AwsFacade {
 		public static final String AUCTION_DELETED = "auction_deleted";
 		public static final String AUCTION_ENDED = "auction_ended";
 		public static final String AUCTION_CLEARED = "auction_cleared";
+		public static final String INVOICE_SENT = "invoice_sent";
 		
 		public static final String MERCHANT_ID = "merchant_id";
 		public static final String MERCHANT_NAME = "merchant_name";
@@ -134,6 +135,7 @@ public class AwsFacade {
 		public static final String INVOICE_PAID = "invoice_paid";
 		public static final String INVOICE_PD_DATE = "invoice_pd_date";
 		public static final String INVOICE_TOTAL = "invoice_total";
+		public static final String INVOICE_NOTICE = "invoice_notice";
 		
 	}
 	

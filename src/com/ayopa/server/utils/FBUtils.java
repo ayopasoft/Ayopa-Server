@@ -2,8 +2,13 @@ package com.ayopa.server.utils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import net.sf.json.JSONObject;
@@ -23,10 +28,10 @@ public class FBUtils {
 	
 	public static final String FACEBOOK_API_KEY = "120882414650116";
 	public static final String FACEBOOK_APPLICATION_SECRET = "17ce975710ce3ac5670fa17d5e70fef3";
-	public static final String FACEBOOK_AUTH_REDIRECT_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-facebook-id-auth.action";
-	public static final String FACEBOOK_CANCEL_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-permissions.action";
-	//public static final String FACEBOOK_NEXT_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-registration.action";
-	public static final String FACEBOOK_NEXT_URL = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/process-permissions.action";
+	public static final String FACEBOOK_AUTH_REDIRECT_URL = "http://beta.ayopasoft.com/AyopaServer/get-facebook-id-auth.action";
+	public static final String FACEBOOK_CANCEL_URL = "http://beta.ayopasoft.com/AyopaServer/get-permissions.action";
+	//public static final String FACEBOOK_NEXT_URL = "http://beta.ayopasoft.com/AyopaServer/get-registration.action";
+	public static final String FACEBOOK_NEXT_URL = "http://beta.ayopasoft.com/AyopaServer/process-permissions.action";
 	
 	
 	public static final String DEV_APPID = "186996844658023";
@@ -157,5 +162,57 @@ public class FBUtils {
 		"&client_secret="+FBUtils.DEV_APPSECRET+"&code="+code;
     }
     
+    
+    public static String MD5(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+        digest.reset();
+        digest.update(text.toString().getBytes());
+        byte[] hash = digest.digest();
+        StringBuffer buf = new StringBuffer();
+ 
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+        if (hex.length() == 1)
+                buf.append('0');
+            buf.append(hex);
+        }
+ 
+        return buf.toString();
+    }
+    
+    public static Map<String,String> parseFBCookie (String fbCookie) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+    	
+    	Map<String, String> map = new HashMap<String,String>();
+    	
+    	fbCookie = URLDecoder.decode(fbCookie,"UTF-8");
+		
+		String[] stringArgs = fbCookie.trim().split("&");
+		
+		String md5Hash = "";
+	    String sig = "";
+		
+		for (String s : stringArgs) {
+			String key = s.split("=")[0];
+			String value = s.split("=")[1];
+			
+			if(key.equals("uid"))
+				map.put("uid", value);
+			
+			if (!key.equals("sig")) {
+				  md5Hash = md5Hash + key + '=' + value;
+			} else {
+				     sig = value;
+			}
+		}
+		
+		md5Hash = FBUtils.MD5(md5Hash + FBUtils.FACEBOOK_APPLICATION_SECRET);
+		
+		if (!md5Hash.equals(sig)){
+			map.clear();
+		}
+		
+		return map;
+    }
+
     
 }

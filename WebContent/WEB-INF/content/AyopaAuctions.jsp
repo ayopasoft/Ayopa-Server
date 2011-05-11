@@ -285,7 +285,7 @@
 						<div class="ayopa_content_bottom">
 						</div>
 						<div style="float:right">
-							<a href="http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/privacy-policy" target="_blank">Privacy Policy</a>
+							<a href="http://www.ayopasoft.com/privacy.html" target="_blank">Privacy Policy</a>
 						</div>
 					</div>
 

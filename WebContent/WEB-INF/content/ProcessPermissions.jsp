@@ -4,40 +4,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ayopa Server</title>
-<script>
-Set_Cookie("fbs_120882414650116",'<s:url encode="false" escapeAmp="false" value="%{session}" />', 1, '/', '<s:property value="base_domain" />', '');
-
-function Set_Cookie( name, value, expires, path, domain, secure )
-{
-// set time, it's in milliseconds
-var today = new Date();
-today.setTime( today.getTime() );
-
-/*
-if the expires variable is set, make the correct
-expires time, the current script below will set
-it for x number of days, to make it for hours,
-delete * 24, for minutes, delete * 60 * 24
-*/
-if ( expires )
-{
-expires = expires * 1000 * 60 * 60 * 24;
-}
-var expires_date = new Date( today.getTime() + (expires) );
-
-document.cookie = name + "=" +escape( value ) +
-( ( expires ) ? ";expires=" + expires_date.toGMTString() : "" ) +
-( ( path ) ? ";path=" + path : "" ) +
-( ( domain ) ? ";domain=" + domain : "" ) +
-( ( secure ) ? ";secure" : "" );
-}
-
-</script>
+<link href="http://ayopa-resources.s3.amazonaws.com/css/page.css" type="text/css" rel="stylesheet">
 <s:head />
 </head>
 <body>
+<div style="margin:20px">
+<h2>Thank you for registering for ayopa</h2>
 
-Thank you for registering.  You may now close this window.
+<p>You may now close this window and complete your purchase. You will be entered in the group buy and will
+receive your rebate via paypal for the difference of the purchase price and the final price.  Please be sure to complete your account setup at 
+<a href="http://accounts.ayopasoft.com/new_account" target="_blank">ayopasoft.com</a> to ensure your payments go to your preferred PayPal email address.</p>
 
+<p align="right"><a href="http://www.ayopasoft.com" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/ayopasoftware_logo.png"></a><br/>
+<a href="http://www.ayopasoft.com/terms.html" target="_blank">Terms of Service</a> | 
+<a href="http://www.ayopasoft.com/privacy.html" target="_blank">Privacy Policy</a></p>
+</div>
 </body>
 </html>

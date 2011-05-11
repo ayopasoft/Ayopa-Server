@@ -17,8 +17,10 @@ public class MerchantPersistence {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		
-		map.put(AwsFacade.Key.MERCHANT_ID,merchant.getMerchant_id());
-		map.put(AwsFacade.Key.MERCHANT_NAME, merchant.getMerchant_name());
+		if (merchant.getMerchant_id() != null)
+			map.put(AwsFacade.Key.MERCHANT_ID,merchant.getMerchant_id());
+		if (merchant.getMerchant_name() != null)
+			map.put(AwsFacade.Key.MERCHANT_NAME, merchant.getMerchant_name());
 		map.put(AwsFacade.Key.MERCHANT_USERNAME, merchant.getMerchant_username());
 		map.put(AwsFacade.Key.MERCHANT_PASSWORD, merchant.getMerchant_password());
 		map.put(AwsFacade.Key.MERCHANT_ADDRESS1, merchant.getMerchant_address1());

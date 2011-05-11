@@ -54,6 +54,7 @@ public class Auction {
 		public static final String AUCTION_DELETED = "auction_deleted";
 		public static final String REBATE_SENT = "rebate_sent";
 		public static final String AUCTION_CLEARED = "auction_cleared";
+		public static final String INVOICE_SENT = "invoice_sent";
 	}
 	
 	
@@ -79,9 +80,15 @@ public class Auction {
 	private String auction_deleted;
 	private String rebate_sent;
 	private String auction_cleared;
+	private String invoice_sent;
 	
 	
-	
+	public String getInvoice_sent() {
+		return invoice_sent;
+	}
+	public void setInvoice_sent(String invoice_sent) {
+		this.invoice_sent = invoice_sent;
+	}
 	public String getAuction_cleared() {
 		return auction_cleared;
 	}
@@ -239,6 +246,7 @@ public class Auction {
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
 		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
+		+ AwsFacade.Key.MERCHANT_ID + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
 		+ AwsFacade.Key.AUCTION_START + "` desc";
@@ -958,6 +966,14 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 		
 		for (int i=0; i < auction_info.size(); i++){
 			ap.putAuctionCleared(auction_info.get(i).get("auction_id"));
+		}
+		
+	}
+	
+    public static void invoiceAuctions(List<Map<String, String>> auction_info) throws IOException {
+		
+		for (int i=0; i < auction_info.size(); i++){
+			AuctionPersistence.putAttribute(auction_info.get(i).get("auction_id"), AwsFacade.Key.INVOICE_SENT, "1");
 		}
 		
 	}

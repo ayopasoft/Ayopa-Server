@@ -225,7 +225,7 @@
 										</div>
 										</s:if>
 										<s:if test="admin">
-											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_fans.png" /></a></div>
+											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title" escapeJavaScript="true"/>'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_fans.png" /></a></div>
 										</s:if>
 									    <s:else>
 									    	<div><a href="<s:property value="link"/>" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/buy_now.png" /></a></div>
@@ -331,7 +331,7 @@
 										</div>
 									</s:if>
 										<s:if test="admin">
-											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_fans.png" /></a></div>
+											<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, you can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title" escapeJavaScript="true" />'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_fans.png" /></a></div>
 										</s:if>
 									    <s:else>
 									    	<div><a href="<s:property value="link"/>" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/buy_now.png" /></a></div>
@@ -385,7 +385,7 @@
 						</div>
 						<!-- ************ END MAIN CONTENT  ******************* -->
 						<div style="float:right">
-							<a href="http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/privacy-policy" target="_blank">Privacy Policy</a>
+							<a href="http://www.ayopasoft.com/privacy.html" target="_blank">Privacy Policy</a>
 						</div>
 					</div>
 

@@ -92,6 +92,8 @@ public class AuctionPersistence {
 			map.put(AwsFacade.Key.REBATE_SENT, auction.getRebate_sent());
 		if (auction.getAuction_cleared() != null)
 			map.put(AwsFacade.Key.AUCTION_CLEARED, auction.getAuction_cleared());
+		if (auction.getInvoice_sent() != null)
+			map.put(AwsFacade.Key.INVOICE_SENT, auction.getInvoice_sent());
 		
 		aws.putRow(AwsFacade.Table.AUCTION, auction.getAuction_id(), map);
 		
@@ -186,6 +188,8 @@ public class AuctionPersistence {
 			auction.setRebate_sent(map.get(AwsFacade.Key.REBATE_SENT));
 		if (map.containsKey(AwsFacade.Key.AUCTION_CLEARED))
 			auction.setAuction_cleared(map.get(AwsFacade.Key.AUCTION_CLEARED));
+		if (map.containsKey(AwsFacade.Key.INVOICE_SENT))
+			auction.setInvoice_sent(map.get(AwsFacade.Key.INVOICE_SENT));
 		
 		return auction;
 	}

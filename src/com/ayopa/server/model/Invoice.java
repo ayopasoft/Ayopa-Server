@@ -1,6 +1,7 @@
 package com.ayopa.server.model;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,9 +26,16 @@ public class Invoice {
 	private Date invoice_date;
 	private boolean invoice_paid;
 	private Date invoice_pd_date;
+	private int invoice_notice;
 	
 	
 	
+	public int getInvoice_notice() {
+		return invoice_notice;
+	}
+	public void setInvoice_notice(int invoice_notice) {
+		this.invoice_notice = invoice_notice;
+	}
 	public List<Map<String, String>> getAuction_info() {
 		return auction_info;
 	}
@@ -122,6 +130,7 @@ public class Invoice {
 			invoice.setInvoice_total(total);
 			invoice.setInvoice_date(now);
 			invoice.setInvoice_id(UUID.randomUUID().toString());
+			invoice.setInvoice_notice(1);
 			
 			merchant_id = auctions.get(i).getMerchant_id();
 			
@@ -146,6 +155,8 @@ public class Invoice {
   
   public static void sendInvoices() throws IOException, MessagingException{
 	 
+	  NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+	  
 	  List<Invoice> invoices = new ArrayList<Invoice>();
 	  List<Auction> auctions = new ArrayList<Auction>();
 	  Merchant merchant = new Merchant();
@@ -158,8 +169,17 @@ public class Invoice {
 		  String[] recipient;
 		  recipient = new String[1];
 		  recipient[0] = merchant.getMerchant_paypal();
-		  String message = PaypalUtils.PAY_NOW_URL + "&amount=" + Double.toString(invoices.get(i).getInvoice_total()) + "&item_name=" + "Ayopa%20Auctions" + "&invoice=" + invoices.get(i).getInvoice_id();
+		  String message = "Please pay for the following auctions:\n";
+		  for (int j = 0; j < invoices.get(i).getAuction_info().size(); j++) {
+			  message += "\n\nAuction: " + invoices.get(i).getAuction_info().get(j).get("auction_id");
+			  message += "    Product: " + invoices.get(i).getAuction_info().get(j).get("product_name");
+			  message += "    Rebate: " + currencyFormatter.format(Double.parseDouble(invoices.get(i).getAuction_info().get(j).get("rebate_total")));
+			  message += "    Commission: " + currencyFormatter.format(Double.parseDouble(invoices.get(i).getAuction_info().get(j).get("commission_total")));
+			  message += "    Total: " + currencyFormatter.format(Double.parseDouble(invoices.get(i).getAuction_info().get(j).get("auction_total")));
+		  }
+		   message += "\n\nClick this link to pay: " + PaypalUtils.PAY_NOW_URL + "&amount=" + Double.toString(invoices.get(i).getInvoice_total()) + "&item_name=" + "Ayopa%20Auctions" + "&invoice=" + invoices.get(i).getInvoice_id();
 		  Mail.postMail(recipient, PaypalUtils.INVOICE_SUBJECT, message, PaypalUtils.INVOICE_FROM);
+		  Auction.invoiceAuctions(invoices.get(i).getAuction_info());
 	  }
 	  
   }

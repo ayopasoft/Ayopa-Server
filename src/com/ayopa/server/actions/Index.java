@@ -16,6 +16,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.ayopa.server.model.Buyer;
 import com.ayopa.server.model.persistence.BuyerPersistence;
 import com.ayopa.server.utils.FBUtils;
+import com.ayopa.server.utils.Mail;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.restfb.DefaultFacebookClient;
@@ -94,7 +95,7 @@ public class Index extends ActionSupport implements SessionAware {
 		
 		if (code != null)
 		{
-			String next_url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/";
+			String next_url = "http://beta.ayopasoft.com/AyopaServer/";
 			String access_token = "";
 			String token_url = "https://graph.facebook.com/oauth/access_token?client_id="
 		        + FBUtils.FACEBOOK_API_KEY + "&redirect_uri=" + URLEncoder.encode(next_url,"UTF-8") + "&client_secret="
@@ -119,6 +120,22 @@ public class Index extends ActionSupport implements SessionAware {
 			
 			FacebookClient facebookClient = new DefaultFacebookClient(access_token);
 			 User user = facebookClient.fetchObject("me", User.class);
+			
+			 buyer = bp.getBuyer(user.getId());
+			 if (buyer.getBuyer_id() == null)
+				{
+					//new user -- send email
+					String[] recipient;
+					recipient = new String[1];
+					recipient[0] = user.getEmail();
+				    String message = "Welcome to group savings with ayopa. " +
+				    		"Track your savings and find more auctions at http://apps.facebook.com/ayopa_auctions." +
+				    		"By default, we will send your Paypal payments to your Facebook email address. " +
+				    		"If you would like to change your Paypal email address, finish your account setup by creating " +
+				    		"an account at www.ayopasoft.com.  Be sure to use your Facebook email address when you create your " +
+				    		"ayopa account. Login and change your Paypal address in your account settings.";
+					Mail.postMail(recipient, "Your ayopa account", message, "info@ayopasoft.com");
+				}
 			 
 			 buyer.setBuyer_id(user.getId());
 			 buyer.setBuyer_name(user.getName());
@@ -146,11 +163,11 @@ public class Index extends ActionSupport implements SessionAware {
 		}
 		else
 		{
-			String cancel_url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/";
-			String next_url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/";
+			String cancel_url = "http://beta.ayopasoft.com/AyopaServer/";
+			String next_url = "http://beta.ayopasoft.com/AyopaServer/";
 			
 			//perms_url = "https://www.facebook.com/login.php?api_key=" + FBUtils.DEV_APPID + "&req_perms=publish_stream,email,offline_access,manage_pages&canvas=1&fbconnect=0&return_session=0&cancel_url=" + cancel_url + "&next=" + next_url;
-			perms_url = "https://www.facebook.com/dialog/oauth?client_id=" + FBUtils.FACEBOOK_API_KEY + "&redirect_uri=" + next_url + "&scope=publish_stream,email,offline_access,manage_pages&canvas=1&fbconnect=0";
+			perms_url = "https://www.facebook.com/dialog/oauth?client_id=" + FBUtils.FACEBOOK_API_KEY + "&redirect_uri=" + next_url + "&scope=publish_stream,email,offline_access&canvas=1&fbconnect=0";
 			return "permsRedirect";
 		}
 		

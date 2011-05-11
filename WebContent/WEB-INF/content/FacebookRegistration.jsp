@@ -7,12 +7,12 @@
 <s:head />
 </head>
 <body>
-      <div id="fb-root"></div>
+<div id="fb-root"></div>
 <script type="text/javascript">             
 
 	window.fbAsyncInit = function() {                 
-		FB.init({appId: '120882414650116', domain: 'happyjacksoftware.com', status: true, cookie: true, xfbml: true});                   
-		/* All the events registered */                
+		FB.init({appId: '120882414650116', domain: 'ayopasoft.com', status: true, cookie: true, xfbml: true});                   
+		/* All the events registered */                			
 			FB.Event.subscribe('auth.login', function(response) {                     
 			// do something with response                     
 			login();                 
@@ -23,52 +23,31 @@
 			logout();                 
 			});                   
 			
-			FB.Canvas.setAutoResize();
-			
-			FB.provide("UIServer.Methods",
-   { 'permissions.request' : { size : {width: 575, height: 300}, 
-                    url: 'connect/uiserver.php',
-                transform : FB.UIServer.genericTransform }
-        } );
-
-
-			FB.api('/me', function(user) {
-				if (user != null) {
-					
-				}
-			});
 			
 			FB.getLoginStatus(function(response) {                     
-				if (response.session) {      
-				// send request to server to make sure they are an ayopa user
-				// logged in and connected user, someone you know                         
-				login(); 
-				   
-				//parent.window.location.hash = user.id                 
+				if (response.session) { 
+					if (response.perms) {
+						if (hasPermission(response, "publish_stream") && hasPermission(response, "email") && hasPermission(response, "offline_access") && "<s:property value="isUser"/>" == "true"){
+							getLoggedIn();
+						}
+						else
+						{
+							getRegistration();
+						}
+					}
+					else
+					{
+						getRegistration();
+					}
+					                  
 				} 
 			    else
-			    {
-			    
-			    	//FB.ui({method: "permissions.request", "perms": 'email,offline_access'} , callBack);
-
-			    	//self.location.href="http://www.ayopadev.com/ayopa/register.php";
-			    	//var newwindow;
-			    	//var  screenX    = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,                  
-			    	//screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,                  
-			    	//outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,                  
-			    	//outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22), 
-			    	//width    = 885,                  
-			    	//height   = 575,                  
-			    	//left     = parseInt(screenX + ((outerWidth - width) / 2), 10),                  
-			    	//top      = parseInt(screenY + ((outerHeight - height) / 2.5), 10),                  
-			    	//features = ( 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top );               
-			    	//newwindow=window.open('http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-permissions','Register through Facebook',features);                
-			    	//if (window.focus) {newwindow.focus()} 
-			    	location.href = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-permissions-iframe";
-					//$("a.fancybox").trigger("click");
+			    {	
+					getRegistration();
 			    }           
-				});             
-				};             
+				}, true);             
+			};          
+			
 			(function() {                
 				 var e = document.createElement('script');                 
 				 e.type = 'text/javascript';                 
@@ -76,28 +55,34 @@
 				 '//connect.facebook.net/en_US/all.js';                 
 				 e.async = true;                 
 				 document.getElementById('fb-root').appendChild(e);             
-				 }());               
+				 }());   
+			
 			function login(){                 
 				
 				FB.api('/me', function(response) {                     
-					//var newwindow;
-			    	//var  screenX    = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,                  
-			    	//screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,                  
-			    	//outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,                  
-			    	//outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22), 
-			    	//width    = 500,                  
-			    	//height   = 200,                  
-			    	//left     = parseInt(screenX + ((outerWidth - width) / 2), 10),                  
-			    	//top      = parseInt(screenY + ((outerHeight - height) / 2.5), 10),                  
-			    	//features = ( 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top );               
-			    	//newwindow=window.open('http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/post-to-facebook','Post To Facebook',features);                
-			    	    location.href =  "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/post-to-facebook";  
+					getLoggedIn();
+			    	
 				});             
 				}             
 			
-			function logout(){                 
-				document.getElementById('login').style.display = "none";             
-			}               
+			     
+			
+			function getRegistration(){
+				location.href = "http://beta.ayopasoft.com/AyopaServer/get-permissions-iframe";
+				
+			}
+			
+			function getLoggedIn(){
+				location.href =  "http://beta.ayopasoft.com/AyopaServer/post-to-facebook";  
+				
+			}
+			
+			function hasPermission(response, perm) {
+				var begin = response.perms.indexOf('extended":[') + 11;
+				var end = response.perms.indexOf(']', begin);
+				var perms = response.perms.substring(begin, end);
+				return (perms.indexOf(perm) != -1);
+			}
   
 			      
 </script>

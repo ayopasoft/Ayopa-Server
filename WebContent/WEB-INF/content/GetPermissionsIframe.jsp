@@ -7,6 +7,7 @@
 	<script src="http://ayopa-resources.s3.amazonaws.com/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js"></script>
 	<script src="http://ayopa-resources.s3.amazonaws.com/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 	<link href="http://ayopa-resources.s3.amazonaws.com/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" type="text/css" rel="stylesheet">
+	<link href="http://ayopa-resources.s3.amazonaws.com/css/page.css" type="text/css" rel="stylesheet">
 <title>Ayopa Server</title>
 <script type="text/javascript">
 
@@ -22,7 +23,7 @@ function newWindow()
 			    	left     = parseInt(screenX + ((outerWidth - width) / 2), 10),                  
 			    	top      = parseInt(screenY + ((outerHeight - height) / 2.5), 10),                  
 			    	features = ( 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top );               
-			    	newwindow=window.open('http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/get-permissions','Register through Facebook',features); 
+			    	newwindow=window.open('http://beta.ayopasoft.com/AyopaServer/get-permissions','ayopa',features); 
 			    	$('#hiddenLink', window.parent.document).fancybox.close(); 
 }
 
@@ -32,7 +33,12 @@ function newWindow()
 </head>
 <body>
 <h2>Group Buy &amp; Save</h2>
-<p>In order to participate in the group buy, you will have to register for an ayopa account through your facebook account.</p>
-<a href="#" onClick="newWindow()">Click Here to Continue</a>
+<p>In order to participate in the group buy, register for an ayopa account through your facebook account.  Click the "Register Now" button below and agree to the facebook permissions to complete your registration.</p>
+<a href="#" onClick="newWindow()"><img src="http://ayopa-resources.s3.amazonaws.com/images/register.png" alt="register now" title="register now"></a>
+<br/><br/>
+<p align="right"><a href="http://www.ayopasoft.com" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/ayopasoftware_logo.png"></a><br/>
+<a href="http://www.ayopasoft.com/terms.html" target="_blank">Terms of Service</a> | 
+<a href="http://www.ayopasoft.com/privacy.html" target="_blank">Privacy Policy</a></p>
 </body>
 </html>
+

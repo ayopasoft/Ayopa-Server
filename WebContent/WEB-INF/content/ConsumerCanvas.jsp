@@ -43,8 +43,8 @@
 			    
 			//stream publish method    
 			
-			function inviteFriends(){
-				var fbml = '<center><fb:request-form action="http://apps.facebook.com/ayopa_auctions/consumer/" target="_top" method="POST" invite="true" type="Product Suggestion" content="DESCRIPTION <fb:req-choice url=\'http://www.ayopadev.com/product/HJS-TV1.html\' label=\'Buy with Ayopa\'"> <fb:multi-friend-selector target="_top" cols="3" rows="5" showborder="false" actiontext="Invite more friends to buy this item with Ayopa" /> </fb:request-form></center>';  
+			function inviteFriends(content, url, label, actiontext){
+				var fbml = '<center><fb:request-form action="http://apps.facebook.com/ayopa_auctions/" target="_top" method="POST" invite="true" type="Group Buy" content="' + content + '" <fb:req-choice url="' + url + '" label="'+ label + '" /> <fb:multi-friend-selector target="_top" cols="3" rows="5" showborder="false" actiontext="' + actiontext + '" /> </fb:request-form></center>';  
 					FB.ui({     
 					method: 'fbml.dialog',     
 					fbml: fbml,     
@@ -255,7 +255,7 @@
 												<s:param name="value" value="purchase_price"/>
 											</s:text>
 										</div>
-										<div><a href="" onclick="inviteFriends(); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_friends.png" /></a></div>
+										<div><a href="" onclick="inviteFriends('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, we can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.','<s:property value="link"/>','Group Buy and Save','Invite friends to this group buy through ayopa'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_friends.png" /></a></div>
 										<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, we can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/post_to_wall.png" /></a></div>
 									</div>
 
@@ -297,7 +297,7 @@
 						<div class="ayopa_content_bottom">
 						</div>
 						<div style="float:right">
-							<a href="http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/privacy-policy" target="_blank">Privacy Policy</a>
+							<a href="http://www.ayopasoft.com/privacy.html" target="_blank">Privacy Policy</a>
 						</div>
 					</div>
 
