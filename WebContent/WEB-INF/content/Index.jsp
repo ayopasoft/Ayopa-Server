@@ -5,8 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ayopa Server</title>
 <s:head />
-	<LINK REL=stylesheet HREF="css/buy_with_ayopa.css" TYPE="text/css">
-	<LINK REL=stylesheet HREF="css/page.css" TYPE="text/css">
+	<LINK REL=stylesheet HREF="http://ayopa-resources.s3.amazonaws.com/css/buy_with_ayopa.css" TYPE="text/css">
+	<LINK REL=stylesheet HREF="http://ayopa-resources.s3.amazonaws.com/css/page.css" TYPE="text/css">
 </head>
 
 <body>
@@ -154,7 +154,7 @@ window.fbAsyncInit = function() {
 						</div>
 						<!-- ***************MAIN CONTENT HOES IN THE AYOPA_CONTENT_MIDDLE DIV  *****************-->
 						<div class="ayopa_content_middle">
-							<LINK REL=stylesheet HREF="http://www.ayopadev.com/ayopa/css/page.css" TYPE="text/css">
+							<LINK REL=stylesheet HREF="http://ayopa-resources.s3.amazonaws.com/css/page.css" TYPE="text/css">
 
 							<div class="ayopa_splash_screen">
 								<div class="ayopa_splash_header">
@@ -169,8 +169,8 @@ window.fbAsyncInit = function() {
 									</ul>
 								</div>
 								<div class="ayopa_splash_action">
-									<!--  <a href="http://apps.facebook.com/ayopa_auctions/consumer"><img src="http://www.ayopadev.com/ayopa/images/ayopa_consumer-demo.png"></a>
-				<a href="http://apps.facebook.com/ayopa_auctions/merchant"><img src="http://www.ayopadev.com/ayopa/images/ayopa_merchant-demo.png"></a>-->
+									<!--  <a href="http://apps.facebook.com/ayopa_auctions/consumer"><img src="http://ayopa-resources.s3.amazonaws.com/images/ayopa_consumer-demo.png"></a>
+				<a href="http://apps.facebook.com/ayopa_auctions/merchant"><img src="http://ayopa-resources.s3.amazonaws.com/images/ayopa_merchant-demo.png"></a>-->
 									
 								</div>
 								<p>&nbsp;</p>
@@ -186,7 +186,7 @@ window.fbAsyncInit = function() {
 						<div class="ayopa_content_bottom">
 						</div>
 						<div style="float:right">
-							<a href="http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/privacy-policy" target="_blank">Privacy Policy</a>
+							<a href="http://www.ayopasoft.com/privacy.html" target="_blank">Privacy Policy</a>
 						</div>
 					</div>
 
