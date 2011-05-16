@@ -10,7 +10,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -239,14 +241,15 @@ public class Auction {
 	public List<Auction> getCurrentAuctions () throws IOException{
 		List<Auction> auctions = new ArrayList<Auction>();
 		AwsFacade aws = AwsFacade.getInstance();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
-		String now = df.format(Calendar.getInstance().getTime());
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 		
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
 		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
-		+ AwsFacade.Key.MERCHANT_ID + "` != '1' and `"
+		//+ AwsFacade.Key.MERCHANT_ID + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
 		+ AwsFacade.Key.AUCTION_START + "` desc";
@@ -273,9 +276,10 @@ public class Auction {
 	public List<Auction> getCurrentAuctions(String category) throws IOException {
 		List<Auction> auctions = new ArrayList<Auction>();
 		AwsFacade aws = AwsFacade.getInstance();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
-		String now = df.format(Calendar.getInstance().getTime());
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 		
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.PRODUCT_CAT + "` = '" + category + "' and `"
@@ -309,8 +313,9 @@ public class Auction {
 		AwsFacade aws = AwsFacade.getInstance();
 		AuctionPersistence ap = new AuctionPersistence();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
-		String now = df.format(Calendar.getInstance().getTime());
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 		
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.AUCTION_END + "` <= '" + now + "' and `"
@@ -343,13 +348,15 @@ public class Auction {
 		AwsFacade aws = AwsFacade.getInstance();
 		AuctionPersistence ap = new AuctionPersistence();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
-		String now = df.format(Calendar.getInstance().getTime());
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 		
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.AUCTION_END + "` <= '" + now + "' and `"
 		+ AwsFacade.Key.REBATE_SENT + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_CLEARED + "` != '1' and `"
+		+ AwsFacade.Key.INVOICE_SENT + "` != '1' and `"
 		+ AwsFacade.Key.MERCHANT_ID + "` != '' order by `"
 		+ AwsFacade.Key.MERCHANT_ID + "` asc";
 		
@@ -375,9 +382,10 @@ public class Auction {
 	public List<String> getCurrentCategories() throws IOException {
 		List<String> categories = new ArrayList<String>();
 		AwsFacade aws = AwsFacade.getInstance();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
-		String now = df.format(Calendar.getInstance().getTime());
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 		
 		String query = "select `" + AwsFacade.Key.PRODUCT_CAT + "` from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
@@ -407,9 +415,10 @@ public class Auction {
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
-		String now = df.format(Calendar.getInstance().getTime());
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 	
 	
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
@@ -451,8 +460,9 @@ public class Auction {
 		AuctionPersistence ap = new AuctionPersistence();
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
-		String now = df.format(Calendar.getInstance().getTime());
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 	
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.MERCHANT_FB_PAGE + "` = '" + page_id + "' and `" 
@@ -494,9 +504,10 @@ public class Auction {
 		AwsFacade aws = AwsFacade.getInstance();
 		AuctionPersistence ap = new AuctionPersistence();
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
-		String now = df.format(Calendar.getInstance().getTime());
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 	
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.MERCHANT_FB_PAGE + "` = '" + page_id + "' and `" 
@@ -566,8 +577,9 @@ public class Auction {
 		AwsFacade aws = AwsFacade.getInstance();
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
-		String now = df.format(Calendar.getInstance().getTime());
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 	
 		String query = "select * from `" + AwsFacade.Table.PURCHASE + "` where `" 
 		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` = '" + buyer_id + "' and `" 
@@ -612,7 +624,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 		
 		AwsFacade aws = AwsFacade.getInstance();
 		
-		Date now = Calendar.getInstance().getTime();
+		Date now = Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime();
 	
 		String query = "select * from `" + AwsFacade.Table.PURCHASE + "` where `" 
 		+ AwsFacade.Key.PURCHASE_BUYER_ID + "` = '" + buyer_id + "' and `"
@@ -656,7 +668,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 				
 		auction = auction.getAuction(auctionID);
 		auction.setAuction_ended("1");
-		auction.setAuction_end(Calendar.getInstance().getTime());
+		auction.setAuction_end(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 		
 		String result = auction.putAuction(auction.auctionToJson(auction));
 		
@@ -684,6 +696,8 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 	
 	public String auctionToJson(Auction auction){
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a"); 
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
+		
 		Map<String,Object> auctionMap = new HashMap<String, Object> ();
 		Map<String, List<Map<String,Object>>> auction_schedule = new HashMap<String, List<Map<String,Object>>>();
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
@@ -745,7 +759,9 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 	public Auction jsonToAuction(String json)
 	{
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a");
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
+		
 		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( json ); 
 		Auction auction = new Auction();
 		
@@ -792,7 +808,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 		return auction;
 	}
 	
-	public String validateAuction(String auctionDef) throws Exception {
+	public boolean validateAuction(String auctionDef) throws Exception {
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a"); 
 		
@@ -922,7 +938,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 			try {
 				double price_conflict = Double.parseDouble(jsonAuction.getString(Auction.Key.AUCTION_PRICECONFLICT));
 				if (price_conflict < 0)
-					throw new Exception ("Start price must be greater than or equal to 0");
+					throw new Exception ("Price conflict must be greater than or equal to 0");
 				
 			} catch (Exception e) {
 				
@@ -932,31 +948,64 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 
 			
 			try {
+				
 				Date auction_start = df.parse(jsonAuction.getString(Auction.Key.AUCTION_START));
+				try {
+					
+					Date auction_end = df.parse(jsonAuction.getString(Auction.Key.AUCTION_END));
+					if (auction_end.before(auction_start) || auction_end.equals(auction_start))
+						throw new Exception ("Auction end date must be after start date");
+					
+				} catch (Exception e) {
+					
+					throw new Exception ("Auction end date is invalid");
+				}
 				
 			} catch (ParseException e) {
 				
 				throw new Exception ("Auction start date is invalid");
 			}
 				
+			
+			
+			//loop through schedule
 			try {
-				Date auction_end = df.parse(jsonAuction.getString(Auction.Key.AUCTION_END));
-			} catch (Exception e) {
+				JSONObject jsonAuctionSched = (JSONObject) JSONSerializer.toJSON( jsonAuction.get(Auction.Key.AUCTION_SCHEDULE));
+				JSONArray jsonSched = (JSONArray) JSONSerializer.toJSON( jsonAuctionSched.get(Auction.Key.SCHEDULE_ROW) ); 
+				List<ScheduleItem> schedule = new ArrayList<ScheduleItem>();
 				
-				throw new Exception ("Auction end date is invalid");
+				schedule = ScheduleSerializer.toSchedule(jsonSched.toString());
+				
+				for (int i=0; i < schedule.size(); i++){
+					if ( (i + 1) < schedule.size()){
+						if (schedule.get(i).getMax() >= schedule.get(i + 1).getMin())
+							throw new Exception ("Min and Max values between schedule levels cannot overlap");
+						if (schedule.get(i).getMin() >= schedule.get(i + 1).getMin())
+							throw new Exception ("Schedule range is not in order");
+						if (schedule.get(i).getMax() >= schedule.get(i + 1).getMax())
+							throw new Exception ("Schedule range is not in order");
+					}
+					
+					if (schedule.get(i).getDis() <= 0 )
+						throw new Exception ("Discount must be greater than 0");
+					
+					if (schedule.get(i).getMin() <= 0 )
+						throw new Exception ("Min must be greater than 0");
+					
+					if (schedule.get(i).getMax() <= 0 )
+						throw new Exception ("Max must be greater than 0");
+					
+				}
+			} catch (Exception e) {
+				throw new Exception ("Problem serializing auction schedule");
 			}
-			
-			if (auction_end.before(auction_start) || auction_end.equals(auction_start))
-				throw new Exception ("Auction end date must be after start date");
-			
-			
 			
 			
 			
 		}
 		
 		
-		return null;
+		return true;
 	}
 	
 	

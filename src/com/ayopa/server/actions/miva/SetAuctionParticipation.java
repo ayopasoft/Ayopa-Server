@@ -144,7 +144,8 @@ public class SetAuctionParticipation extends ActionSupport {
 		try {
 			purchaseID = Purchase.putPurchase(auctionID, buyerID, quantity, price);
 			
-			Buyer.addAddress(buyerID, address1, address2, city, state, zip, country);
+			if (address1 != null && !address1.equals(""))
+				Buyer.addAddress(buyerID, address1, address2, city, state, zip, country);
 		    
 			FBUtils.postAuctionToFacebook(auctionID, buyerID);
 		

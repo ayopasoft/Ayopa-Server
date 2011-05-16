@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -28,6 +29,8 @@ public class AuctionPersistence {
 			auction.setAuction_id(UUID.randomUUID().toString());
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
+		
 		AwsFacade aws = AwsFacade.getInstance();
 		
 		
@@ -137,6 +140,8 @@ public class AuctionPersistence {
 		Auction auction = new Auction ();
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
+		
 		if (map.containsKey(AwsFacade.Key.AUCTION_ID))
 			auction.setAuction_id (map.get(AwsFacade.Key.AUCTION_ID));
 		if (map.containsKey(AwsFacade.Key.PRODUCT_ID))

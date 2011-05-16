@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import com.ayopa.server.utils.AwsFacade;
 
@@ -251,9 +253,9 @@ public class CurrentAuction {
 		
 		Map<String,Long> map = new HashMap<String,Long>();
 		
-		Calendar calendar1 = Calendar.getInstance();
-		Calendar calendar2 = Calendar.getInstance();
-		calendar1.setTime(Calendar.getInstance().getTime());
+		Calendar calendar1 = Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US);
+		Calendar calendar2 = Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US);
+		calendar1.setTime(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
 	    calendar2.setTime(auction.getAuction_end());
 	    
 	    long milliseconds1 = calendar1.getTimeInMillis();

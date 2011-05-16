@@ -7,13 +7,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
 
 import com.ayopa.server.model.persistence.InvoicePersistence;
-import com.ayopa.server.model.persistence.MerchantPersistence;
 import com.ayopa.server.utils.Mail;
 import com.ayopa.server.utils.PaypalUtils;
 
@@ -89,7 +90,7 @@ public class Invoice {
 		List<Invoice> invoices = new ArrayList<Invoice>();
 		InvoicePersistence ip = new InvoicePersistence();
 		
-		Date now = Calendar.getInstance().getTime();
+		Date now = Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime();
 		
 		double total = 0;
 		

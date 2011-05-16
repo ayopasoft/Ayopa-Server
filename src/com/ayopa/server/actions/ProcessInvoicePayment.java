@@ -9,6 +9,8 @@ import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -182,7 +184,7 @@ public class ProcessInvoicePayment extends ActionSupport implements ServletReque
 							inv = inv.getInvoice(invoice);
 							if (Double.parseDouble(mc_gross) == inv.getInvoice_total() && mc_currency.equals("USD"))
 							{
-								Date now = Calendar.getInstance().getTime();
+								Date now = Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime();
 								inv.setInvoice_paid(Boolean.TRUE);
 								inv.setInvoice_pd_date(now);
 								inv.putInvoice(inv);

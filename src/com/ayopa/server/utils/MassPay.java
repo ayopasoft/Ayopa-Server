@@ -73,6 +73,6 @@ public class MassPay
 		{
 			ex.printStackTrace();
 		}
-		return decoder.get("ACK"); 
+		return decoder.get("ACK") + decoder.get("L_LONGMESSAGE") + decoder.get("L_ERRORCODE"); 
 	}
 }

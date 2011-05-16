@@ -44,7 +44,7 @@
 			//stream publish method    
 			
 			function inviteFriends(content, url, label, actiontext){
-				var fbml = '<center><fb:request-form action="http://apps.facebook.com/ayopa_auctions/" target="_top" method="POST" invite="true" type="Group Buy" content="' + content + '" <fb:req-choice url="' + url + '" label="'+ label + '" /> <fb:multi-friend-selector target="_top" cols="3" rows="5" showborder="false" actiontext="' + actiontext + '" /> </fb:request-form></center>';  
+				var fbml = '<center><fb:request-form action="http://apps.facebook.com/ayopa_auctions/" target="_top" action="' + url + '" method="POST" invite="true" type="Group Buy" content="' + content + '" <fb:req-choice url="' + url + '" label="'+ label + '" /> <fb:multi-friend-selector target="_top" cols="3" rows="5" showborder="false" actiontext="' + actiontext + '" /> </fb:request-form></center>';  
 					FB.ui({     
 					method: 'fbml.dialog',     
 					fbml: fbml,     
@@ -62,7 +62,7 @@
 				 	attachment: {
                      
 				 	name: userPrompt,                         
-				 	caption: '',                         
+				 	caption: 'Group buy and save!',                         
 				 	description: (description),                         
 				 	href: hrefLink, 
 				 	media: [
@@ -255,7 +255,7 @@
 												<s:param name="value" value="purchase_price"/>
 											</s:text>
 										</div>
-										<div><a href="" onclick="inviteFriends('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, we can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.','<s:property value="link"/>','Group Buy and Save','Invite friends to this group buy through ayopa'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_friends.png" /></a></div>
+										<div><a href="" onclick="inviteFriends('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this <s:property value="title" escapeJavaScript="true" />, we can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.','<s:property value="link"/>','Group Buy and Save','Invite friends to this group buy through ayopa'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_friends.png" /></a></div>
 										<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, we can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/post_to_wall.png" /></a></div>
 									</div>
 

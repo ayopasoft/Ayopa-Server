@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import net.sf.json.JSONArray;
@@ -28,7 +29,8 @@ public class InvoicePersistence {
 			invoice.setInvoice_id(UUID.randomUUID().toString());		
 		
 		Map<String, String> map = new HashMap<String, String>();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
 		map.put(AwsFacade.Key.INVOICE_ID,invoice.getInvoice_id());
 		
@@ -69,6 +71,7 @@ public class InvoicePersistence {
 	public Invoice mapToInvoice(Map<String, String> map) {
 		Invoice invoice = new Invoice();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
 		if (map.containsKey(AwsFacade.Key.INVOICE_ID)){
 			invoice.setInvoice_id(map.get(AwsFacade.Key.INVOICE_ID));

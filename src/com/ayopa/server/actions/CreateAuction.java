@@ -1,5 +1,7 @@
 package com.ayopa.server.actions;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -14,7 +16,8 @@ import com.opensymphony.xwork2.ActionSupport;
 })
 public class CreateAuction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-
+	private static Log log = LogFactory.getLog(CreateAuction.class);
+	
 	private String auctionDef;
 	private String jsoncallback;
 	private String jsonReturn;
@@ -37,12 +40,21 @@ public class CreateAuction extends ActionSupport {
 	public String execute() throws Exception {
 		
 		Auction auction = new Auction();
+		String jsonString = "";
 		
-		//String validates = auction.validateAuction(auctionDef);
+		try {
+			boolean validates = auction.validateAuction(auctionDef);
+			
+			if (validates)
+				jsonString = auction.putAuction(auctionDef);
 		
-		String jsonString = auction.putAuction(auctionDef);
+		} catch (Exception e) {
+			
+			log.error("Problem validating create auction: " + e);
+			e.printStackTrace();
+		}
 		
-		if ( jsoncallback != null || jsoncallback != "" ) jsonReturn = jsoncallback + "(" + jsonString + ");";
+		if ( jsoncallback != null && !jsoncallback.equals("") ) jsonReturn = jsoncallback + "(" + jsonString + ");";
 		else jsonReturn = jsonString;
 		
 		return Action.SUCCESS;

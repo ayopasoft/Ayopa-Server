@@ -10,6 +10,8 @@ import com.paypal.sdk.services.NVPCallerServices;
 
 public class PaypalUtils {
 
+	//https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ALC6UKX9WQKPA
+
 	public static final String PAY_NOW_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q9KPS9CZHJT3Y";
 	public static final String PAYPAL_URL = "https://www.sandbox.paypal.com/cgi-bing/webscr";
 	public static final String INVOICE_SUBJECT = "Ayopa Invoice";
@@ -18,13 +20,16 @@ public class PaypalUtils {
 	
 	
 	
-	//public static final String PAYPAL_EMAIL = "info@ayopasoft.com";
-	public static final String PAYPAL_EMAIL ="kari_1304368087_biz@happyjacksoftware.com";
-	
-	public static final String API_USERNAME = "kari_1304368087_biz_api1.happyjacksoftware.com";
-	public static final String API_PASSWORD = "1304368104";
-	public static final String SIGNATURE = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-A1.LLMlJ2dXSX.m67x.o9U.71IFw ";
-	public static final String ENVIRONMENT = "sandbox";
+	//public static final String PAYPAL_EMAIL = "rebate@ayopasoft.com";  //live
+	public static final String PAYPAL_EMAIL ="kari_1304368087_biz@happyjacksoftware.com"; //sandbox
+	//public static final String API_USERNAME = "todd_api1.ayopasoft.com"; //live
+	public static final String API_USERNAME = "kari_1304368087_biz_api1.happyjacksoftware.com"; //sandbox
+	//public static final String API_PASSWORD = "PUYFGW2Q36XR4DW7"; //live
+	public static final String API_PASSWORD = "1304368104";  //sandbox
+	//public static final String SIGNATURE = "AjuSD4cUJhLD7WfOQsd7ZAS6t3MxACDTOa5VcvCxfoX4.JY7XWZK4biO"; //live
+	public static final String SIGNATURE = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-A1.LLMlJ2dXSX.m67x.o9U.71IFw "; //sandbox
+	//public static final String ENVIRONMENT = "live"; //live
+	public static final String ENVIRONMENT = "sandbox";  //sandbox
 	
 	
 	public static String massPayCode(String emailSub,String receiverType, List<String> receiverEmail,
