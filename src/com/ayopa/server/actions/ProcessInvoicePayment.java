@@ -14,18 +14,13 @@ import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONObject;
-
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.ayopa.server.model.Auction;
-import com.ayopa.server.model.Buyer;
 import com.ayopa.server.model.Invoice;
-import com.ayopa.server.model.persistence.BuyerPersistence;
-import com.ayopa.server.utils.FBUtils;
 import com.ayopa.server.utils.PaypalUtils;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;

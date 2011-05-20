@@ -66,9 +66,7 @@ public class ConsumerAuctions extends ActionSupport implements SessionAware {
 
 	@Override
 	public String execute() throws Exception {
-		//get users current auctions
-		//authenticate by FB ID
-		
+				
 		Auction auction = new Auction();
 		if (category == null || category.equals(""))
 			auctions = AuctionDTO.auctionsToAuctionDTO(auction.getCurrentAuctions());

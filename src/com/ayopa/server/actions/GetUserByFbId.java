@@ -1,9 +1,5 @@
 package com.ayopa.server.actions;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 

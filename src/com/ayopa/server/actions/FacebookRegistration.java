@@ -14,7 +14,6 @@ import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.ayopa.server.model.Buyer;
-import com.ayopa.server.model.persistence.AuctionPersistence;
 import com.ayopa.server.model.persistence.BuyerPersistence;
 import com.ayopa.server.utils.FBUtils;
 import com.opensymphony.xwork2.Action;
