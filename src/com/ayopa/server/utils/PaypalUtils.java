@@ -11,9 +11,10 @@ import com.paypal.sdk.services.NVPCallerServices;
 public class PaypalUtils {
 
 	//https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ALC6UKX9WQKPA
-
+	
 	public static final String PAY_NOW_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q9KPS9CZHJT3Y";
-	public static final String PAYPAL_URL = "https://www.sandbox.paypal.com/cgi-bing/webscr";
+	//public static final String PAYPAL_URL = "https://www.paypal.com/cgi-bin/webscr";
+	public static final String PAYPAL_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr";
 	public static final String INVOICE_SUBJECT = "Ayopa Invoice";
 	public static final String INVOICE_FROM = "info@ayopasoft.com";
 	public static final String PAYPAL_ID = "";
@@ -27,7 +28,7 @@ public class PaypalUtils {
 	//public static final String API_PASSWORD = "PUYFGW2Q36XR4DW7"; //live
 	public static final String API_PASSWORD = "1304368104";  //sandbox
 	//public static final String SIGNATURE = "AjuSD4cUJhLD7WfOQsd7ZAS6t3MxACDTOa5VcvCxfoX4.JY7XWZK4biO"; //live
-	public static final String SIGNATURE = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-A1.LLMlJ2dXSX.m67x.o9U.71IFw "; //sandbox
+	public static final String SIGNATURE = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-A1.LLMlJ2dXSX.m67x.o9U.71IFw"; //sandbox
 	//public static final String ENVIRONMENT = "live"; //live
 	public static final String ENVIRONMENT = "sandbox";  //sandbox
 	
