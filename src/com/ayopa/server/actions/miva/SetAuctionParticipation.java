@@ -1,10 +1,12 @@
 package com.ayopa.server.actions.miva;
 
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.ayopa.server.actions.CreateAuction;
 import com.ayopa.server.model.Buyer;
 import com.ayopa.server.model.Purchase;
 import com.ayopa.server.utils.FBUtils;
@@ -18,7 +20,8 @@ import com.opensymphony.xwork2.ActionSupport;
 })
 public class SetAuctionParticipation extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-
+	private static org.apache.log4j.Logger logger = Logger.getLogger(SetAuctionParticipation.class);
+	
 	private String auctionID;
 	private String buyerID;
 	private Integer quantity;
@@ -151,7 +154,7 @@ public class SetAuctionParticipation extends ActionSupport {
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Problem setting auction participation for AuctionID = : " + auctionID + ", buyerID: " + buyerID + ", quantity: " + quantity + ", price: " + price + ": " + e);
 			purchaseID = "";
 		}
 		

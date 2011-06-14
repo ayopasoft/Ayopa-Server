@@ -3,6 +3,7 @@ package com.ayopa.server.actions;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -16,7 +17,8 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({ @Result(name = Action.SUCCESS, location = "DisplayAuctionButton.jsp"), })
 public class DisplayAuctionButton extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-
+	private static org.apache.log4j.Logger logger = Logger.getLogger(DisplayAuctionButton.class);
+	
 	private String auctionID;
 
 	public void setAuctionID(String auctionID) {
@@ -102,32 +104,37 @@ public class DisplayAuctionButton extends ActionSupport {
 		// detects pricing conflict
 		
 		
-			Auction auction = new Auction();
-			CurrentAuction currAuction = new CurrentAuction();
-			Map<String, Long> map = new HashMap<String, Long>();
-			Map<String,Object> currMap = new HashMap<String, Object>();
+			try {
+				Auction auction = new Auction();
+				CurrentAuction currAuction = new CurrentAuction();
+				Map<String, Long> map = new HashMap<String, Long>();
+				Map<String,Object> currMap = new HashMap<String, Object>();
 
-			auction = auction.getAuction(auctionID);
-			currMap = currAuction.getCurrentQuantity(auctionID);
-			int quantity = (Integer) currMap.get("quantity");
-			
-			currAuction = CurrentAuction.getCurrentAuctionInfo(auction, quantity);
+				auction = auction.getAuction(auctionID);
+				currMap = currAuction.getCurrentQuantity(auctionID);
+				int quantity = (Integer) currMap.get("quantity");
+				
+				currAuction = CurrentAuction.getCurrentAuctionInfo(auction, quantity);
 
-			map = CurrentAuction.getAuctionTimeRemaining(auction);
+				map = CurrentAuction.getAuctionTimeRemaining(auction);
 
-			current_price = currAuction.getCurrent_price();
-			start_price = auction.getAuction_startprice();
-			next_price = currAuction.getNext_price();
-			lowest_price = currAuction.getLowest_price();
-			highest_quant = currAuction.getLowest_level();
-			start_quant = auction.getAuction_schedule().get(0).getMin();
-			current_quant = currAuction.getCurrent_level();
-			next_quant = currAuction.getNext_level();
-			time_days = map.get("days");
-			time_hours = map.get("hours");
-			time_minutes = map.get("minutes");
-			time_seconds = map.get("seconds");
-			price_conflict = auction.getAuction_priceconflict();
+				current_price = currAuction.getCurrent_price();
+				start_price = auction.getAuction_startprice();
+				next_price = currAuction.getNext_price();
+				lowest_price = currAuction.getLowest_price();
+				highest_quant = currAuction.getLowest_level();
+				start_quant = auction.getAuction_schedule().get(0).getMin();
+				current_quant = currAuction.getCurrent_level();
+				next_quant = currAuction.getNext_level();
+				time_days = map.get("days");
+				time_hours = map.get("hours");
+				time_minutes = map.get("minutes");
+				time_seconds = map.get("seconds");
+				price_conflict = auction.getAuction_priceconflict();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				logger.error("Problem displaying auction information: " + e);
+			}
 		
 		
 		return Action.SUCCESS;

@@ -1,9 +1,11 @@
 package com.ayopa.server.actions.miva;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.ayopa.server.actions.CreateAuction;
 import com.ayopa.server.model.Merchant;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,6 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 })
 public class CheckLogin extends ActionSupport {
 	private static final long serialVersionUID = 1L;
+	private static org.apache.log4j.Logger logger = Logger.getLogger(CreateAuction.class);
 
 	private String username;
 	private String password;
@@ -44,6 +47,7 @@ public class CheckLogin extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		
+		try {
 		Merchant merchant = new Merchant();
 		
 		if (username == null || username.trim().length() == 0)
@@ -60,6 +64,11 @@ public class CheckLogin extends ActionSupport {
 			
 			if (merchant.getMerchant_id() == null)
 				merchantID = "<merchant_id value = \"0\">";
+		}
+		}
+		catch (Exception e)
+		{
+			logger.error("Authentication error: " + e);
 		}
 		
 		return Action.SUCCESS;

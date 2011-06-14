@@ -424,6 +424,48 @@ public class Auction {
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.MERCHANT_ID + "` = '" + merchant_id + "' and `" 
 		+ AwsFacade.Key.PRODUCT_ID + "` = '" + product_id + "' and `" 
+		+ AwsFacade.Key.AUCTION_START + "` != '' and `" 
+		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
+		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
+		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
+		+ AwsFacade.Key.AUCTION_START + "` desc";
+		
+		log.info(query);
+		
+		List<Map<String,String>> results = aws.selectRows(query);
+		
+		
+		if (results.size() == 0) {
+			//return auction;
+		}
+		else {
+			if (results.size() > 1){
+				log.info("getAuctionForProduct returned more than 1 result");
+			}
+			
+			auction = ap.mapToAuction(results.get(0));
+			
+		}
+		
+			return auction;
+			
+	}
+	
+	public Auction getCurrentAuctionForProduct (String merchant_id, String product_id) throws IOException{
+		Auction auction = new Auction();
+		AuctionPersistence ap = new AuctionPersistence();
+		
+		AwsFacade aws = AwsFacade.getInstance();
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
+		
+		String now = df.format(Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime());
+	
+	
+		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
+		+ AwsFacade.Key.MERCHANT_ID + "` = '" + merchant_id + "' and `" 
+		+ AwsFacade.Key.PRODUCT_ID + "` = '" + product_id + "' and `" 
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
 		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
 		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
@@ -921,7 +963,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 					throw new Exception ("Max Units must be greater than 0");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				throw new Exception ("Auction Max Units must be an integer");
+				throw new Exception ("Auction Max Units must be an integer greater than 0");
 			}
 			
 			try {
@@ -931,7 +973,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				throw new Exception ("Start Price must be a number");
+				throw new Exception ("Start Price must be a number greater than 0");
 			}
 			
 			
@@ -969,7 +1011,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 			
 			
 			//loop through schedule
-			try {
+			//try {
 				JSONObject jsonAuctionSched = (JSONObject) JSONSerializer.toJSON( jsonAuction.get(Auction.Key.AUCTION_SCHEDULE));
 				JSONArray jsonSched = (JSONArray) JSONSerializer.toJSON( jsonAuctionSched.get(Auction.Key.SCHEDULE_ROW) ); 
 				List<ScheduleItem> schedule = new ArrayList<ScheduleItem>();
@@ -996,9 +1038,9 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 						throw new Exception ("Max must be greater than 0");
 					
 				}
-			} catch (Exception e) {
-				throw new Exception ("Problem serializing auction schedule");
-			}
+			//} catch (Exception e) {
+			//	throw new Exception ("Problem serializing auction schedule");
+			//}
 			
 			
 			

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -27,6 +28,7 @@ import com.opensymphony.xwork2.ActionSupport;
 })
 public class GetUserByFbId extends ActionSupport implements ServletRequestAware{
 	private static final long serialVersionUID = 1L;
+	private static org.apache.log4j.Logger logger = Logger.getLogger(GetUserByFbId.class);
 	
 	private String jsoncallback;
 	private String jsonReturn;
@@ -102,6 +104,7 @@ public class GetUserByFbId extends ActionSupport implements ServletRequestAware{
 				if (buyer.getBuyer_id() != null)
 				{
 					jsonString = "{\"User\": \"" + map.get("uid") + "\"}";
+					logger.info("FB User ID: " + map.get("uid"));
 				}
 			}
 			

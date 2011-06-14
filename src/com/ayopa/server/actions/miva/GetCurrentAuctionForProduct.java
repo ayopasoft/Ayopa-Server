@@ -52,7 +52,7 @@ public class GetCurrentAuctionForProduct extends ActionSupport {
 		else
 			{
 				auctionID = "0";
-				auction = auction.getAuctionForProduct(merchantID, productID);
+				auction = auction.getCurrentAuctionForProduct(merchantID, productID);
 			
 				if (auction.getAuction_id() != null){
 					if (auction.getAuction_maxunits() > (Integer) currAuction.getCurrentQuantity(auction.getAuction_id()).get("quantity")){
