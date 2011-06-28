@@ -1,8 +1,11 @@
 package com.ayopa.server.model;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import com.ayopa.server.model.persistence.PurchasePersistence;
 
@@ -108,6 +111,11 @@ public class Purchase implements Comparable<Purchase> {
 	public static String putPurchase(String auction_id, String buyer_id, Integer quantity, Double price) throws IOException {
 		
 		PurchasePersistence pp = new PurchasePersistence();
+		Date now = Calendar.getInstance(TimeZone.getTimeZone("US/Mountain"), Locale.US).getTime();
+		String purchaseReturn = "";
+		
+		if (auction_id.trim().length() == 0 || buyer_id.trim().length() == 0 || quantity == 0 || price == 0)
+			throw new IOException ("A purchase parameter is blank");
 		
 		Purchase purchase = new Purchase();
 		purchase.setPurchase_auction_id(auction_id);
@@ -128,7 +136,10 @@ public class Purchase implements Comparable<Purchase> {
 			purchase.setAuction_end(auction.getAuction_end());
 		}	
 		
-		String purchaseReturn = pp.putPurchase(purchase);
+		if (auction.getAuction_end().after(now))
+			purchaseReturn = pp.putPurchase(purchase);
+		else
+			purchaseReturn = "Expired";
 		
 		return purchaseReturn;
 	}

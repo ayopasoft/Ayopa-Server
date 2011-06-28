@@ -89,25 +89,31 @@ public class GetUserByFbId extends ActionSupport implements ServletRequestAware{
 		
 		jsonString = "{\"User\": \"" + "\"}";
 		
-		for(Cookie c : request.getCookies()) {
-		    if (c.getName().equals("fbs_"+ FBUtils.FACEBOOK_API_KEY))
-		      fbCookie=c.getValue();
-		  }
 		
-		if (fbCookie != null) {
+		try {
+			for(Cookie c : request.getCookies()) {
+			    if (c.getName().equals("fbs_"+ FBUtils.FACEBOOK_API_KEY))
+			      fbCookie=c.getValue();
+			  }
 			
-			map = FBUtils.parseFBCookie(fbCookie);
-			
-			if (map.containsKey("uid"))
-			{
-				buyer = bp.getBuyer(map.get("uid"));
-				if (buyer.getBuyer_id() != null)
+			if (fbCookie != null) {
+				
+				map = FBUtils.parseFBCookie(fbCookie);
+				
+				if (map.containsKey("uid"))
 				{
-					jsonString = "{\"User\": \"" + map.get("uid") + "\"}";
-					logger.info("FB User ID: " + map.get("uid"));
+					buyer = bp.getBuyer(map.get("uid"));
+					if (buyer.getBuyer_id() != null)
+					{
+						jsonString = "{\"User\": \"" + map.get("uid") + "\"}";
+						logger.info("FB User ID: " + map.get("uid"));
+					}
 				}
+				
 			}
 			
+		} catch (Exception e) {
+			logger.error("Error getting User FB ID: " + e);
 		}	
 			
 			if ( jsoncallback != null) jsonReturn = jsoncallback + "(" + jsonString + ");";

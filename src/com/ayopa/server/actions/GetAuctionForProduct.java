@@ -1,10 +1,15 @@
 package com.ayopa.server.actions;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.ayopa.server.model.Auction;
+import com.ayopa.server.model.CurrentAuction;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -15,7 +20,8 @@ import com.opensymphony.xwork2.ActionSupport;
 })
 public class GetAuctionForProduct extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-
+	private static org.apache.log4j.Logger logger = Logger.getLogger(GetAuctionForProduct.class);
+	
 	private String merchantID;
 	private String productID;
 
@@ -60,14 +66,34 @@ public class GetAuctionForProduct extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		
-		Auction auction = new Auction();
+		try {
+			Auction auction = new Auction();
+			Map<String,Object> currMap = new HashMap<String, Object>();
+			CurrentAuction currAuction = new CurrentAuction();
+			
+			auction = auction.getAuctionForProduct(merchantID, productID);
+			
+			if (auction.getAuction_id() == null)
+				jsonString = "0";
+			else
+				currMap = currAuction.getCurrentQuantity(auction.getAuction_id());
+				int quantity = (Integer) currMap.get("quantity");
 				
-		auction = auction.getAuctionForProduct(merchantID, productID);
-		
-		if (auction.getAuction_id() == null)
+				if (quantity >= auction.getAuction_maxunits())
+				{
+					jsonString = "0";
+				}
+				else
+				{
+					jsonString = auction.auctionToJson(auction);
+				}
+				
+		} catch (Exception e) {
+			
 			jsonString = "0";
-		else
-			jsonString = auction.auctionToJson(auction);
+			logger.error("Problem with Get Auction for Product: " + e.getMessage());
+		}
+			
 		
 		if ( jsoncallback != null && !jsoncallback.equals("") ) jsonReturn = jsoncallback + "(" + jsonString + ");";
 		else jsonReturn = jsonString;

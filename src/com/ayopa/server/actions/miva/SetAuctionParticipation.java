@@ -6,7 +6,6 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
-import com.ayopa.server.actions.CreateAuction;
 import com.ayopa.server.model.Buyer;
 import com.ayopa.server.model.Purchase;
 import com.ayopa.server.utils.FBUtils;
@@ -145,6 +144,7 @@ public class SetAuctionParticipation extends ActionSupport {
 	public String execute() throws Exception {
 		
 		try {
+					
 			purchaseID = Purchase.putPurchase(auctionID, buyerID, quantity, price);
 			
 			if (address1 != null && !address1.equals(""))
@@ -155,7 +155,7 @@ public class SetAuctionParticipation extends ActionSupport {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			logger.error("Problem setting auction participation for AuctionID = : " + auctionID + ", buyerID: " + buyerID + ", quantity: " + quantity + ", price: " + price + ": " + e);
-			purchaseID = "";
+			purchaseID = "0";
 		}
 		
 		return Action.SUCCESS;
