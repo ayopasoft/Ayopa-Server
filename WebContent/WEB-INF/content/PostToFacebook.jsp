@@ -67,6 +67,6 @@
 
 <h2>Thank you for participating in this ayopa group buy</h2>
 <p>When you complete your purchase, we will post your purchase to your Facebook wall. Below is an example of how these types of posts look. You may also re-post this or send to specific friends from the <a href="http://apps.facebook.com/ayopa_auctions" target="_blank">ayopa facebook app.</a></p>
-	<img src="http://ayopa-resources.s3.amazonaws.com/images/FB_post_preview.png">							
+	<img src="https://ayopa-resources.s3.amazonaws.com/images/FB_post_preview.png">							
 </body>
 </html>

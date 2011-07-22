@@ -105,7 +105,7 @@ public class InvoicePersistence {
 		}
 		
 		if (map.containsKey(AwsFacade.Key.INVOICE_NOTICE)){
-			invoice.setInvoice_notice(Integer.parseInt(map.get(AwsFacade.Key.MERCHANT_ID)));
+			invoice.setInvoice_notice(Integer.parseInt(map.get(AwsFacade.Key.INVOICE_NOTICE)));
 		}
 		
 		if (map.containsKey(AwsFacade.Key.INVOICE_AUCTIONS)){

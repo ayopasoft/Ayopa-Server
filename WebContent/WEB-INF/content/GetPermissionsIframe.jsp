@@ -34,9 +34,9 @@ function newWindow()
 <body>
 <h2>Group Buy &amp; Save</h2>
 <p>In order to participate in the group buy, register for an ayopa account through your facebook account.  Click the "Register Now" button below and agree to the facebook permissions to complete your registration.</p>
-<a href="#" onClick="newWindow()"><img src="http://ayopa-resources.s3.amazonaws.com/images/register.png" alt="register now" title="register now"></a>
+<a href="#" onClick="newWindow()"><img src="https://ayopa-resources.s3.amazonaws.com/images/register.png" alt="register now" title="register now"></a>
 <br/><br/>
-<p align="right"><a href="http://www.ayopasoft.com" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/ayopasoftware_logo.png"></a><br/>
+<p align="right"><a href="http://www.ayopasoft.com" target="_blank"><img src="https://ayopa-resources.s3.amazonaws.com/images/ayopasoftware_logo.png"></a><br/>
 <a href="http://www.ayopasoft.com/terms.html" target="_blank">Terms of Service</a> | 
 <a href="http://www.ayopasoft.com/privacy.html" target="_blank">Privacy Policy</a></p>
 </body>

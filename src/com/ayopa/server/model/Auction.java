@@ -249,7 +249,7 @@ public class Auction {
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
 		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
-		//+ AwsFacade.Key.MERCHANT_ID + "` != '1' and `"
+		+ AwsFacade.Key.MERCHANT_ID + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
 		+ AwsFacade.Key.AUCTION_START + "` desc";
@@ -283,6 +283,7 @@ public class Auction {
 		
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.PRODUCT_CAT + "` = '" + category + "' and `"
+		+ AwsFacade.Key.MERCHANT_ID + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
 		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
 		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
@@ -354,6 +355,7 @@ public class Auction {
 		
 		String query = "select * from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.AUCTION_END + "` <= '" + now + "' and `"
+		+ AwsFacade.Key.MERCHANT_ID + "` != '1' and `"
 		+ AwsFacade.Key.REBATE_SENT + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_CLEARED + "` != '1' and `"
 		+ AwsFacade.Key.INVOICE_SENT + "` != '1' and `"
@@ -390,6 +392,7 @@ public class Auction {
 		String query = "select `" + AwsFacade.Key.PRODUCT_CAT + "` from `" + AwsFacade.Table.AUCTION + "` where `" 
 		+ AwsFacade.Key.AUCTION_START + "` <= '" + now + "' and `" 
 		+ AwsFacade.Key.AUCTION_END + "` >= '" + now + "' and `"
+		+ AwsFacade.Key.MERCHANT_ID + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_ENDED + "` != '1' and `"
 		+ AwsFacade.Key.AUCTION_DELETED + "` != '1' order by `"
 		+ AwsFacade.Key.AUCTION_START + "` desc";
@@ -801,7 +804,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 	public Auction jsonToAuction(String json)
 	{
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
 		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
 		
 		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( json ); 
@@ -852,7 +855,7 @@ public List<AuctionDTO> getAllAuctionsForBuyer (String buyer_id) throws IOExcept
 	
 	public boolean validateAuction(String auctionDef) throws Exception {
 		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm a"); 
 		
 		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON( auctionDef ); 
 		

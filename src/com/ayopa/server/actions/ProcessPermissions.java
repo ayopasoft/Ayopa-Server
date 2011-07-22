@@ -139,7 +139,7 @@ public class ProcessPermissions extends ActionSupport implements ServletResponse
 				recipient[0] = user.getEmail();
 			    String message = "Welcome to group savings with ayopa. " +
 			    		"Track your savings and find more auctions at http://apps.facebook.com/ayopa_auctions. " +
-			    		"By default, we will send your Paypal payments to this email address: " + user.getEmail() +
+			    		" By default, we will send your Paypal payments to this email address: " + user.getEmail() +
 			    		" If you would like to change your Paypal email address, finish your account setup by creating " +
 			    		"an account by clicking or pasting this link into your browser: https://accounts.ayopasoft.com/new_account. " +  "" +
 			    		"Be sure to use " + user.getEmail() + " as your email address when you create your " +

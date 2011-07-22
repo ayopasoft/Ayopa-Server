@@ -104,51 +104,53 @@ public class Invoice {
 			currAuction = CurrentAuction.getCurrentAuctionInfo(auctions.get(i), quantity);
 			map = CurrentAuction.getCurrentAuctionRebate(auctions.get(i).getMerchant_id(), currAuction.getCurrent_price(), (Double) map.get("total"), quantity);
 			
+			
 		
-			if (auctions.get(i).getMerchant_id().equals(merchant_id)){
-				//add to invoice total for same merchant
-				total += (Double) map.get("auction_total");
+				if (auctions.get(i).getMerchant_id().equals(merchant_id)){
+					//add to invoice total for same merchant
+					total += (Double) map.get("auction_total");
+					
+				}
+				else {
+					
+					//start new invoice
+					invoice = new Invoice();
+					inv_auctions = new ArrayList<Map<String,String>>();
+					
+					total = (Double) map.get("auction_total");		
+				}
 				
-			}
-			else {
+				map_auctions.put("auction_id", auctions.get(i).getAuction_id());
+				map_auctions.put("product_name", auctions.get(i).getProduct_title());
+				map_auctions.put("rebate_total", map.get("rebate_total").toString());
+				map_auctions.put("commission_total", map.get("commission_total").toString());
+				map_auctions.put("auction_total", map.get("auction_total").toString());
 				
-				//start new invoice
-				invoice = new Invoice();
-				inv_auctions = new ArrayList<Map<String,String>>();
+				inv_auctions.add(map_auctions);
+				invoice.setAuction_info(inv_auctions);
+				invoice.setMerchant_id(auctions.get(i).getMerchant_id());
+				invoice.setInvoice_total(total);
+				invoice.setInvoice_date(now);
+				invoice.setInvoice_id(UUID.randomUUID().toString());
+				invoice.setInvoice_notice(1);
 				
-				total = (Double) map.get("auction_total");		
-			}
-			
-			map_auctions.put("auction_id", auctions.get(i).getAuction_id());
-			map_auctions.put("product_name", auctions.get(i).getProduct_title());
-			map_auctions.put("rebate_total", map.get("rebate_total").toString());
-			map_auctions.put("commission_total", map.get("commission_total").toString());
-			map_auctions.put("auction_total", map.get("auction_total").toString());
-			
-			inv_auctions.add(map_auctions);
-			invoice.setAuction_info(inv_auctions);
-			invoice.setMerchant_id(auctions.get(i).getMerchant_id());
-			invoice.setInvoice_total(total);
-			invoice.setInvoice_date(now);
-			invoice.setInvoice_id(UUID.randomUUID().toString());
-			invoice.setInvoice_notice(1);
-			
-			merchant_id = auctions.get(i).getMerchant_id();
-			
-			if ((i + 1) == auctions.size()){
-				//last iteration - save invoice
-				invoices.add(invoice);
-				ip.putInvoice(invoice);
+				merchant_id = auctions.get(i).getMerchant_id();
 				
-			}
-			else
-			{
-				if (!merchant_id.equals(auctions.get(i + 1).getMerchant_id())){ //finished with merchant - save invoice
+				if ((i + 1) == auctions.size()){
+					//last iteration - save invoice
 					invoices.add(invoice);
 					ip.putInvoice(invoice);
+					
+				}
+				else
+				{
+					if (!merchant_id.equals(auctions.get(i + 1).getMerchant_id())){ //finished with merchant - save invoice
+						invoices.add(invoice);
+						ip.putInvoice(invoice);
+					}
 				}
 			}
-		}
+		
 
 			return invoices;
 	}
@@ -168,8 +170,9 @@ public class Invoice {
 	  for (int i = 0; i < invoices.size(); i++){
 		  merchant = merchant.getMerchant(invoices.get(i).getMerchant_id());
 		  String[] recipient;
-		  recipient = new String[1];
+		  recipient = new String[2];
 		  recipient[0] = merchant.getMerchant_paypal();
+		  recipient[1] = "kari@happyjacksoftware.com";
 		  String message = "Please pay for the following auctions:\n";
 		  for (int j = 0; j < invoices.get(i).getAuction_info().size(); j++) {
 			  message += "\n\nAuction: " + invoices.get(i).getAuction_info().get(j).get("auction_id");

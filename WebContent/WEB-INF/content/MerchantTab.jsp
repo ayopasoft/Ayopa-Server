@@ -59,8 +59,8 @@
 				 	message: '',                     
 				 	attachment: {
                      
-				 	name: userPrompt,                         
-				 	caption: '',                         
+				 	name: 'Join this GroupBuy',                         
+				 	caption: userPrompt,                          
 				 	description: (description),                         
 				 	href: hrefLink, 
 				 	media: [
@@ -75,7 +75,7 @@
                    
 				 	},                     
 				 	action_links: [                         
-				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' }
+				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopasoft.com' }
 				                        
 				 	],                     
 				 	user_prompt_message: userPrompt                 

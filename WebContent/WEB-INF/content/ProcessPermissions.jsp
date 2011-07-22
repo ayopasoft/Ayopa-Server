@@ -16,7 +16,7 @@ receive your rebate via paypal for the difference of the purchase price and the 
 <p>After your purchase, we will post your purchase to your facebook wall.  Below is an example of these types of posts.</p>
 <img src="http://ayopa-resources.s3.amazonaws.com/images/FB_post_preview.png">
 <p>Please be sure to complete your account setup at 
-<a href="http://accounts.ayopasoft.com/new_account" target="_blank">ayopasoft.com</a> to ensure your payments go to your preferred PayPal email address.</p>
+<a href="https://accounts.ayopasoft.com/new_account" target="_blank">ayopasoft.com</a> to ensure your payments go to your preferred PayPal email address.</p>
 
 <p align="right"><a href="http://www.ayopasoft.com" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/ayopasoftware_logo.png"></a><br/>
 <a href="http://www.ayopasoft.com/terms.html" target="_blank">Terms of Service</a> | 

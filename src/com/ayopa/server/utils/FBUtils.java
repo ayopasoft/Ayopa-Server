@@ -102,12 +102,14 @@ public class FBUtils {
 		String message = "Great group buy with Ayopa. If " + auctionDTO.getHighest_quant() + " people buy this, we can get it for " + nf.format(auctionDTO.getLowest_price()) + ". This opportunity ends in " + auctionDTO.getTime_days() + " days, " + auctionDTO.getTime_hours() + " hours.";
 		String name = auction.getProduct_title();
 		String description = auction.getProduct_description();
+		String action =  "{name:\"What\'s Ayopa?\",\"link\":\"http://www.ayopasoft.com\"}"; 
 		
 		facebookClient.publish("me/feed", FacebookType.class,
 			    Parameter.with("message", message), Parameter.with("link", link), 
-			    Parameter.with("picture", picture), Parameter.with("name", name),
+			    Parameter.with("picture", picture), Parameter.with("name", "Join this GroupBuy"),
 			    Parameter.with("description", description),
-			    Parameter.with("caption", "Group buy and save!"));
+			    Parameter.with("actions", action),
+			    Parameter.with("caption", name));
 	}
 	
 	public static String getLoginURL() {

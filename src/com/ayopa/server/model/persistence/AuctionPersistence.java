@@ -25,8 +25,12 @@ public class AuctionPersistence {
 	private static Log log = LogFactory.getLog(AuctionPersistence.class);
 	
 	public String putAuction (Auction auction) throws IOException {
-		if (auction.getAuction_id() == null || auction.getAuction_id().length() == 0)
+		Map<String, String> map = new HashMap<String, String>();
+		
+		if (auction.getAuction_id() == null || auction.getAuction_id().length() == 0) {
 			auction.setAuction_id(UUID.randomUUID().toString());
+			map.put(AwsFacade.Key.INVOICE_SENT, "0");
+		}
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"); 
 		df.setTimeZone(TimeZone.getTimeZone("US/Mountain"));
@@ -48,7 +52,7 @@ public class AuctionPersistence {
 	    auction.setProduct_image("http://" + AwsFacade.Bucket.PRODUCT_IMAGES + ".s3.amazonaws.com/"  + file.getName());
 	    file.delete();
 		
-		Map<String, String> map = new HashMap<String, String>();
+		
 		map.put(AwsFacade.Key.AUCTION_ID,auction.getAuction_id());
 		
 		if (auction.getProduct_id() != null)
