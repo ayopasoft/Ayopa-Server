@@ -61,7 +61,7 @@
 				 	message: '',                     
 				 	attachment: {
                      
-				 	name: 'Join this GroupBuy',                         
+				 	name: hrefTitle,                         
 				 	caption: userPrompt,                         
 				 	description: (description),                         
 				 	href: hrefLink, 
@@ -256,7 +256,7 @@
 											</s:text>
 										</div>
 										<div><a href="" onclick="inviteFriends('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this <s:property value="title" escapeJavaScript="true" />, we can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.','<s:property value="link"/>','Group Buy and Save','Invite friends to this group buy through ayopa'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/invite_friends.png" /></a></div>
-										<div><a href="" onclick="showStream('Great group buy with Ayopa. If <s:property value="highest_quant"/> people buy this, we can get it for <s:text name="format.currency"><s:param name="value" value="lowest_price"/></s:text>. This opportunity ends in <s:property value="time_days"/> days, <s:property value="time_hours"/> hours.', 'Buy it here', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/post_to_wall.png" /></a></div>
+										<div><a href="" onclick="showStream('I just scored a killer deal by participating in <s:property value="title"/> GroupBuyNSave Sale! The more everyone buys...the more everyone saves! <s:property value="time_days"/> days, <s:property value="time_hours"/> hours, and <s:property value="time_minutes"/> minutes left! Click GroupBuy below to get in on the deal.', 'Join <s:property value="title"/> GroupBuy', '<s:property value="link"/>', '<s:property value="image"/>','<s:property value="title"/>'); return false;"><img src="http://ayopa-resources.s3.amazonaws.com/images/post_to_wall.png" /></a></div>
 									</div>
 
 									<!-- *** TIME LEFT  *** -->

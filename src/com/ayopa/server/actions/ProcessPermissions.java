@@ -137,14 +137,15 @@ public class ProcessPermissions extends ActionSupport implements ServletResponse
 				String[] recipient;
 				recipient = new String[1];
 				recipient[0] = user.getEmail();
-			    String message = "Welcome to group savings with ayopa. " +
-			    		"Track your savings and find more auctions at http://apps.facebook.com/ayopa_auctions. " +
+			    String message = "Welcome to GroupBuyNSave powered by Ayopa. " +
+			    		"Track your savings and find more GroupBuys at http://apps.facebook.com/ayopa_auctions. " +
 			    		" By default, we will send your Paypal payments to this email address: " + user.getEmail() +
-			    		" If you would like to change your Paypal email address, finish your account setup by creating " +
-			    		"an account by clicking or pasting this link into your browser: https://accounts.ayopasoft.com/new_account. " +  "" +
+			    		"\n\nPlease finish your account setup clicking or pasting this link into your browser: https://accounts.ayopasoft.com/new_account. " +  "" +
 			    		"Be sure to use " + user.getEmail() + " as your email address when you create your " +
-			    		"ayopa account. Login and change your Paypal address in your account settings.";
-				Mail.postMail(recipient, "Your ayopa account", message, "info@ayopasoft.com");
+			    		"ayopa account. \n\nYou may change your Paypal email address from your account settings page.\n\n" +
+			    		"We hope you enjoy using GroupBuyNSave. If you have any questions, please email us at support@ayopasoft.com\n\n" +
+			    		"Thank you,\nAyopa Software";
+				Mail.postMail(recipient, "Welcome to GroupBuyNSave", message, "info@ayopasoft.com");
 			}
 			
 			 buyer.setBuyer_id(user.getId());

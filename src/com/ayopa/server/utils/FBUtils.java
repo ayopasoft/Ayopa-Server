@@ -23,6 +23,7 @@ import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.FacebookType;
+import com.restfb.types.User;
 
 public class FBUtils {
 	
@@ -96,17 +97,19 @@ public class FBUtils {
 		
 		FacebookClient facebookClient;
 		facebookClient = new DefaultFacebookClient(buyer.getBuyer_access_token());
+		User user = facebookClient.fetchObject("me", User.class);
 		
 		String link = auction.getProduct_url();
 		String picture = auction.getProduct_image();
-		String message = "Great group buy with Ayopa. If " + auctionDTO.getHighest_quant() + " people buy this, we can get it for " + nf.format(auctionDTO.getLowest_price()) + ". This opportunity ends in " + auctionDTO.getTime_days() + " days, " + auctionDTO.getTime_hours() + " hours.";
+		//String message = user.getName() "Great group buy with Ayopa. If " + auctionDTO.getHighest_quant() + " people buy this, we can get it for " + nf.format(auctionDTO.getLowest_price()) + ". This opportunity ends in " + auctionDTO.getTime_days() + " days, " + auctionDTO.getTime_hours() + " hours.";
+		String message = user.getName() + " just scored a killer deal by participating in " + auction.getProduct_title() + " GroupBuyNSave Sale! The more everyone buys...the more everyone saves! " + auctionDTO.getTime_days() + " days, " + auctionDTO.getTime_hours() + " hours, and " + auctionDTO.getTime_minutes() + " minutes left! Click GroupBuy below to get in on the deal.";
 		String name = auction.getProduct_title();
 		String description = auction.getProduct_description();
 		String action =  "{name:\"What\'s Ayopa?\",\"link\":\"http://www.ayopasoft.com\"}"; 
 		
 		facebookClient.publish("me/feed", FacebookType.class,
 			    Parameter.with("message", message), Parameter.with("link", link), 
-			    Parameter.with("picture", picture), Parameter.with("name", "Join this GroupBuy"),
+			    Parameter.with("picture", picture), Parameter.with("name", "Join " + auction.getProduct_title() + " GroupBuy"),
 			    Parameter.with("description", description),
 			    Parameter.with("actions", action),
 			    Parameter.with("caption", name));
