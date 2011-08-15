@@ -175,7 +175,7 @@ public class ProcessInvoicePayment extends ActionSupport implements ServletReque
 					if (receiver_email.equals(PaypalUtils.PAYPAL_EMAIL))
 					{
 						
-						//try {
+						try {
 							inv = inv.getInvoice(invoice);
 							if (Double.parseDouble(mc_gross) == inv.getInvoice_total() && mc_currency.equals("USD"))
 							{
@@ -185,10 +185,10 @@ public class ProcessInvoicePayment extends ActionSupport implements ServletReque
 								inv.putInvoice(inv);
 								Auction.clearAuctions(inv.getAuction_info());
 							}
-						//} catch (Exception e) {
+						} catch (Exception e) {
 							
-						//	e.printStackTrace();
-						//}
+							e.printStackTrace();
+						}
 						
 					}
 					else
