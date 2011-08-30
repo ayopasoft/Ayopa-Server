@@ -60,8 +60,8 @@
 				 	message: '',                     
 				 	attachment: {
                      
-				 	name: userPrompt,                         
-				 	caption: '',                         
+				 	name: hrefTitle,                         
+				 	caption: userPrompt,                         
 				 	description: (description),                         
 				 	href: hrefLink, 
 				 	media: [
@@ -76,9 +76,7 @@
                    
 				 	},                     
 				 	action_links: [                         
-				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopa.com' },
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'},
-				    { text: 'Buy Now', href: 'http://www.ayopadev.com/product/HJS-TV1.html'}                     
+				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopasoft.com' }
 				 	],                     
 				 	user_prompt_message: userPrompt                 
 				 	},                 

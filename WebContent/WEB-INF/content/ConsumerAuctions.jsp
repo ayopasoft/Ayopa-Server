@@ -39,7 +39,45 @@
 				 document.getElementById('fb-root').appendChild(e);             
 				 }());               
 			    
-			//stream publish method    
+			//stream publish method   
+			
+			function streamPublish(name, description, hrefTitle, hrefLink, image, userPrompt){                 
+				FB.ui(                
+				 {                     
+				 	method: 'stream.publish',                     
+				 	message: '',                     
+				 	attachment: {
+                     
+				 	name: hrefTitle,                         
+				 	caption: userPrompt,                         
+				 	description: (description),                         
+				 	href: hrefLink, 
+				 	media: [
+				    {
+				        "type": "image", 
+				        "src": image, 
+				        "href": hrefLink
+				    }
+				    
+				    ]
+					
+                   
+				 	},                     
+				 	action_links: [                         
+				 	{ text: 'What\'s Ayopa?', href: 'http://www.ayopasoft.com' }
+				 	],                     
+				 	user_prompt_message: userPrompt                 
+				 	},                 
+				 	function(response) {                   
+				 	});               
+				 	}   
+			
+			function showStream(message, hrefTitle, hrefLink, image, title){                 
+				 	FB.api('/me', function(response) {                     
+				 	//console.log(response.id);                     
+				 	streamPublish(response.name, message, hrefTitle, hrefLink, image, title);                 
+				 	});             
+				 	}    
 			
 
 </script>
@@ -163,6 +201,7 @@
 										</div>
 									</s:if>	
 											<div><a href="<s:property value="link"/>" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/buy_now.png" /></a></div>
+											<div><a href="" onclick="showStream('<s:property value="description" />', 'Buy <s:property value="title"/> at <s:property value="merchant_name"/>', '<s:property value="link"/>', '<s:property value="image"/>','A New GroupBuyNSave from <s:property value="merchant_name"/> is available. Check out this great deal.'); return false;">Post to Wall</a></div>
 									</div>
 
 									<!-- *** TIME LEFT  *** -->
