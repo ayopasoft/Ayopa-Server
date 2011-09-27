@@ -9,7 +9,7 @@
 	 	 
 		<result-types>
 			<result-type name="json" class="org.apache.struts2.json.JSONResult"/>
-			<result-type name="string" class="com.ayopa.server.results.StringResult"/>
+			<result-type name="string" class="com.ez.server.results.StringResult"/>
 		</result-types>
 	
     
