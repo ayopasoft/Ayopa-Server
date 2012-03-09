@@ -56,7 +56,7 @@
 			function streamPublish(name, description, hrefTitle, hrefLink, image, userPrompt){                 
 				FB.ui(                
 				 {                     
-				 	method: 'stream.publish',                     
+				 	method: 'stream.share',                     
 				 	message: '',                     
 				 	attachment: {
                      
@@ -234,6 +234,7 @@
 										</div>
 										
 											<div><a href="<s:property value="link"/>" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/buy_now.png" /></a></div>
+											<a onClick="window.open('http://www.facebook.com/sharer.php?s=100&p[title]=Buy+<s:property value="title"/>+at+<s:property value="merchant_name" escape="true"/>&p[images][0]=<s:property value="image" escape="true"/>&p[summary]=<s:property value="description" escape="true" />&p[url]=<s:property value="link_encoded" />', 'sharer', 'toolbar=0,status=0,width=548,height=325');" target="_parent" href="javascript: void(0)">Share</a>
 									</div>
 
 									<!-- *** TIME LEFT  *** -->

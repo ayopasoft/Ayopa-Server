@@ -1,6 +1,7 @@
 package com.ayopa.server.model;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -31,10 +32,25 @@ public class AuctionDTO {
     private String merchant_url;
     private double price_conflict;
     private String category;
+    private String description;
+    private String link_encoded;
+    
    
 	
     
     
+	public String getLink_encoded() {
+		return link_encoded;
+	}
+	public void setLink_encoded(String link_encoded) {
+		this.link_encoded = link_encoded;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public String getCategory() {
 		return category;
 	}
@@ -210,6 +226,8 @@ public class AuctionDTO {
 		auctionDTO.setPrice_conflict(auction.getAuction_priceconflict());
 		auctionDTO.setCategory(auction.getProduct_category());
 		auctionDTO.setRebate_sent(Boolean.parseBoolean(auction.getRebate_sent()));
+		auctionDTO.setDescription(auction.getProduct_description());
+		auctionDTO.setLink_encoded(URLEncoder.encode(auction.getProduct_url(), "UTF-8"));
 		if (auction.getRebate_sent().equals("1"))
 			auctionDTO.setRebate_sent(Boolean.TRUE);
 		else
@@ -254,6 +272,8 @@ public class AuctionDTO {
 			auctionDTO.setMerchant_url(auctions.get(i).getMerchant_website());
 			auctionDTO.setPrice_conflict(auctions.get(i).getAuction_priceconflict());
 			auctionDTO.setCategory(auctions.get(i).getProduct_category());
+			auctionDTO.setDescription(auctions.get(i).getProduct_description());
+			auctionDTO.setLink_encoded(URLEncoder.encode(auctions.get(i).getProduct_url(), "UTF-8"));
 			if (auctions.get(i).getRebate_sent().equals("1"))
 				auctionDTO.setRebate_sent(Boolean.TRUE);
 			else

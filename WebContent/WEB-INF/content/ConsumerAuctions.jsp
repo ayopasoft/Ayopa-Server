@@ -44,7 +44,7 @@
 			function streamPublish(name, description, hrefTitle, hrefLink, image, userPrompt){                 
 				FB.ui(                
 				 {                     
-				 	method: 'stream.publish',                     
+				 	method: 'stream.share',                     
 				 	message: '',                     
 				 	attachment: {
                      
@@ -78,6 +78,12 @@
 				 	streamPublish(response.name, message, hrefTitle, hrefLink, image, title);                 
 				 	});             
 				 	}    
+			
+			function doshare(url){
+			   var share = {method:'stream.share', u: url};
+			   FB.ui(share, function(response){});
+			}
+
 			
 
 </script>
@@ -201,7 +207,8 @@
 										</div>
 									</s:if>	
 											<div><a href="<s:property value="link"/>" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/buy_now.png" /></a></div>
-											<div><a href="" onclick="showStream('<s:property value="description" />', 'Buy <s:property value="title"/> at <s:property value="merchant_name"/>', '<s:property value="link"/>', '<s:property value="image"/>','A New GroupBuyNSave from <s:property value="merchant_name"/> is available. Check out this great deal.'); return false;">Post to Wall</a></div>
+											 <a onClick="window.open('http://www.facebook.com/sharer.php?s=100&p[title]=Buy+<s:property value="title"/>+at+<s:property value="merchant_name" escape="true"/>&p[images][0]=<s:property value="image" escape="true"/>&p[summary]=<s:property value="description" escape="true" />&p[url]=<s:property value="link_encoded" />', 'sharer', 'toolbar=0,status=0,width=548,height=325');" target="_parent" href="javascript: void(0)">Share</a>
+											<!--  <a onClick="doshare('<s:property value="link" />'); return false;"  href="javascript:;">Share</a>-->
 									</div>
 
 									<!-- *** TIME LEFT  *** -->
